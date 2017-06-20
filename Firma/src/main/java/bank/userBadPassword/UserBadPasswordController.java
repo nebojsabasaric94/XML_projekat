@@ -17,7 +17,6 @@ public class UserBadPasswordController {
 	@Autowired
 	private UserBadPasswordService userBadPasswordService;
 	
-	@PreAuthorize("hasAuthority('activateUser')")
 	@GetMapping
 	private List<UserBadPassword> findAll(){
 		System.out.println(userBadPasswordService.findAll().size());

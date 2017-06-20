@@ -5,6 +5,8 @@
 			<th>Naziv dobavljaca</th>
 			<th>Adresa dobavljaca</th>
 			<th>Ukupno roba i usluge</th>
+			<th>Hitno</th>
+			
 			<th></th>
 			
 		</tr>
@@ -12,7 +14,8 @@
 			<td>{{faktura.nazivDobavljaca}}</td>
 			<td>{{faktura.adresaDobavljaca}}</td>
 			<td>{{faktura.ukupnoRobaIUsluge}}</td>
-			<td><button class = "btn" ng-click = "obradi(faktura)">Obradi fakturu</button></td>
+			<td><input type = "checkbox" ng-model = "$index"></td>
+			<td><button class = "btn" ng-click = "obradi(faktura,$index)">Obradi fakturu</button></td>
 		</tr>
 	</table>
 </div>

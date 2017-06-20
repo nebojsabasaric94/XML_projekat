@@ -6,6 +6,8 @@ app.controller('fakturaController',['$scope','fakturaService','$location',
 
 	$scope.faktura = new Object();
 	$scope.faktura.stavkeFakture = [];
+	$scope.stavka = new Object();
+	$scope.faktura.iznosZaUplatu = 0;
 	
 	$scope.dodajStavkuDiv = false;
 	$scope.findFirm = function(){
@@ -14,6 +16,8 @@ app.controller('fakturaController',['$scope','fakturaService','$location',
 				$scope.faktura.nazivDobavljaca = response.data.name;
 				$scope.faktura.adresaDobavljaca = response.data.address;
 				$scope.faktura.pibDobavljaca = response.data.pibFirm;
+				$scope.faktura.brojRacuna = response.data.brojRacuna;
+				
 				
 			}
 		)
@@ -21,10 +25,17 @@ app.controller('fakturaController',['$scope','fakturaService','$location',
 	
 	$scope.dodajStavkuFakture = function(stavka){
 		$scope.faktura.stavkeFakture.push(stavka);
+		$scope.faktura.iznosZaUplatu += stavka.vrednost;
 		$scope.dodajStavkuDiv = false;
 	}
 	
+	$scope.promeniVrednost = function(stavka){
+		if(stavka.jedinicnaCena != undefined && stavka.kolicina != undefined)
+			$scope.stavka.vrednost = stavka.jedinicnaCena * stavka.kolicina;
+	}
+	
 	$scope.dodajStavku = function(){
+		$scope.stavka = new Object();
 		$scope.dodajStavkuDiv = true;
 	}
 	
@@ -69,19 +80,25 @@ app.controller('fakturaController',['$scope','fakturaService','$location',
 		$scope.faktura.nazivKupca = $scope.selectedFirm.name;
 		$scope.faktura.pibKupca = $scope.selectedFirm.pibFirm;
 		$scope.faktura.adresaKupca = $scope.selectedFirm.address;
+		$scope.faktura.uplataNaRacun = $scope.selectedFirm.brojRacuna;
+		
 		modal.style.display = "none";		
 	
 	}
+	
+	$scope.cancelModal = function(){
+		var modal = document.getElementById('myModal');
+		modal.style.display = "none";
+	}
+	
 	$scope.selectedFirm = null;
 	$scope.setSelectedFirm = function(firm){
 		$scope.selectedFirm = firm;
-		/*$scope.faktura.nazivKupca = firm.name;
-		$scope.faktura.pibKupca = firm.pibFirm;
-		$scope.faktura.adresaKupca = firm.address;*/
 		
 	}
-	$scope.obradi = function(faktura){
-		fakturaService.obradi(faktura)
+	
+	$scope.obradi = function(faktura, hitno){
+		fakturaService.obradi(faktura, hitno)
 		.then(function(response){
 			$scope.findAll();
 		},

@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,10 +87,12 @@ public class FakturaController {
 	}
 	
 	@PreAuthorize("hasAuthority('sendInvoice')")
-	@PostMapping("/obrada")
-	public void obradi(@RequestBody Faktura faktura){
+	@PostMapping("/obrada/{hitno}")
+	public void obradi(@RequestBody Faktura faktura, @PathVariable boolean hitno){
 		Faktura f = fakturaService.findOne(faktura.getId());
-		firmClient.sendNalog(f);
+		firmClient.sendNalog(f, hitno);
+		faktura.setObradjena(true);
+		fakturaService.save(faktura);
 		logger.info("User " + getUserDetails() + " processing invoice.");
 	}
 	private User getUserDetails() {

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header/><SOAP-ENV:Body><ns2:getNalogZaPlacanjeRequest xmlns:ns2="http://nalogZaPlacanje.com"><xenc:EncryptedData xmlns:xenc="http://www.w3.org/2001/04/xmlenc#" Type="http://www.w3.org/2001/04/xmlenc#Content"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
 <ds:KeyName>Sifrovan tajni kljuc</ds:KeyName>
-<xenc:EncryptedKey><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/><xenc:CipherData><xenc:CipherValue>W8OK7ImM6ttcMwju9DJFHJgohKVtReBj2eV5GQrGigJzpr/xnqToB1IOc97gNxT5o2bSusKXG4VH&#13;
-pZNrE9K5/0PEkipcdn6LDGWms8mt9qX4QCWjEVoQbgA8JzXSx3jzlEVPzKjztmbWgYfsNIqnlCed&#13;
-nuF2d7IOn3/zxdVe9UmH4fo3ztv9jkaps4qqEYbYWWrbRz9kLyAhcLZk+p4KlbCflT0mpVYHqcY6&#13;
-C9EdjlEjRK6duiVsYq2X/K9XemtZZjSAnPvY4kBhST8V0VNaerQSkwJ4WOjHm/8zLaJZtRf+aitz&#13;
-wY2/Ax8jCAnRmY3M+xDwNf/1soX3NtCg/fFL2Q==</xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>F1OBD2IDChdZAzWS8mjU9882RdTg0+NC+Y7eOP/bksyUSbXwrvxj716X6/zpdH0VXdaxq/msQF4H&#13;
-I2T+pbhcWsWT3BstrWuIDU4gKms+IZ/tbfuMee1pDcGeAYLQvIsyRofdYetxN/bzajhXIGMXtxHS&#13;
-aYeudxPlT6R4hamaeEVCJ06PS4zQFTXizjRY9PB7jaEiwHSrl73SMkfgGuWhtNLy+PTv2mZo9eyZ&#13;
-mw4vrC4GxNDmcQJju1TlpIGyYP6uFnhw9Kzlbnjg0Hsl3/YOErxirkfWroVLMbtlwGKraSI1o5XS&#13;
-biYOJBfxeNtC3sKJBCPqJqFSU9yp0TjvKQqUB9fMiArLGHDhovtSxRI9b/QWkTGfR92WjaCBOow/&#13;
-7fW4tEQfxEfNtKU+teYhHgDqlbB3HEcFDYp6g69lULu+DVjhkDR0PVxUGx4U3vF9yuoHSPU4E7pA&#13;
-roZp2HoQZpqSW8xoZeK5eUg6f1RMVP/wcEFv/stFxtQWV5whdDtYNZDTUEPJlSZTlcGvYGD2Xcwg&#13;
-864D+hP/ZG/TK538vLC1ywtaEvBG98/t2+QTsl3IHjQh/EPU0UfPv4VEKxYomjDIqikgQotrf9y6&#13;
-q4zaieb9l0X6bg84kzYV0FPPZyMKlDjfciIPCFE3fezXjC9BymT2rpiR4qk9WtBJkAkjAALhQ9Mg&#13;
-H9AS3imAZJ0thfun4cBEsTXNmSqgSB4vSvdRHMCoF189GZDFq7YOsjd1hOtpLAxrdld/4a5lLeY0&#13;
-yt4FR9aXf4eDHZb4qnPFYQs1FtEWSnVyQurFG6sgHUyn//+pQ7DRz+OaqGx+wFL9Q37GjQDkdJCf&#13;
-YRvaX4X2GmSwo5L7ePk1ypwxZmjyl8CS/jbANtHp50WC0fur5duZ4G+UhUp9XzQ1BSh9Z/Hge2PT&#13;
-gZC9s1ZLSPYbxQkJSfwVdFHtvhBiQ/JK+7HR5n6Hc0/niKUJ</xenc:CipherValue></xenc:CipherData></xenc:EncryptedData></ns2:getNalogZaPlacanjeRequest></SOAP-ENV:Body><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<xenc:EncryptedKey><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/><xenc:CipherData><xenc:CipherValue>PLcrbEkhczVQ527X4GOwuE4fXRjz1SyhgII68Ee6hAq+XRXAjdmuWs4fBKj2OB0acvWc1k0+NKa2&#13;
+Q0m3A+7VFFhZ1dmSU0XQpVDNKWRguxBnBrN+K8fjqGQDg5MfxGXY80fXzPcvr/xMViyOTl+lsoVL&#13;
+Lj2RJ8wCpTTZT/Id8JG22q7iZfL+jITqb4IX4Q3TAVWswfme1vxVcz+UTgeAT8m1ySYU9gDwE6I1&#13;
+i5+ekT7Re7kxqzvzQOyWHGqB/T7PIlIgTargBmmC8drRZ5eR2VMAGoIhJPuE8SJSW2zPEWZUtqBO&#13;
+i0sSnsEu4mZbP6ALNUMZG8YO768YptZNRc68DQ==</xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>biactWn7ToXVDP6FqIP4Sevpy1I4/NISAVC3ZNNqffJGD0XzTnDIx7xTaqevU46JXffV5wJ8aSEQ&#13;
+Gdk2Pyi7mSteqwGoN2ZvazljubasVnoA6PiYvnloBTtJvZ9AlnICKq4sH8jPqL7rn4zw/Mj+BIop&#13;
+XsioStm9aQXdtLhPNfg5JcPSOpN25QaOJwyw+tWeqgj4RmRT2m4lkd1MlOjroqMIwwITV51EDKGh&#13;
+x9AgnNP+oEcjLVqsHJn80tvPmELf5VOt7xvvktjFYeMTr1TCshH516Dkzg921eypR3/3lapwev8D&#13;
+Dod/DJeEQA2ZXS0+c+Wvk7MLxkbZhSEmmvi9Vu2lOWVR8uXOKi8JeoLm240oNpvt/wTuCSildZsz&#13;
+vbBqwoW/6lz28N2AKWPs+VOluqN1ih22k+VAuvGWJbuyE8wCzJHrm3o28BTLG4SHtCuz7CFiRtGe&#13;
+HFZfDvcKWX2u56WBt3L/0barkdBS4C99eAY9GuolJu0tYNnhRxnJHYc8n4Ir9y2hToeHDaSzjMZl&#13;
+ED/0Tueaa7yLZtRb/51MPU0cWNKNYZfLK+VwDpA8kB/I7APELUoK75XmJDQoSKWfhbLTsSq9lBVP&#13;
+hXFS6FoDV+zEKxeOuOv3R3eYrwMLssUGhojb4TVOQuzNEvnnkIh/CrsjDDvtSTvvnN4wkjRn4+6T&#13;
+u04pq6eNUyL1ZllNICanvzsZpRSMf6qU5wAnoOFlmgKr71B3RS2uDV39lX/+28xv8JonEpgQG1q3&#13;
+DpPE08sQNQNeTMnbIAQXWkoWLjgkOgWZBhJDO0tn7uwkotXzi1foith2E/JMvx0SX63cQtr8dKhm&#13;
+/BucYxgIWzmfnvlj2Yu7dTc8/4SgDhASF1pQyNZZmqMeZoXg/fEc86WkW+VjMrqsgjQ6nGdff2ap&#13;
+wiGXLIf2Ic8J79QkuEdzSZSMyegbbc70SqdFhQ==</xenc:CipherValue></xenc:CipherData></xenc:EncryptedData></ns2:getNalogZaPlacanjeRequest></SOAP-ENV:Body><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
 <ds:SignedInfo>
 <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
 <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
@@ -26,15 +26,15 @@ gZC9s1ZLSPYbxQkJSfwVdFHtvhBiQ/JK+7HR5n6Hc0/niKUJ</xenc:CipherValue></xenc:Cipher
 <ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-<ds:DigestValue>paSJDeJDLk3g7xp2gO2cxFY3dSI=</ds:DigestValue>
+<ds:DigestValue>qsjm09x8tPCGYbjLPwcQZWJS7UE=</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
 <ds:SignatureValue>
-bP7a8pauw+TKjavpEG0UR/r7z5oW580VdTjOWUm1ot01Th7gY18brIKQsKqsS79pQiWO20yL65Uj&#13;
-QHtB2XtzlI+eyWaxzhc4kMXf4aXqXucVAYhqIlOWpNfnlQpxIg8kuXkyjBbo4Ty1Chf9N3H4yEpc&#13;
-2LqYJe041+aa/2UDk6qz78YOFbJ0JgfaJ/Pmn8icAIyLyrdMjdZuxvDOMe1Ez2/spyvNVXlL0j02&#13;
-5HdjsTi0zwf0oegvdWuwyRwUb+so59sEF7lRkd3ZOvGNH5wRWpd2RUrtYWwMX+H6zRigIdEta0Al&#13;
-SV9BNgcD1wBTnRSYLK1vwJrwHJVymSh6Jy7vwQ==
+qUhBOmc4vjSJ4S3lXxI7JQ6+B6p/xmkGht9OXjEOnAp+4676M9nees0U0w8t2aIF+gEz0Z16dCmN&#13;
+KhC64Z5LhIaOFz1FFaVpHbtabd09UlIsSPsq29HuSkyGOSew8pV9iEFzE3RWpL1dhDbals4JzYjW&#13;
+rCLrYRpp4gZuPH+WEFds+kmp8DSN5gyCHvqiJcy/xfe1cB2aocawFux8Pg3moUrAZaGW+1PzfCYo&#13;
+g6wZrVP5DQqSdq7bWi4NvJHdAKyk01qPAUvZ98Er+O6CBT9SHFuHHVYTU0+s7lbGUPAjOzfFiPvw&#13;
+PuRZHkV17dfSgQyHpiv1Y3ZPPlxKjeWucQXJWQ==
 </ds:SignatureValue>
 <ds:KeyInfo>
 <ds:KeyValue>

@@ -23,25 +23,25 @@ public class FirmClient {
 	private WSTemplate webServiceTemplate;
 
 
-	public void sendNalog(Faktura f) {
+	public void sendNalog(Faktura f, boolean hitno) {
 		ObjectFactory factory = new ObjectFactory();
 		GetNalogZaPlacanjeRequest nalogZaPlacanjeRequest = factory.createGetNalogZaPlacanjeRequest();
 		
 		NalogZaPlacanje nalogZaPlacanje = factory.createNalogZaPlacanje();
 		nalogZaPlacanje.setDatumNaloga(new Date());
-		nalogZaPlacanje.setDatumValute(new Date());
-		nalogZaPlacanje.setDuznikNalogodavac("levi");
-		nalogZaPlacanje.setHitno(false);
+		nalogZaPlacanje.setDatumValute(f.getDatumValute());
+		nalogZaPlacanje.setDuznikNalogodavac(f.getNazivDobavljaca());
+		nalogZaPlacanje.setHitno(hitno);
 		nalogZaPlacanje.setIdPoruke("Nalog za prenos");
-		nalogZaPlacanje.setIznos(new BigDecimal("2000"));
+		nalogZaPlacanje.setIznos(new BigDecimal(f.getIznosZaUplatu()));
 		nalogZaPlacanje.setModelOdobrenja(97);
 		nalogZaPlacanje.setModelZaduzenja(92);
-		nalogZaPlacanje.setOznakaValute("RSD");
+		nalogZaPlacanje.setOznakaValute(f.getOznakaValute());
 		nalogZaPlacanje.setPozivNaBrojOdobrenja("147541214");
 		nalogZaPlacanje.setPozivNaBrojZaduzenja("41247412");
-		nalogZaPlacanje.setPrimalacPoverilac("ftn");
-		nalogZaPlacanje.setRacunDuznika("200636547896321456");
-		nalogZaPlacanje.setRacunPoverioca("400254547845612156");
+		nalogZaPlacanje.setPrimalacPoverilac(f.getNazivKupca());
+		nalogZaPlacanje.setRacunDuznika(f.getBrojRacuna());
+		nalogZaPlacanje.setRacunPoverioca(f.getUplataNaRacun());
 		nalogZaPlacanje.setSvrhaPlacanja("Svrha placanja");
 		
 		nalogZaPlacanjeRequest.setNalogZaPlacanje(nalogZaPlacanje);
@@ -49,7 +49,8 @@ public class FirmClient {
 		webServiceTemplate.setDefaultUri(sub+"5/ws");*/
 		
 		GetNalogZaPlacanjeResponse getNalogZaPlacanjeResponse = (GetNalogZaPlacanjeResponse) webServiceTemplate.marshalSendAndReceive(nalogZaPlacanjeRequest);
-		System.out.println(getNalogZaPlacanjeResponse.getNalogZaPlacanje().getDuznikNalogodavac());
+		System.out.println("proslo");
+	//	System.out.println(getNalogZaPlacanjeResponse.getNalogZaPlacanje().getDuznikNalogodavac());
 		}
 
 }
