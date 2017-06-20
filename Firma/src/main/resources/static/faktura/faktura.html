@@ -1,0 +1,153 @@
+
+<div ng-init = "findFirm()">
+<div class = "col-sm-offset-1 col-sm-4">
+	<h4>Faktura</h4>
+	<form name = "fakturaSent" method = "POST">
+	<div class="d-inline">
+		<label class="control-label">Naziv dobavljaca</label>
+		<input type = "text" class = "form-control" ng-model = "faktura.nazivDobavljaca" disabled = "true"/>
+	</div>
+	<div>
+		<label class="control-label">Adresa dobavljaca</label>
+		<input type = "text" class = "form-control" ng-model = "faktura.adresaDobavljaca" disabled = "true"/>
+	</div>
+	<div>
+		<label class="control-label">Pib dobavljaca</label>
+		<input type = "text" class = "form-control" ng-model = "faktura.pibDobavljaca" disabled = "true"/>
+	</div>
+	<button ng-click = "openModal()">Dodaj kupca</button>
+	<div>
+		<label class="control-label">Naziv kupca</label>
+		<input type = "text" class = "form-control" ng-model = "faktura.nazivKupca" disabled = "true"/>
+	</div>
+	<div>
+		<label class="control-label">Adresa kupca</label>
+		<input type = "text" class = "form-control" ng-model = "faktura.adresaKupca" disabled = "true"/>
+	</div>
+	<div>
+		<label class="control-label">Pib kupca</label>
+		<input type = "text" class = "form-control" ng-model = "faktura.pibKupca" disabled = "true"/>
+	</div>
+	<div>
+		<label class="control-label">Broj racuna</label>
+		<input type = "text" class = "form-control" ng-model = "faktura.brojRacuna"/>
+	</div>
+	<div>
+		<label class="control-label">Datum racuna</label>
+		<input type = "date" class = "form-control" ng-model = "faktura.datumRacuna"/>
+	</div>
+	<div>
+		<label class="control-label">Vrednost robe</label>
+		<input type = "number" class = "form-control" ng-model = "faktura.vrednostRobe"/>
+	</div>
+	<div>
+		<label class="control-label">Vrednost usluga</label>
+		<input type = "number" class = "form-control" ng-model = "faktura.vrednostUsluga"/>
+	</div>
+	<div>
+		<label class="control-label">Ukupno roba i usluge</label>
+		<input type = "text" class = "form-control" ng-model = "faktura.ukupnoRobaIUsluge"/>
+	</div>
+	<div>
+		<label class="control-label">Ukupan rabat</label>
+		<input type = "number" class = "form-control" ng-model = "faktura.ukupanRabat"/>
+	</div>
+	<div>
+		<label class="control-label">Ukupan porez</label>
+		<input type = "number" class = "form-control" ng-model = "faktura.ukupanPorez"/>
+	</div>
+	<div>
+		<label class="control-label">Oznaka valute</label>
+		<input type = "text" class = "form-control" ng-model = "faktura.oznakaValute"/>
+	</div>
+	<div>
+		<label class="control-label">Iznos za uplatu</label>
+		<input type = "number" class = "form-control" ng-model = "faktura.iznosZaUplatu"/>
+	</div>
+	<div>
+		<label class="control-label">Uplata na racun</label>
+		<input type = "text" class = "form-control" ng-model = "faktura.uplataNaRacun"/>
+	</div>
+	<div>
+		<label class="control-label">Datum valute</label>
+		<input type = "date" class = "form-control" ng-model = "faktura.datumValute"/>
+	</div>
+	<button ng-click = "dodajStavku()">Dodaj stavku</button>
+	<button ng-click = "sendFaktura()">Posalji</button>
+		
+</form>
+</div>
+	 
+<div ng-if = "dodajStavkuDiv" class = "col-sm-offset-2 col-sm-4">
+	<h4>Stavka fakture</h4>
+	<div>
+		<label>Redni broj</label>
+		<input type = "number" class = "form-control" ng-model = "stavka.redniBroj"/>
+	</div>
+	<div>
+		<label>Naziv robe ili usluge</label>
+		<input type = "text" class = "form-control" ng-model = "stavka.nazivRobeIliUsluge"/>
+	</div>
+	<div>
+		<label>Kolicina</label>
+		<input type = "number" class = "form-control" ng-model = "stavka.kolicina"/>
+	</div>
+	<div>
+		<label>Jedinica mere</label>
+		<input type = "text" class = "form-control" ng-model = "stavka.jedinicaMere"/>
+	</div>
+	<div>
+		<label>Jedinicna cena</label>
+		<input type = "number" class = "form-control" ng-model = "stavka.jedinicnaCena"/>
+	</div>
+	<div>
+		<label>Vrednost</label>
+		<input type = "number" class = "form-control" ng-model = "stavka.vrednost"/>
+	</div>
+	<div>
+		<label>Procena rabata</label>
+		<input type = "number" class = "form-control" ng-model = "stavka.procenaRabata"/>
+	</div>
+	<div>
+		<label>Iznos rabata</label>
+		<input type = "number" class = "form-control" ng-model = "stavka.iznosRabata"/>
+	</div>
+	<div>
+		<label>Umanjeno za rabat</label>
+		<input type = "number" class = "form-control" ng-model = "stavka.umanjenoZaRabat"/>
+	</div>
+	<div>
+		<label>Ukupan porez</label>
+		<input type = "number" class = "form-control" ng-model = "stavka.ukupanPorezStavka"/>
+	</div>
+	<button ng-click = "dodajStavkuFakture(stavka)">Dodaj</button>
+</div> 
+	
+
+</div>
+
+<div id="myModal" class="modal">
+	  	<div class="modal-content">
+	    	<h3>Countries</h3><hr/><br/>
+	    
+	    	<table ng-init = findAllFirms() ng-table="stateTable" class="table table-bordered " border="1">
+				<tr>
+					<th>Code:</th>
+					<th>Name:</th>
+				</tr>
+				<tr class="state" ng-repeat="firm in firms" ng-click = "setSelectedFirm(firm)" ng-class = "{selected:firm === selectedFirm}">
+					<td>
+						{{firm.name}}
+					</td>
+			
+					<td>
+						{{firm.pibFirm}}
+					</td>
+					<td>
+						{{firm.address}}
+					</td>
+				</tr>
+			</table>		
+			<button type = "button" ng-click=okModal() class="btn btn-default navbar-btn">OK</button></center>
+	 		</div>
+		</div>	

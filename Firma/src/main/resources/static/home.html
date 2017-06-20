@@ -1,0 +1,50 @@
+<!-- <div>
+	<a ui-sref=".addFaktura">Faktura</a>
+	<a ui-sref=".listaFaktura">Lista faktura</a>
+	
+	<a ui-sref=".addCertificate" ng-if = "role_admin">New central bank certificate</a>
+	<a ui-sref=".addCaSignedCertificate" ng-if = "role_admin">New bank certificate</a>
+	<a ui-sref = ".addSignedCertificate">Create certificate signing request</a>
+	<a ui-sref = ".csr">Sign certificate signing request</a>
+
+    <a ui-sref=".findCertificate">Find certificate</a>
+    <a ui-sref = ".revokeCertificate" ng-if = "role_admin">Revoke certificate</a>
+    <a ui-sref = ".register">Register user</a>
+    <a ui-sref = ".changePassword">Change password</a>
+    <a href = "/logout">Logout</a>
+</div>
+
+<div>
+		<div ui-view></div>
+	</div> -->
+
+<div class="navbar navbar-inverse">
+  <ul class="nav navbar-nav">
+	<li><a ui-sref=".addFaktura" ng-if = "sendInvoice">Faktura</a></li>
+	<li><a ui-sref=".listaFaktura" ng-if = "sendInvoice">Lista faktura</a></li>
+	
+	<li><a ui-sref=".addCertificate" ng-if = "addCertificate">New central bank certificate</a></li>
+	<li><a ui-sref=".addCaSignedCertificate" ng-if = "addCaSignedCertificate">New bank certificate</a></li>
+	<li><a ui-sref = ".addSignedCertificate" ng-if = "createCSR">Create certificate signing request</a></li>
+	<li><a ui-sref = ".csr" ng-if = "signCSR">Sign certificate signing request</a></li>
+
+    <li><a ui-sref=".findCertificate">Find certificate</a></li>
+    <li><a ui-sref = ".revokeCertificate" ng-if = "revokeCertificate">Revoke certificate</a></li>
+    <li><a ui-sref = ".register" ng-if = "registerUserNav">Register user</a></li>
+    <li><a ui-sref = ".changePassword">Change password</a></li>
+    <li><a ui-sref = ".nonActiveUsers" ng-if = "activateUser">Non active users</a></li>
+    
+    <li><a href = "/logout">Logout</a></li>
+  </ul>
+
+</div>
+
+<div class="container">
+ <div class="row">
+	<div ui-view></div>
+ </div>
+</div>
+
+
+
+

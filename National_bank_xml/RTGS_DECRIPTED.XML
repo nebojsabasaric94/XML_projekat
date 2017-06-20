@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ns3:strukturaRtgsNaloga datum_naloga="2017-06-19" datum_valute="2017-06-19" sifra_valute="RSD" xmlns:ns3="http://strukturaRtgsNaloga.com">
+<ns3:id_poruke>MT103</ns3:id_poruke>
+<ns3:swift_kod_banke_duznika/>
+<ns3:obracunski_racun_banke_duznika/>
+<ns3:swift_kod_banke_poverioca/>
+<ns3:obracunski_racun_banke_poverioca/>
+<ns3:duznik_nalogodavac>levi</ns3:duznik_nalogodavac>
+<ns3:svrha_placanja>Svrha placanja</ns3:svrha_placanja>
+<ns3:primalac_poverilac>ftn</ns3:primalac_poverilac>
+<ns3:racun_duznika>200636547896321456</ns3:racun_duznika>
+<ns3:model_zaduzenja>92</ns3:model_zaduzenja>
+<ns3:poziv_na_broj_zaduzenja>41247412</ns3:poziv_na_broj_zaduzenja>
+<ns3:racun_poverioca>400254547845612156</ns3:racun_poverioca>
+<ns3:model_odobrenja>97</ns3:model_odobrenja>
+<ns3:poziv_na_broj_odobrenja>147541214</ns3:poziv_na_broj_odobrenja>
+<ns3:iznos>260000</ns3:iznos></ns3:strukturaRtgsNaloga>

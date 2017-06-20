@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><ns2:nalogZaPlacanje datumNaloga="2017-06-19" datumValute="2017-06-19+02:00" hitno="false" xmlns:ns2="http://nalogZaPlacanje.com"><xenc:EncryptedData xmlns:xenc="http://www.w3.org/2001/04/xmlenc#" Type="http://www.w3.org/2001/04/xmlenc#Content"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:KeyName>Sifrovan tajni kljuc</ds:KeyName>
+<xenc:EncryptedKey><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/><xenc:CipherData><xenc:CipherValue>PzPyoGNb9DYx+7YdZSbs4sFmLEzPoM1YkBLSFV6qQn1TL7Kxiz/+XT9vYVIzYDvuHATvAX3wvrDC&#13;
+SXm9AUgQkOfXtfK+VTKbAhAw8njogXzu0/q6AARjOWhRAd1RzfZonOtzAfbcHdeEBAWUMQemqFPT&#13;
+sqWNsheiJBR8ycxpxA8=</xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>6UJqsmeJr2sY/ENf7ThhomfJJEky+6lrv/IQz4L+RjMmJxEVuk2ek+fVLN9nSGhaAatGrLmiPk5p&#13;
+RFK4QMJ6DmkfKWuWhWKkGNNpbFTXcatUVqnpm7osy/jz00oLhi8cihJhd4nHUEhw9MlmUTLDrTL3&#13;
+DDkqn1oOgRE01PYU5QuTdNgj2wQSVtymKME6E57suS0azdpOiJ3qsJ/I0thGFScTpLokKs3Xxa7B&#13;
+6t62+n1oaxwn4hgv3EG1SlCGMm5B9mscu8/w0HAzj409k3u563pYklOxLiYIjIB9KuSG2uHn/4XG&#13;
+JVppL6fZIGGvvkEcVB5R48A69bLFy0Cs2Jgsg0gRN/NsTjRgPEniGOOhNZmqBqfxkmwnSTQo2SEz&#13;
+Q9WyyjvKmtwXEJ8tp3pUFJUBJWLzGcxAHuF3Bjq6r1D+Ss+8Bj6GnXOPzInwFwPfoVfgZ/DAfmdQ&#13;
+PsUkOnlXITdeeNn4W/AXBfi7dV2BR6kz/+gWD8PCReaHewKtiVyqU8E3MxLqI2+WDZGnEOozTvLY&#13;
+m42iRo79/xNvtQkSypOvuCeZhcCCGl/IZRXrMMUCzcLiSj6eeGNcR41hD2qdnz981E5rDnb423eA&#13;
+pTb7U0GlBwOB5v8E6iHySWGJGB7vUl5ZgR05oFaWdDi6IGX3I7HLpsl5cdj9RHZ8UVw5mNhehZEo&#13;
+07mtcCxfa7I2R23/8CcZkYeXFL7nSJoboW2xhtPc4t3nnssdr5Mqt0xn/6MWv/b8W0WrOT3OsNFN&#13;
+BpXMJ22coYLoa9bE7WReACoxO8a4Me/Mp8FJE0ZM9IvOobJZzzk=</xenc:CipherValue></xenc:CipherData></xenc:EncryptedData></ns2:nalogZaPlacanje>

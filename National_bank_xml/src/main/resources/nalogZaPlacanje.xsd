@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://nalogZaPlacanje.com"
+    xmlns:nzp="http://nalogZaPlacanje.com">
+    <xs:complexType name="nalogZaPlacanje">
+        <xs:sequence>
+            <xs:element name="idPoruke">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="50"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="duznik-nalogodavac" type="xs:string"/>
+            <xs:element name="svrhaPlacanja" type="xs:string"/>
+            <xs:element name="primalac-poverilac" type="xs:string"/>
+            <xs:element name="racunDuznika">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="18"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="modelZaduzenja">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int">
+                        <xs:maxInclusive value="99"/>
+                        <xs:minInclusive value="10"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="pozivNaBrojZaduzenja">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="20"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="racunPoverioca">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="18"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="modelOdobrenja">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int">
+                        <xs:minInclusive value="10"/>
+                        <xs:maxInclusive value="99"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="pozivNaBrojOdobrenja">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="20"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="iznos">
+                <xs:simpleType>
+                    <xs:restriction base="xs:decimal">
+                        <xs:totalDigits value="15"/>
+                        <xs:fractionDigits value="2"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="oznakaValute">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="3"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="datumNaloga" type="xs:date"/>
+        <xs:attribute name="datumValute" type="xs:date"/>
+        <xs:attribute name="hitno" type="xs:boolean"/>
+    </xs:complexType>
+    <xs:element name="getNalogZaPlacanjeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nalogZaPlacanje" type="nzp:nalogZaPlacanje"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getNalogZaPlacanjeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nalogZaPlacanje" type="nzp:nalogZaPlacanje"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

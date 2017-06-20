@@ -1,0 +1,37 @@
+<div class = "container">
+	<div class = "row">
+		<form class="form-horizontal" name= "form1" role = "form"  ng-submit = "checkCertificateStatus()" method = "post">
+				<legend>Check certificate status</legend>
+				
+				<div class = "form-group" ng-class="{ 'has-error': form.certificateSerialNumber.$dirty && form.certificateSerialNumber.$error.required }">
+					<label class = "col-md-4 control-label" for = "certificateSerialNumber">Certificate serial number:</label>
+					<div class = "col-md-4">
+						<input  type = "text" name = "certificateSerialNumber" id = "certificateSerialNumber" ng-model = "certificateSerialNumber"  class="form-control " required/>
+					</div>
+					<span><button type = "submit" name = "buttonSubmit1" class = "btn btn-primary" ng-disabled="form1.$invalid">Check</button></span>
+					
+				</div>
+				<div class = "form-group" >
+					<label class = "col-md-4 control-label" ></label>
+					<div class = "col-md-4">
+						<span ng-show = "status == 1" class="alert alert-success">Certificate is active.</span>
+						<span ng-show = "status == 0" class="alert alert-danger">Certificate is not active.</span>
+						<span ng-show = "status == 2" class="alert alert-danger">Certificate doesn't exist.</span>
+						
+
+					</div>
+				</div>
+		</form>
+		<form class="form-horizontal" name= "form2" role = "form"  ng-submit = "findCertificate()" method = "post">
+				<legend>Find certificate</legend>
+				
+				<div class = "form-group" >
+					<label class = "col-md-4 control-label" for = "certificateFindSerialNumber">Serial number:</label>
+					<div class = "col-md-4">
+						<input  type = "text" name = "certificateFindSerialNumber" id = "certificateFindSerialNumber" ng-model = "findSerialNumber"  class="form-control " required/>
+					</div>
+					<span><button type = "submit" name = "buttonSubmit2" class = "btn btn-primary" ng-disabled="form2.$invalid">Find</button></span>
+				</div>
+		</form>
+	</div>
+</div>

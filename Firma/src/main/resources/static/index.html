@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="routerApp">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="style.css">
+	
+		
+	<!-- AngularJS ============================================================= -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-resource.js"></script>
+	<script	src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+	<script src = "/FileSaver.min.js"></script>
+
+<script src="app.js"></script>
+
+<script src = "/nationalBank/nationalBankController.js"></script>
+<script src = "/nationalBank/nationalBankService.js"></script>
+<script src = "/caSignedCertificate/caSignedCertificateController.js"></script>
+<script src = "/caSignedCertificate/caSignedCertificateService.js"></script>
+<script src = "/signedCertificate/signedCertificateController.js"></script>
+<script src = "/signedCertificate/signedCertificateService.js"></script>
+
+<script src = "/findExistingCertificate/findCertificateController.js"></script>
+<script src = "/findExistingCertificate/findCertificateService.js"></script>
+
+<script src = "/revokeCertificate/revokeCertificateController.js"></script>
+<script src = "/revokeCertificate/revokeCertificateService.js"></script>
+
+<script src = "/csr/csrController.js"></script>
+<script src = "/csr/csrService.js"></script>
+
+<script src = "/user/userController.js"></script>
+<script src = "/user/userService.js"></script>
+
+<script src = "/login/loginController.js"></script>
+<script src = "/login/loginService.js"></script>
+
+<script src = "/faktura/fakturaController.js"></script>
+<script src = "/faktura/fakturaService.js"></script>
+
+</head>
+
+
+<body class="bg" ng-controller="appController">
+
+
+
+     <div>
+		<div ui-view></div>
+	</div>
+    
+    
+</body>
+
+</html>

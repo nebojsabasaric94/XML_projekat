@@ -1,0 +1,33 @@
+
+<form name="addNational" ng-model = "$parent.nationalBank">
+
+	<div>
+		<label>Common name:</label>
+		<input type = "text" name = "commonName" ng-model="$parent.nationalBank.commonName"/>
+	</div>
+	<div>
+		<label>Country:</label>
+		<input type = "text" name = "country" ng-model="$parent.nationalBank.country"/>
+	</div>
+	
+	<div>
+		<label>Organization</label> 
+		<input type="text" name="organization" ng-model = "$parent.nationalBank.organization"/>
+	</div>
+	
+	<div>
+		<label>Organization unit</label> 
+		<input type="text" name="organizationUnit" ng-model = "$parent.nationalBank.organizationUnit"/>
+	</div>
+	
+	<div>
+		<label>Email</label> 
+		<input type="text" name="email" ng-model = "$parent.nationalBank.email"/>
+	</div>
+	
+	<button ng-click="addNationalBank()">Add</button>
+</form>
+
+
+
+

@@ -1,0 +1,18 @@
+<div class = "col-sm-5">
+<legend>Register new user</legend>
+	<form name = "registerNewUser" role = "form" ng-submit = "registerUser()" method = "post">
+	
+	<div>
+		<label class="control-label">Username</label> 
+		<input type="text" class = "form-control" ng-model="user.username" required />
+	</div>
+	<div>
+		<label class="control-label">Email</label>
+		<input type="email" class = "form-control" ng-model="user.email" required />
+	</div>
+
+	<div>
+		<button type = "submit" class = "btn btn-primary" ng-disabled="registerNewUser.$invalid">Register</button>
+	</div>
+</form>
+</div>

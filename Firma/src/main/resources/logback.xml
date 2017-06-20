@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<property name="DEV_HOME" value="D:/logging.log" />
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+
+				[%-5level]%d{yyyy-MM-dd HH:mm:ss} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+
+
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>${DEV_HOME}</file>
+		<encoder>
+			<Pattern>
+				[%-5level]%d{yyyy-MM-dd HH:mm:ss} %logger{36} - %msg%n
+			</Pattern>
+		</encoder>
+
+	</appender>
+
+	<logger name="bank.user" level="INFO">
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="bank.login" level="INFO">
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="bank.nationalBank" level="INFO">
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="bank.certificate" level="INFO">
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="bank.client" level="INFO">
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="bank.faktura" level="INFO">
+		<appender-ref ref="FILE" />
+	</logger>
+
+
+
+	<root level="info">
+		<appender-ref ref="STDOUT" />
+	</root>
+	<logger name="jdbc" level="OFF" />
+
+
+</configuration>

@@ -1,0 +1,17 @@
+<div class = "container">
+	<div class = "row">
+		<form class="form-horizontal" name= "form" role = "form"  ng-submit = "revokeCertificate()" method = "post">
+				<legend>Revoke certificate</legend>
+				
+				<div class = "form-group" ng-class="{ 'has-error': form.certificateSerialNumber.$dirty && form.certificateSerialNumber.$error.required }">
+					<label class = "col-md-4 control-label" for = "certificateSerialNumber">Certificate serial number:</label>
+					<div class = "col-md-4">
+						<input  type = "text" name = "certificateSerialNumber" id = "certificateSerialNumber" ng-model = "certificateSerialNumber"  class="form-control " required/>
+						<span ng-show = "form.certificateSerialNumber.$dirty && form.certificateSerialNumber.$error.required" class="help-block">Certificate serial number is required</span>
+					</div>
+					<span><button type = "submit" name = "buttonSubmit" class = "btn btn-primary" ng-disabled="form.$invalid">Revoke</button></span>
+				</div>
+		</form>
+
+	</div>
+</div>
