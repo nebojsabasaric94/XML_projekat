@@ -5,17 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 
 @Entity
 public class StavkaFakture {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private Long id;
-	
+
 	@Max(value = 999)
 	private Integer redniBroj;
 
@@ -35,7 +34,7 @@ public class StavkaFakture {
 	private Integer vrednost;
 
 	@Column
-	private Integer procenaRabata;
+	private Integer procenatRabata;
 
 	@Column
 	private Integer iznosRabata;
@@ -45,10 +44,6 @@ public class StavkaFakture {
 
 	@Column
 	private Integer ukupanPorezStavka;
-	
-	@ManyToOne
-	private Faktura faktura;
-	
 
 	public Integer getRedniBroj() {
 		return redniBroj;
@@ -98,12 +93,20 @@ public class StavkaFakture {
 		this.vrednost = vrednost;
 	}
 
-	public Integer getProcenaRabata() {
-		return procenaRabata;
+	public Long getId() {
+		return id;
 	}
 
-	public void setProcenaRabata(Integer procenaRabata) {
-		this.procenaRabata = procenaRabata;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getProcenatRabata() {
+		return procenatRabata;
+	}
+
+	public void setProcenatRabata(Integer procenatRabata) {
+		this.procenatRabata = procenatRabata;
 	}
 
 	public Integer getIznosRabata() {
@@ -129,24 +132,5 @@ public class StavkaFakture {
 	public void setUkupanPorezStavka(Integer ukupanPorezStavka) {
 		this.ukupanPorezStavka = ukupanPorezStavka;
 	}
-
-	public Faktura getFaktura() {
-		return faktura;
-	}
-
-	public void setFaktura(Faktura faktura) {
-		this.faktura = faktura;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	
-	
 
 }

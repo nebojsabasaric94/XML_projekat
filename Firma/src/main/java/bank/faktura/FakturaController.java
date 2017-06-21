@@ -90,7 +90,8 @@ public class FakturaController {
 	@PostMapping("/obrada/{hitno}")
 	public void obradi(@RequestBody Faktura faktura, @PathVariable boolean hitno){
 		Faktura f = fakturaService.findOne(faktura.getId());
-		firmClient.sendNalog(f, hitno);
+		Firma firmaPoverioca = firmService.findByName(f.getNazivDobavljaca());
+		firmClient.sendNalog(f, hitno, firmaPoverioca);
 		faktura.setObradjena(true);
 		fakturaService.save(faktura);
 		logger.info("User " + getUserDetails() + " processing invoice.");

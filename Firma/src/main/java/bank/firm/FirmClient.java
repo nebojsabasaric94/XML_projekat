@@ -23,14 +23,14 @@ public class FirmClient {
 	private WSTemplate webServiceTemplate;
 
 
-	public void sendNalog(Faktura f, boolean hitno) {
+	public void sendNalog(Faktura f, boolean hitno, Firma firmaPoverioca) {
 		ObjectFactory factory = new ObjectFactory();
 		GetNalogZaPlacanjeRequest nalogZaPlacanjeRequest = factory.createGetNalogZaPlacanjeRequest();
 		
 		NalogZaPlacanje nalogZaPlacanje = factory.createNalogZaPlacanje();
 		nalogZaPlacanje.setDatumNaloga(new Date());
 		nalogZaPlacanje.setDatumValute(f.getDatumValute());
-		nalogZaPlacanje.setDuznikNalogodavac(f.getNazivDobavljaca());
+		nalogZaPlacanje.setDuznikNalogodavac(f.getNazivKupca());
 		nalogZaPlacanje.setHitno(hitno);
 		nalogZaPlacanje.setIdPoruke("Nalog za prenos");
 		nalogZaPlacanje.setIznos(new BigDecimal(f.getIznosZaUplatu()));
@@ -39,9 +39,10 @@ public class FirmClient {
 		nalogZaPlacanje.setOznakaValute(f.getOznakaValute());
 		nalogZaPlacanje.setPozivNaBrojOdobrenja("147541214");
 		nalogZaPlacanje.setPozivNaBrojZaduzenja("41247412");
-		nalogZaPlacanje.setPrimalacPoverilac(f.getNazivKupca());
-		nalogZaPlacanje.setRacunDuznika(f.getBrojRacuna());
-		nalogZaPlacanje.setRacunPoverioca(f.getUplataNaRacun());
+		nalogZaPlacanje.setPrimalacPoverilac(f.getNazivDobavljaca());
+		nalogZaPlacanje.setRacunDuznika(f.getUplataNaRacun());
+		
+		nalogZaPlacanje.setRacunPoverioca(firmaPoverioca.getBrojRacuna());
 		nalogZaPlacanje.setSvrhaPlacanja("Svrha placanja");
 		
 		nalogZaPlacanjeRequest.setNalogZaPlacanje(nalogZaPlacanje);
