@@ -8,6 +8,7 @@ app.controller('fakturaController',['$scope','fakturaService','$location',
 	$scope.faktura.stavkeFakture = [];
 	$scope.stavka = new Object();
 	$scope.faktura.iznosZaUplatu = 0;
+	$scope.regex = /^\w{3}$/;
 	
 	$scope.dodajStavkuDiv = false;
 	$scope.findFirm = function(){
@@ -16,7 +17,6 @@ app.controller('fakturaController',['$scope','fakturaService','$location',
 				$scope.faktura.nazivDobavljaca = response.data.name;
 				$scope.faktura.adresaDobavljaca = response.data.address;
 				$scope.faktura.pibDobavljaca = response.data.pibFirm;
-				$scope.faktura.brojRacuna = response.data.brojRacuna;
 				
 				
 			}
@@ -98,6 +98,8 @@ app.controller('fakturaController',['$scope','fakturaService','$location',
 	}
 	
 	$scope.obradi = function(faktura, hitno){
+		if(hitno == undefined)
+			hitno = false;
 		fakturaService.obradi(faktura, hitno)
 		.then(function(response){
 			$scope.findAll();

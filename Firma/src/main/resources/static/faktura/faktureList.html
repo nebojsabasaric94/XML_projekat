@@ -14,8 +14,8 @@
 			<td>{{faktura.nazivDobavljaca}}</td>
 			<td>{{faktura.adresaDobavljaca}}</td>
 			<td>{{faktura.ukupnoRobaIUsluge}}</td>
-			<td><input type = "checkbox" ng-model = "$index"></td>
-			<td><button class = "btn" ng-click = "obradi(faktura,$index)">Obradi fakturu</button></td>
+			<td><input type = "checkbox" ng-model = "pera.$index"></td>
+			<td><button class = "btn" ng-click = "obradi(faktura,pera.$index)">Obradi fakturu</button></td>
 		</tr>
 	</table>
 </div>

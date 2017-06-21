@@ -15,10 +15,6 @@
 		<label class="control-label">Pib dobavljaca</label>
 		<input type = "text" class = "form-control" ng-model = "faktura.pibDobavljaca" required disabled/>
 	</div>
-	<div>
-		<label class="control-label">Broj racuna</label>
-		<input type = "text" class = "form-control" ng-model = "faktura.brojRacuna" required disabled/>
-	</div>
 	<div><button class = "btn" ng-click = "openModal()">Dodaj kupca</button></div>
 	
 	<div>
@@ -36,6 +32,11 @@
 	<div>
 		<label class="control-label">Uplata na racun</label>
 		<input type = "text" class = "form-control" ng-model = "faktura.uplataNaRacun" required disabled/>
+	</div>
+	<div>
+		<label class="control-label">Broj racuna</label>
+		<input type = "text" class = "form-control" name = "brojRacuna" ng-model = "faktura.brojRacuna" ng-pattern = "/^\d{6}$/" required />
+		<span ng-show="fakturaSent.brojRacuna.$error.pattern" style="color:red">Nevalidan broj racuna(broj racuna = 123456)</span>
 	</div>
 	<div>
 		<label class="control-label">Datum racuna</label>
@@ -63,12 +64,13 @@
 	</div>
 	<div>
 		<label class="control-label">Oznaka valute</label>
-		<input type = "text" class = "form-control" ng-model = "faktura.oznakaValute" required/>
+		<input type = "text" class = "form-control" name = "oznakaValute" ng-model = "faktura.oznakaValute" ng-pattern = "/^\w{3}$/" required/>
+		<span ng-show="fakturaSent.oznakaValute.$error.pattern" style="color:red">Nevalidna oznaka(validna oznaka = abc)</span>
 	</div>
-<!-- 	<div>
+ 	<div>    
 		<label class="control-label">Iznos za uplatu</label>
-		<input type = "number" class = "form-control" ng-model = "faktura.iznosZaUplatu" required/>
-	</div> -->
+		<input type = "number" class = "form-control" ng-model = "faktura.iznosZaUplatu" disabled />
+	</div>
 
 	<div>
 		<label class="control-label">Datum valute</label>
@@ -87,7 +89,8 @@
 	<form name = "formaStavke">
 	<div>
 		<label>Redni broj</label>
-		<input type = "number" class = "form-control" ng-model = "stavka.redniBroj" required/>
+		<input type = "number" class = "form-control" ng-model = "stavka.redniBroj" ng-pattern = "/^\d{3}$/" min="111" max="999"  required/>
+		<span ng-show="fakturaSent.oznakaValute.$error.pattern" style="color:red">Nevalidan redni broj(validna oznaka = 123)</span>
 	</div>
 	<div>
 		<label>Naziv robe ili usluge</label>
@@ -110,8 +113,8 @@
 		 <input type = "text" class = "form-control" ng-model = "stavka.vrednost" disabled required/>		
 	</div>
 	<div>
-		<label>Procena rabata</label>
-		<input type = "number" class = "form-control" ng-model = "stavka.procenaRabata" required/>
+		<label>Procenat rabata</label>
+		<input type = "number" class = "form-control" ng-model = "stavka.procenatRabata" required/>
 	</div>
 	<div>
 		<label>Iznos rabata</label>

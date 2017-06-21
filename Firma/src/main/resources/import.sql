@@ -65,7 +65,7 @@ insert into faktura(adresa_dobavljaca, adresa_kupca, broj_racuna, datum_racuna, 
 
 insert into stavka_fakture(iznos_rabata, jedinica_mere, jedinicna_cena, kolicina, naziv_robe_ili_usluge, procena_rabata, redni_broj, ukupan_porez_stavka, umanjeno_za_rabat, vrednost, faktura_id) values ('5', '5', '5', '6', '5', '5', '141', '7', '5', '5', 1);
 
-insert into faktura(adresa_dobavljaca, adresa_kupca, broj_racuna, datum_racuna, datum_valute, iznos_za_uplatu, naziv_dobavljaca, naziv_kupca, obradjena, oznaka_valute, pib_dobavljaca, pib_kupca, ukupan_porez, ukupan_rabat, ukupno_robaiusluge, uplata_na_racun, vrednost_robe, vrednost_usluga, firma_id) values ('bulevar', 'trifkovicev trg', '200636547896321456', '2017-06-12 02:00:00', '2017-06-12 02:00:00', '7', 'ftn', 'levi', false, '7', 'asdfggfdsea', 'asdfggfdsaa', '7', '7', '77', '300874521693695451', '312312', '3212', '1')
+insert into faktura(adresa_dobavljaca, adresa_kupca, broj_racuna, datum_racuna, datum_valute, iznos_za_uplatu, naziv_dobavljaca, naziv_kupca, obradjena, oznaka_valute, pib_dobavljaca, pib_kupca, ukupan_porez, ukupan_rabat, ukupno_robaiusluge, uplata_na_racun, vrednost_robe, vrednost_usluga, firma_id) values ('bulevar', 'trifkovicev trg', '200636547896321456', '2017-06-12 02:00:00', '2017-06-12 02:00:00', '700000', 'ftn', 'levi', false, '7', 'asdfggfdsea', 'asdfggfdsaa', '7', '7', '77', '300874521693695451', '312312', '3212', '1')
 
 insert into stavka_fakture(iznos_rabata, jedinica_mere, jedinicna_cena, kolicina, naziv_robe_ili_usluge, procena_rabata, redni_broj, ukupan_porez_stavka, umanjeno_za_rabat, vrednost, faktura_id) values ('5', '5', '5', '6', '5', '5', '141', '700000', '5', '5', 2);
 
