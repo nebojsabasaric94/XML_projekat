@@ -42,17 +42,17 @@ import javax.xml.bind.annotation.XmlType;
 public class GetMt102Response {
 
     @XmlElement(required = true)
-    protected Mt900 mt900;
+    protected Mt900Mt102 mt900;
 
     /**
      * Gets the value of the mt900 property.
      * 
      * @return
      *     possible object is
-     *     {@link Mt900 }
+     *     {@link Mt900Mt102 }
      *     
      */
-    public Mt900 getMt900() {
+    public Mt900Mt102 getMt900() {
         return mt900;
     }
 
@@ -61,10 +61,10 @@ public class GetMt102Response {
      * 
      * @param value
      *     allowed object is
-     *     {@link Mt900 }
+     *     {@link Mt900Mt102 }
      *     
      */
-    public void setMt900(Mt900 value) {
+    public void setMt900(Mt900Mt102 value) {
         this.mt900 = value;
     }
 

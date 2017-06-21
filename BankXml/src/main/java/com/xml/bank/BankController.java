@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xml.client.BankClient;
-import com.xml.firm.FirmService;
 import com.xml.mt102.GetMt102Response;
 import com.xml.mt102.Mt102;
 import com.xml.mt102.Mt102Service;
@@ -37,17 +36,12 @@ public class BankController {
 		for(int i = 0 ; i < mt102List.size(); i++){
 			if(!mt102List.get(i).isObradjen()){
 				GetMt102Response response = bankClient.sendMt102ToNationalBank(mt102List.get(i));
-				Mt102 mt102 = mt102List.get(i);
-				/*for(int j = 0 ; j < mt102.getNalogZaMT102().size(); j++){
-					Firma firm = firmService.findByAccount(mt102.getNalogZaMT102().get(j).getRacunDuznika());
-					firm.setStanjeRacuna(firm.getStanjeRacuna() - mt102.getNalogZaMT102().get(j).getIznos().intValueExact());
-					firmService.save(firm);
-				}*/
-				//Firma firm = firmService.findByAccount(response.getMt900().getObracunskiRacunBankeDuznika());
-				//firm.setStanjeRacuna(firm.getStanjeRacuna() - response.getMt900().getIznos().intValueExact());
-				mt102.setObradjen(true);
-				
-				mt102Service.save(mt102);
+				if(response.getMt900().getIdPoruke().equals("MT900")){
+					Mt102 mt102 = mt102List.get(i);
+					mt102.setObradjen(true);
+					
+					mt102Service.save(mt102);
+				}
 			}
 		}
 	}

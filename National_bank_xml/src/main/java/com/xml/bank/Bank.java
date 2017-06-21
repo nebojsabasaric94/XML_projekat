@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xml.firm.Firma;
-
+import com.xml.mt102.Mt102;
 
 @Entity
 public class Bank {
@@ -35,7 +35,7 @@ public class Bank {
 
 	@Column(unique = true, columnDefinition = "CHAR(18)")
 	@NotBlank
-	private String obracunskiRacunBanke;	
+	private String obracunskiRacunBanke;
 
 	@Column(unique = true, columnDefinition = "CHAR(8)")
 	@NotBlank	
@@ -68,6 +68,10 @@ public class Bank {
 	@OneToMany(mappedBy = "bank", cascade = CascadeType.ALL)
 	private List<Firma> firms;
 
+	@JsonIgnore
+	@OneToMany(mappedBy = "banka", cascade = CascadeType.ALL)
+	private List<Mt102> mt102;
+	
 	public Long getId() {
 		return id;
 	}
@@ -172,9 +176,14 @@ public class Bank {
 	public void setStanjeRacunaBanke(Integer stanjeRacunaBanke) {
 		this.stanjeRacunaBanke = stanjeRacunaBanke;
 	}
-	
-	
-	
+
+	public List<Mt102> getMt102() {
+		return mt102;
+	}
+
+	public void setMt102(List<Mt102> mt102) {
+		this.mt102 = mt102;
+	}
 	
 	
 	

@@ -1,7 +1,5 @@
 package com.xml.bank;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.security.PrivateKey;
 import java.util.Date;
 
@@ -10,10 +8,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -41,6 +35,8 @@ import com.xml.strukturartgsnaloga.GetMt910Request;
 import com.xml.strukturartgsnaloga.GetMt910Response;
 import com.xml.strukturartgsnaloga.GetStrukturaRtgsNalogaRequest;
 import com.xml.strukturartgsnaloga.GetStrukturaRtgsNalogaResponse;
+import com.xml.strukturartgsnaloga.Mt900Service;
+import com.xml.strukturartgsnaloga.Mt910Service;
 import com.xml.strukturartgsnaloga.ObjectFactory;
 import com.xml.strukturartgsnaloga.StrukturaRtgsNaloga;
 
@@ -59,7 +55,16 @@ public class BankEndpoint {
 	private Mt102Service mt102Service;
 	
 	@Autowired
+	private Mt900Service mt900Service;
+	
+	@Autowired
+	private Mt910Service mt910Service;
+		
+	@Autowired
 	private NalogZaMT102Service nalogZaMt102Service;
+	
+	@Autowired
+	private com.xml.mt102.Mt910Service mt910ServiceMt102;
 	
 	private static final String NAMESPACE_URI = "http://strukturaRtgsNaloga.xml.com";
 
@@ -83,7 +88,7 @@ public class BankEndpoint {
 		String oznakaBankePoverioca = nalogZaPlacanje.getRacunPoverioca().substring(0,3);
 		Firma duznik = firmService.findByAccount(nalogZaPlacanje.getRacunDuznika());
 		Firma poverilac = firmService.findByAccount(nalogZaPlacanje.getRacunPoverioca());
-		GetNalogZaPlacanjeResponse responseNalog = new GetNalogZaPlacanjeResponse();
+
 		if(oznakaBankeDuznika.equals(oznakaBankePoverioca)){
 		//u istoj su banci, samo prebaci novac sa racuna na racun
 			
@@ -91,6 +96,9 @@ public class BankEndpoint {
 			firmService.save(duznik);
 			poverilac.setStanjeRacuna(poverilac.getStanjeRacuna()+ nalogZaPlacanje.getIznos().intValue());
 			firmService.save(poverilac);
+			GetNalogZaPlacanjeResponse responseNZP = new GetNalogZaPlacanjeResponse();
+			responseNZP.setNalogZaPlacanje(nalogZaPlacanje);
+			return responseNZP;			
 		}
 		else if(nalogZaPlacanje.isHitno() || nalogZaPlacanje.getIznos().intValue() > 250000){
 			//RTGS
@@ -123,6 +131,10 @@ public class BankEndpoint {
 			if(response.getMt900().getIdPoruke().equals("MT900")){
 				duznik.setStanjeRacuna(duznik.getStanjeRacuna()-response.getMt900().getIznos().intValue());
 				firmService.save(duznik);
+				mt900Service.save(response.getMt900());
+				GetNalogZaPlacanjeResponse responseNZP = new GetNalogZaPlacanjeResponse();
+				responseNZP.setNalogZaPlacanje(nalogZaPlacanje);
+				return responseNZP;
 			}
 		}
 		else{
@@ -159,9 +171,7 @@ public class BankEndpoint {
 				mt102 = mt102Service.save(mt102);
 				nalog.setMt102(mt102);
 				nalogZaMt102Service.save(nalog);
-				//mt102.getNalogZaMT102().add(nalog);
-				//nalog.setMt102(mt102);
-				//mt102Service.save(mt102);
+
 			} else {
 				//Mt102 mt102 = new Mt102();
 				NalogZaMT102 nalog = new NalogZaMT102();
@@ -188,11 +198,13 @@ public class BankEndpoint {
 				 
 				 
 			}
+			GetNalogZaPlacanjeResponse responseNZP = new GetNalogZaPlacanjeResponse();
+			responseNZP.setNalogZaPlacanje(nalogZaPlacanje);
+			return responseNZP;			
 		}
 
-		GetNalogZaPlacanjeResponse response = new GetNalogZaPlacanjeResponse();
 		
-		return response;
+		return null;
 	}
 	
 	
@@ -211,7 +223,10 @@ public class BankEndpoint {
 		Firma poverilac = firmService.findByAccount(getMt910Request.getRtgsNalog().getRacunPoverioca());
 		poverilac.setStanjeRacuna(poverilac.getStanjeRacuna()+ getMt910Request.getRtgsNalog().getIznos().intValue());
 		firmService.save(poverilac);
-		return new GetMt910Response();
+		GetMt910Response response = new GetMt910Response();
+		mt910Service.save(getMt910Request.getMt910());
+		response.setStatus("success");
+		return response;
 	}
 	
 	@PayloadRoot(namespace = NAMESPACE_URI2, localPart = "getMt910RequestMt102")//za mt102
@@ -231,7 +246,10 @@ public class BankEndpoint {
 			poverilac.setStanjeRacuna(poverilac.getStanjeRacuna()+ getMt910Request.getMt102().getNalogZaMT102().get(i).getIznos().intValue());
 			firmService.save(poverilac);
 		}
-		return null;
+		com.xml.mt102.GetMt910Response response = new com.xml.mt102.GetMt910Response();
+		mt910ServiceMt102.save(getMt910Request.getMt910());
+		response.setStatus("success");
+		return response;
 	}
 	
 	
@@ -331,7 +349,7 @@ public class BankEndpoint {
 	/*
 	 * Postoji samo radi testiranja enkripcije
 	 */
-	private void saveDocument(Document doc, String fileName) {
+/*	private void saveDocument(Document doc, String fileName) {
 		try {
 			File outFile = new File(fileName);
 			FileOutputStream f = new FileOutputStream(outFile);
@@ -342,7 +360,7 @@ public class BankEndpoint {
 			transformer.transform(source, result);
 			f.close();
 		} catch (Exception r){r.printStackTrace();}
-	}
+	}*/
 	
 	
 }

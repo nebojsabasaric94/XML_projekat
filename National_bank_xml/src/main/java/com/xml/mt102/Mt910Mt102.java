@@ -9,13 +9,22 @@
 package com.xml.mt102;
 
 import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.xml.AddaptDate;
 
 
 /**
@@ -88,8 +97,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "idPorukeNaloga",
     "iznos"
 })
-public class Mt910 {
 
+@Entity
+public class Mt910Mt102 {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@XmlTransient
+	private Long id;
+	
     @XmlElement(name = "id_poruke", required = true)
     protected String idPoruke;
     @XmlElement(name = "swift_kod_banke_poverioca", required = true)
@@ -102,7 +118,8 @@ public class Mt910 {
     protected BigDecimal iznos;
     @XmlAttribute(name = "datum_valute")
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar datumValute;
+    @XmlJavaTypeAdapter(AddaptDate.class)    
+    protected Date datumValute;
     @XmlAttribute(name = "sifra_valute")
     protected String sifraValute;
 
@@ -234,7 +251,7 @@ public class Mt910 {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getDatumValute() {
+    public Date getDatumValute() {
         return datumValute;
     }
 
@@ -246,7 +263,7 @@ public class Mt910 {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setDatumValute(XMLGregorianCalendar value) {
+    public void setDatumValute(Date value) {
         this.datumValute = value;
     }
 
@@ -274,4 +291,14 @@ public class Mt910 {
         this.sifraValute = value;
     }
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+    
+    
 }

@@ -45,11 +45,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Mt910 }
+     * Create an instance of {@link Mt910Mt102 }
      * 
      */
-    public Mt910 createMt910() {
-        return new Mt910();
+    public Mt910Mt102 createMt910() {
+        return new Mt910Mt102();
     }
 
     /**
@@ -69,11 +69,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Mt900 }
+     * Create an instance of {@link Mt900Mt102 }
      * 
      */
-    public Mt900 createMt900() {
-        return new Mt900();
+    public Mt900Mt102 createMt900() {
+        return new Mt900Mt102();
     }
 
     /**

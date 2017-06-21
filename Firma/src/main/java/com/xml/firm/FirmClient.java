@@ -10,6 +10,7 @@ import com.xml.faktura.Faktura;
 import com.xml.nalogzaplacanje.GetNalogZaPlacanjeRequest;
 import com.xml.nalogzaplacanje.GetNalogZaPlacanjeResponse;
 import com.xml.nalogzaplacanje.NalogZaPlacanje;
+import com.xml.nalogzaplacanje.NalogZaPlacanjeService;
 import com.xml.nalogzaplacanje.ObjectFactory;
 import com.xml.ws.WSTemplate;
 
@@ -23,7 +24,9 @@ public class FirmClient {
 	@Autowired
 	private WSTemplate webServiceTemplate;
 
-
+	@Autowired
+	private NalogZaPlacanjeService nalogService;
+	
 	public void sendNalog(Faktura f, boolean hitno, Firma firmaPoverioca) {
 		ObjectFactory factory = new ObjectFactory();
 		GetNalogZaPlacanjeRequest nalogZaPlacanjeRequest = factory.createGetNalogZaPlacanjeRequest();
@@ -50,7 +53,10 @@ public class FirmClient {
 
 		
 		GetNalogZaPlacanjeResponse getNalogZaPlacanjeResponse = (GetNalogZaPlacanjeResponse) webServiceTemplate.marshalSendAndReceive(nalogZaPlacanjeRequest);
-		System.out.println("proslo");
+		if(getNalogZaPlacanjeResponse.getNalogZaPlacanje() != null){
+			System.out.println("proslo");
+			nalogService.save(getNalogZaPlacanjeResponse.getNalogZaPlacanje());
+		}
 	//	System.out.println(getNalogZaPlacanjeResponse.getNalogZaPlacanje().getDuznikNalogodavac());
 		}
 

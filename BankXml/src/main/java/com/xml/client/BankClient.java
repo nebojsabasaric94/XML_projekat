@@ -9,6 +9,7 @@ import com.xml.firm.Firma;
 import com.xml.mt102.GetMt102Request;
 import com.xml.mt102.GetMt102Response;
 import com.xml.mt102.Mt102;
+import com.xml.mt102.Mt900Service;
 import com.xml.strukturartgsnaloga.GetStrukturaRtgsNalogaRequest;
 import com.xml.strukturartgsnaloga.GetStrukturaRtgsNalogaResponse;
 
@@ -21,6 +22,9 @@ public class BankClient {
 
 	@Autowired
 	private FirmService firmService;
+	
+	@Autowired
+	private Mt900Service mt900Service;
 	
 /*	public void sendToNationalBank(NalogZaPlacanje nalog){
 		ObjectFactory factory = new ObjectFactory();
@@ -42,15 +46,18 @@ public class BankClient {
 		request.setMt102(mt102);
 		GetMt102Response response = (GetMt102Response) webServiceTemplate.marshalSendAndReceive(request);
 		//nakon vracene poruke skini pare sa racuna
-		String racunDuznika = null;
-		for(int i =0; i < mt102.getNalogZaMT102().size();i++){
-			racunDuznika = mt102.getNalogZaMT102().get(i).getRacunDuznika();
-			Firma duznik = firmService.findByAccount(racunDuznika);
-			duznik.setStanjeRacuna(duznik.getStanjeRacuna()-mt102.getNalogZaMT102().get(i).getIznos().intValue());
-			firmService.save(duznik);
+		if(response.getMt900().getIdPoruke().equals("MT900")){
+			String racunDuznika = null;
+			for(int i =0; i < mt102.getNalogZaMT102().size();i++){
+				racunDuznika = mt102.getNalogZaMT102().get(i).getRacunDuznika();
+				Firma duznik = firmService.findByAccount(racunDuznika);
+				duznik.setStanjeRacuna(duznik.getStanjeRacuna()-mt102.getNalogZaMT102().get(i).getIznos().intValue());
+				firmService.save(duznik);
+			}
+			mt900Service.save(response.getMt900());
+			return response;
 		}
-		return response;
-		
+		return null;
 		/*response.getMt102().setObradjen(true);
 		mt102Service.save(response.getMt102());*/
 		//return null;

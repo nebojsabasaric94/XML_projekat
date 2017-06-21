@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlType;
 public class GetMt910RequestMt102 {
 
     @XmlElement(required = true)
-    protected Mt910 mt910;
+    protected Mt910Mt102 mt910;
     @XmlElement(required = true)
     protected Mt102 mt102;
 
@@ -53,10 +53,10 @@ public class GetMt910RequestMt102 {
      * 
      * @return
      *     possible object is
-     *     {@link Mt910 }
+     *     {@link Mt910Mt102 }
      *     
      */
-    public Mt910 getMt910() {
+    public Mt910Mt102 getMt910() {
         return mt910;
     }
 
@@ -65,10 +65,10 @@ public class GetMt910RequestMt102 {
      * 
      * @param value
      *     allowed object is
-     *     {@link Mt910 }
+     *     {@link Mt910Mt102 }
      *     
      */
-    public void setMt910(Mt910 value) {
+    public void setMt910(Mt910Mt102 value) {
         this.mt910 = value;
     }
 

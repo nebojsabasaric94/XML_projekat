@@ -11,12 +11,18 @@ package com.xml.nalogzaplacanje;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -130,8 +136,15 @@ import com.xml.AddaptDate;
     "iznos",
     "oznakaValute"
 })
+@Entity
 public class NalogZaPlacanje {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@XmlTransient
+	@Column
+	private Long id;
+	
     @XmlElement(required = true)
     protected String idPoruke;
     @XmlElement(name = "duznik-nalogodavac", required = true)
@@ -508,5 +521,13 @@ public class NalogZaPlacanje {
     public void setHitno(Boolean value) {
         this.hitno = value;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 }

@@ -38,11 +38,11 @@ public class Bank {
 	private String obracunskiRacunBanke;
 
 	@Column(unique = true, columnDefinition = "CHAR(8)")
-	@NotBlank
+	@NotBlank	
 	private String swiftKodBanke;
-
+	
 	private Integer stanjeRacunaBanke;
-
+	
 	@Column(length = 120)
 	@NotBlank
 	private String name;
@@ -57,13 +57,13 @@ public class Bank {
 
 	@Column(length = 128)
 	private String web;
-
+	
 	@Column(length = 20)
 	private String phone;
-
+	
 	@Column(length = 20)
 	private String fax;
-
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "bank", cascade = CascadeType.ALL)
 	private List<Firma> firms;
@@ -71,7 +71,7 @@ public class Bank {
 	@JsonIgnore
 	@OneToMany(mappedBy = "banka", cascade = CascadeType.ALL)
 	private List<Mt102> mt102;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -144,6 +144,7 @@ public class Bank {
 		this.fax = fax;
 	}
 
+
 	public List<Firma> getFirms() {
 		return firms;
 	}
@@ -184,5 +185,8 @@ public class Bank {
 		this.mt102 = mt102;
 	}
 	
+	
+	
+
 
 }

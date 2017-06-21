@@ -54,6 +54,7 @@ import com.xml.strukturartgsnaloga.Mt900;
 import com.xml.strukturartgsnaloga.Mt910;
 import com.xml.strukturartgsnaloga.ObjectFactory;
 import com.xml.strukturartgsnaloga.StrukturaRtgsNaloga;
+import com.xml.strukturartgsnaloga.StrukturaRtgsNalogaService;
 
 
 
@@ -72,25 +73,10 @@ public class NationalBankEndpoint {
 	@Autowired
 	private BankService bankService;
 	
-	/*@PayloadRoot(namespace = NAMESPACE_URI1, localPart = "getNalogZaPlacanjeRequest")
-	@XmlAnyElement
-	@ResponsePayload
-	public GetNalogZaPlacanjeResponse getNalogZaPlacanje(@RequestPayload Element request) {
-		Document doc = null;
-		if(checkSignature(request))
-			doc = decrypt(request);
-		//----------------------------------gotov deo za desifrovanje-------------
-		NalogZaPlacanje nalogZaPlacanje = getObjectFromXMLDoc(doc);
-		//------------------------------------------------------------------------
-		GetNalogZaPlacanjeResponse response = new GetNalogZaPlacanjeResponse();
-		System.out.println("usao narodna banka");
-		//response.setCountry(countryRepository.findCountry(request.getName()));
-		//bankClient.sendToNationalBank(response.getNalogZaPlacanje());
-		return response;
-	}*/
+	@Autowired
+	private StrukturaRtgsNalogaService strukturaRtgsNalogaService;
 	
-	
-	
+
 	
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getStrukturaRtgsNalogaRequest")
 	@XmlAnyElement
@@ -105,8 +91,11 @@ public class NationalBankEndpoint {
 		
 		
 		//StrukturaRtgsNaloga rtgsNalog = request.getStrukturaRtgsNaloga();
+		//skidam novac sa racuna banki
 		Bank bankaDuznika = bankService.findBySwiftCode(rtgsNalog.getSwiftKodBankeDuznika());
 		Bank bankaPoverioca = bankService.findBySwiftCode(rtgsNalog.getSwiftKodBankePoverioca());
+		bankService.save(bankaPoverioca);
+		bankService.save(bankaDuznika);
 		bankaPoverioca.setStanjeRacunaBanke(bankaPoverioca.getStanjeRacunaBanke() + rtgsNalog.getIznos().intValue());
 		bankaDuznika.setStanjeRacunaBanke(bankaDuznika.getStanjeRacunaBanke()-rtgsNalog.getIznos().intValue());
 		System.out.println("Usao rtgs");
@@ -116,7 +105,7 @@ public class NationalBankEndpoint {
 		Mt910 mt910 = factory.createMt910();
 		mt910.setDatumValute(null);
 		mt910.setIdPoruke("MT910");
-		mt910.setIdPorukeNaloga("Nalog za prenos");
+		mt910.setIdPorukeNaloga("MT103");
 		mt910.setIznos(rtgsNalog.getIznos());
 		mt910.setObracunskiRacunBankePoverioca(rtgsNalog.getObracunskiRacunBankePoverioca());
 		mt910.setSifraValute(rtgsNalog.getSifraValute());
@@ -125,74 +114,66 @@ public class NationalBankEndpoint {
 		mt910Request.setMt910(mt910);
 		mt910Request.setRtgsNalog(rtgsNalog);
 		GetMt910Response mt910Response = client.sendMt910(mt910Request);
-		
-		Mt900 mt900 = new Mt900();
-		mt900.setDatumValute(null);
-		mt900.setIdPoruke("MT900");
-		mt900.setIdPorukeNaloga("Nalog za prenos");
-		mt900.setIznos(rtgsNalog.getIznos());
-		mt900.setObracunskiRacunBankeDuznika(bankaDuznika.getObracunskiRacunBanke());
-		mt900.setSifraValute("RSD");
-		mt900.setSwiftBankeDuznika(bankaDuznika.getSwiftKodBanke());
-		
-		
-		
-		GetStrukturaRtgsNalogaResponse response = new GetStrukturaRtgsNalogaResponse();
-		response.setMt900(mt900);
-		
-//		JAXBContext jaxbMarshaller = null;
-			//try {
-			//	jaxbMarshaller = JAXBContext.newInstance(GetStrukturaRtgsNalogaResponse.class);
-			//} catch (JAXBException e) {
-			///	// TODO Auto-generated catch block
-		//	/	e.printStackTrace();
-//			}
+		if(mt910Response.getStatus().equals("success"))
+		{
+			Mt900 mt900 = new Mt900();
+			mt900.setDatumValute(null);
+			mt900.setIdPoruke("MT900");
+			mt900.setIdPorukeNaloga("MT103");
+			mt900.setIznos(rtgsNalog.getIznos());
+			mt900.setObracunskiRacunBankeDuznika(bankaDuznika.getObracunskiRacunBanke());
+			mt900.setSifraValute("RSD");
+			mt900.setSwiftBankeDuznika(bankaDuznika.getSwiftKodBanke());
 			
-		
-			////////////
-			File file = new File("RESPONSEfile.xml");
-			JAXBContext jaxbContext;
-			try {
-				jaxbContext = JAXBContext.newInstance(GetStrukturaRtgsNalogaResponse.class);
-				Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
-				// output pretty printed
-				jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-				jaxbMarshaller.marshal(response, file);
-				jaxbMarshaller.marshal(response, System.out);
+			
+			
+			GetStrukturaRtgsNalogaResponse response = new GetStrukturaRtgsNalogaResponse();
+			response.setMt900(mt900);
+				File file = new File("RESPONSEfile.xml");
+				JAXBContext jaxbContext;
+				try {
+					jaxbContext = JAXBContext.newInstance(GetStrukturaRtgsNalogaResponse.class);
+					Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+	
+					// output pretty printed
+					jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+	
+					jaxbMarshaller.marshal(response, file);
+					jaxbMarshaller.marshal(response, System.out);
+					
+					
+				} catch (JAXBException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
+				Document document = loadDocument("RESPONSEfile.xml");
+	
 				
-			} catch (JAXBException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			Document document = loadDocument("RESPONSEfile.xml");
-
-			
-			KeyStoreReader ksReader = new KeyStoreReader();
-			XMLEncryptionUtility encUtility = new XMLEncryptionUtility();
-			XMLSigningUtility sigUtility = new XMLSigningUtility();
-			
-			SecretKey secretKey = encUtility.generateDataEncryptionKey();
-			System.out.println("\n===== Generisan kljuc =====");
-			System.out.println(Base64.encode(secretKey.getEncoded()));
-			
-			//Ucitava sertifikat za sifrovanje tajnog kljuca
-			Certificate cert = ksReader.readCertificate("primer.jks", "primer", "primer");
-			//Sifruje se dokument
-			System.out.println("\n===== Sifrovanje XML dokumenta =====");
-			document = encUtility.encrypt(document, secretKey, cert);
-			//Snima se XML dokument, koji sadrzi tajni kljuc
-			saveDocument(document, file.getPath());
-			
-			System.out.println("\n===== Potpisivanje XML dokumenta =====");
-			PrivateKey privateKey = ksReader.readPrivateKey("primer.jks", "primer", "primer", "primer");
-			document = sigUtility.signDocument(document, privateKey, cert);
-			saveDocument(document, "RESPONSEsignedFile.xml");
-			
-		return response;
+				KeyStoreReader ksReader = new KeyStoreReader();
+				XMLEncryptionUtility encUtility = new XMLEncryptionUtility();
+				XMLSigningUtility sigUtility = new XMLSigningUtility();
+				
+				SecretKey secretKey = encUtility.generateDataEncryptionKey();
+				System.out.println("\n===== Generisan kljuc =====");
+				System.out.println(Base64.encode(secretKey.getEncoded()));
+				
+				//Ucitava sertifikat za sifrovanje tajnog kljuca
+				Certificate cert = ksReader.readCertificate("primer.jks", "primer", "primer");
+				//Sifruje se dokument
+				System.out.println("\n===== Sifrovanje XML dokumenta =====");
+				document = encUtility.encrypt(document, secretKey, cert);
+				//Snima se XML dokument, koji sadrzi tajni kljuc
+				saveDocument(document, file.getPath());
+				
+				System.out.println("\n===== Potpisivanje XML dokumenta =====");
+				PrivateKey privateKey = ksReader.readPrivateKey("primer.jks", "primer", "primer", "primer");
+				document = sigUtility.signDocument(document, privateKey, cert);
+				saveDocument(document, "RESPONSEsignedFile.xml");
+				strukturaRtgsNalogaService.save(rtgsNalog);
+				return response;
+		}
+		return null;
 		
 	}	
 	
@@ -209,13 +190,13 @@ public class NationalBankEndpoint {
 		
 		
 		com.xml.mt102.ObjectFactory factory = new com.xml.mt102.ObjectFactory();
-		com.xml.mt102.Mt910 mt910 = factory.createMt910();
+		com.xml.mt102.Mt910Mt102 mt910 = factory.createMt910();
 		GetMt910RequestMt102 mt910Request = factory.createGetMt910RequestMt102();
 		System.out.println("Usao MT102");
 
-		mt910.setDatumValute(null);
+		mt910.setDatumValute(mt102.getDatum());
 		mt910.setIdPoruke("MT910");
-		mt910.setIdPorukeNaloga("Nalog za prenos");
+		mt910.setIdPorukeNaloga("MT102");
 		mt910.setIznos(mt102.getUkupanIznos());
 		mt910.setObracunskiRacunBankePoverioca(mt102.getObracunskiRacunBankePoverioca());
 		mt910.setSifraValute(mt102.getSifraValute());
@@ -225,19 +206,22 @@ public class NationalBankEndpoint {
 		mt910Request.setMt102(mt102);
 		com.xml.mt102.GetMt910Response mt910response = client.sendMt910mt102(mt910Request);
 		/////////////////////
-		com.xml.mt102.Mt900 mt900 = new com.xml.mt102.Mt900();
-		mt900.setDatumValute(null);
-		mt900.setIdPoruke("MT900");
-		mt900.setIdPorukeNaloga("Nalog za prenos");
-		mt900.setIznos(mt102.getUkupanIznos());
-		mt900.setObracunskiRacunBankeDuznika(mt102.getObracunskiRacunBankeDuznika());
-		mt900.setSifraValute(mt102.getSifraValute());
-		mt900.setSwiftBankeDuznika(mt102.getSwiftKodBankeDuznika());
-		GetMt102Response response = new GetMt102Response();
-		response.setMt900(mt900);
-	
+		if(mt910response.getStatus().equals("success")){
+			com.xml.mt102.Mt900Mt102 mt900 = new com.xml.mt102.Mt900Mt102();
+			mt900.setDatumValute(null);
+			mt900.setIdPoruke("MT900");
+			mt900.setIdPorukeNaloga("MT102");
+			mt900.setIznos(mt102.getUkupanIznos());
+			mt900.setObracunskiRacunBankeDuznika(mt102.getObracunskiRacunBankeDuznika());
+			mt900.setSifraValute(mt102.getSifraValute());
+			mt900.setSwiftBankeDuznika(mt102.getSwiftKodBankeDuznika());
+			GetMt102Response response = new GetMt102Response();
+			response.setMt900(mt900);
+			//mt102Service.save(mt102);
+			return response;
+		}
 		
-		return response;
+		return null;
 	}
 	
 	

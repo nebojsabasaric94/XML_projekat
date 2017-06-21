@@ -1,16 +1,20 @@
 package com.xml.firm;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xml.bank.Bank;
-
-
+import com.xml.faktura.Faktura;
 
 @Entity
 public class Firma {
@@ -45,7 +49,7 @@ public class Firma {
 	@Column(name = "web")
 	private String web;
 	
-	@Column(columnDefinition = "CHAR(11)",unique = true)
+	@Column(unique = true, columnDefinition = "CHAR(11)")
 	private String pibFirm;
 
 	private Integer stanjeRacuna;
@@ -56,8 +60,11 @@ public class Firma {
 	@ManyToOne
 	private Bank bank;
 	
-	
 
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "firma", cascade = CascadeType.ALL)
+	private List<Faktura> fakture;
 
 	
 	
@@ -134,6 +141,14 @@ public class Firma {
 		this.bank = bank;
 	}
 
+	public List<Faktura> getFakture() {
+		return fakture;
+	}
+
+	public void setFakture(List<Faktura> fakture) {
+		this.fakture = fakture;
+	}
+
 	public String getPibFirm() {
 		return pibFirm;
 	}
@@ -141,6 +156,7 @@ public class Firma {
 	public void setPibFirm(String pibFirm) {
 		this.pibFirm = pibFirm;
 	}
+
 
 	public Integer getStanjeRacuna() {
 		return stanjeRacuna;
@@ -157,6 +173,7 @@ public class Firma {
 	public void setBrojRacuna(String brojRacuna) {
 		this.brojRacuna = brojRacuna;
 	}
+
 	
 	
 

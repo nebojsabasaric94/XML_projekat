@@ -9,12 +9,22 @@
 package com.xml.mt102;
 
 import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.xml.AddaptDate;
 
 
 /**
@@ -139,8 +149,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "iznos",
     "sifraValute"
 })
+@Entity
 public class NalogZaMT102 {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@XmlTransient
+	private Long id;
+	
     @XmlElement(name = "id_naloga_za_placanje", required = true)
     protected String idNalogaZaPlacanje;
     @XmlElement(name = "duznik_nalogodavac", required = true)
@@ -151,7 +167,8 @@ public class NalogZaMT102 {
     protected String primalacPoverilac;
     @XmlElement(name = "datum_naloga", required = true)
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar datumNaloga;
+    @XmlJavaTypeAdapter(AddaptDate.class)    
+    protected Date datumNaloga;
     @XmlElement(name = "racun_duznika", required = true)
     protected String racunDuznika;
     @XmlElement(name = "model_zaduzenja")
@@ -169,6 +186,10 @@ public class NalogZaMT102 {
     @XmlElement(name = "sifra_valute", required = true)
     protected String sifraValute;
 
+    
+    @ManyToOne
+    @XmlTransient
+    private Mt102 mt102;
     /**
      * Gets the value of the idNalogaZaPlacanje property.
      * 
@@ -273,7 +294,7 @@ public class NalogZaMT102 {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getDatumNaloga() {
+    public Date getDatumNaloga() {
         return datumNaloga;
     }
 
@@ -285,7 +306,7 @@ public class NalogZaMT102 {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setDatumNaloga(XMLGregorianCalendar value) {
+    public void setDatumNaloga(Date value) {
         this.datumNaloga = value;
     }
 
@@ -465,4 +486,22 @@ public class NalogZaMT102 {
         this.sifraValute = value;
     }
 
+	public Mt102 getMt102() {
+		return mt102;
+	}
+
+	public void setMt102(Mt102 mt102) {
+		this.mt102 = mt102;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+    
+    
 }

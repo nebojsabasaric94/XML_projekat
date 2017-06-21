@@ -10,15 +10,28 @@ package com.xml.mt102;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
+
+import com.xml.AddaptDate;
+import com.xml.bank.Bank;
 
 
 /**
@@ -103,8 +116,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "ukupanIznos",
     "nalogZaMT102"
 })
+@Entity
 public class Mt102 {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@XmlTransient
+	private Long id;
+	
     @XmlElement(name = "id_poruke", required = true)
     protected String idPoruke;
     @XmlElement(name = "swift_kod_banke_duznika", required = true)
@@ -118,16 +137,26 @@ public class Mt102 {
     @XmlElement(name = "ukupan_iznos", required = true)
     protected BigDecimal ukupanIznos;
     @XmlElement(required = true)
+    @OneToMany(mappedBy = "mt102")
     protected List<NalogZaMT102> nalogZaMT102;
     @XmlAttribute(name = "datum")
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar datum;
+    @XmlJavaTypeAdapter(AddaptDate.class)
+    protected Date datum;
     @XmlAttribute(name = "datum_valute")
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar datumValute;
+    @XmlJavaTypeAdapter(AddaptDate.class)
+    protected Date datumValute;
     @XmlAttribute(name = "sifra_valute")
     protected String sifraValute;
 
+    
+    @ManyToOne
+    @XmlTransient
+    private Bank banka;
+    
+    @XmlTransient
+    private boolean obradjen;    
     /**
      * Gets the value of the idPoruke property.
      * 
@@ -309,7 +338,7 @@ public class Mt102 {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getDatum() {
+    public Date getDatum() {
         return datum;
     }
 
@@ -321,7 +350,7 @@ public class Mt102 {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setDatum(XMLGregorianCalendar value) {
+    public void setDatum(Date value) {
         this.datum = value;
     }
 
@@ -333,7 +362,7 @@ public class Mt102 {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getDatumValute() {
+    public Date getDatumValute() {
         return datumValute;
     }
 
@@ -345,7 +374,7 @@ public class Mt102 {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setDatumValute(XMLGregorianCalendar value) {
+    public void setDatumValute(Date value) {
         this.datumValute = value;
     }
 
@@ -373,4 +402,42 @@ public class Mt102 {
         this.sifraValute = value;
     }
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getSwiftKodBankePoverioca() {
+		return swiftKodBankePoverioca;
+	}
+
+	public void setSwiftKodBankePoverioca(String swiftKodBankePoverioca) {
+		this.swiftKodBankePoverioca = swiftKodBankePoverioca;
+	}
+
+	public void setNalogZaMT102(List<NalogZaMT102> nalogZaMT102) {
+		this.nalogZaMT102 = nalogZaMT102;
+	}
+
+	public Bank getBanka() {
+		return banka;
+	}
+
+	public void setBanka(Bank banka) {
+		this.banka = banka;
+	}
+
+	public boolean isObradjen() {
+		return obradjen;
+	}
+
+	public void setObradjen(boolean obradjen) {
+		this.obradjen = obradjen;
+	}
+
+	
+	
 }
