@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nalogZaPlacanje.com"
-    xmlns:tns="http://nalogZaPlacanje.com" elementFormDefault="qualified">
-    
-    
-    
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://nalogZaPlacanje.xml.com" elementFormDefault="qualified"
+    xmlns:nzp="http://nalogZaPlacanje.xml.com">
+
+
+
     <xs:element name="getNalogZaPlacanjeRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="nalogZaPlacanje" type="tns:nalogZaPlacanje"/>
+                <xs:element name="nalogZaPlacanje" type="nzp:nalogZaPlacanje"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
     <xs:element name="getNalogZaPlacanjeResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="nalogZaPlacanje" type="tns:nalogZaPlacanje"/>
+                <xs:element name="nalogZaPlacanje" type="nzp:nalogZaPlacanje"/>
             </xs:sequence>
         </xs:complexType>
-    </xs:element>    
+    </xs:element>
     <xs:complexType name="nalogZaPlacanje">
         <xs:sequence>
             <xs:element name="idPoruke">
