@@ -18,6 +18,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -156,7 +157,12 @@ public class Mt102 {
     @ManyToOne
     @XmlTransient
     private Bank banka;
-    
+ 
+	@ManyToOne
+	@JoinColumn(name = "bankaPoverioca")
+	@XmlTransient
+	private Bank bankaPoverioca;
+	
     @XmlTransient
     private boolean obradjen;
 
@@ -433,6 +439,13 @@ public class Mt102 {
 		this.id = id;
 	}
 
+	public Bank getBankaPoverioca() {
+		return bankaPoverioca;
+	}
+
+	public void setBankaPoverioca(Bank bankaPoverioca) {
+		this.bankaPoverioca = bankaPoverioca;
+	}
 
 
 }

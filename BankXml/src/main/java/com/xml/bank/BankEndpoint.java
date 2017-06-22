@@ -158,6 +158,7 @@ public class BankEndpoint {
 				mt102.setSifraValute("RSD");
 				mt102.setBanka(duznik.getBank());
 				mt102.setObradjen(false);
+				mt102.setBankaPoverioca(poverilac.getBank());
 				NalogZaMT102 nalog = new NalogZaMT102();
 				nalog.setIdNalogaZaPlacanje("idNaloga");
 				nalog.setDuznikNalogodavac(nalogZaPlacanje.getDuznikNalogodavac());
@@ -253,6 +254,7 @@ public class BankEndpoint {
 			firmService.save(poverilac);
 		}
 		com.xml.mt102.GetMt910Response response = new com.xml.mt102.GetMt910Response();
+		getMt910Request.getMt910().setBankaPoverioca(bankService.findByObracunskiRacunBanke(getMt910Request.getMt910().getObracunskiRacunBankePoverioca()));
 		mt910ServiceMt102.save(getMt910Request.getMt910());
 		response.setStatus("success");
 		return response;

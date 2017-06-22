@@ -16,6 +16,8 @@ import org.hibernate.validator.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xml.firm.Firma;
 import com.xml.mt102.Mt102;
+import com.xml.mt102.Mt900Mt102;
+import com.xml.mt102.Mt910Mt102;
 import com.xml.strukturartgsnaloga.Mt900;
 import com.xml.strukturartgsnaloga.Mt910;
 import com.xml.strukturartgsnaloga.StrukturaRtgsNaloga;
@@ -76,6 +78,11 @@ public class Bank {
 	private List<Mt102> mt102;
 
 	@JsonIgnore
+	@OneToMany(mappedBy = "bankaPoverioca", cascade = CascadeType.ALL)
+	private List<Mt102> mt102Poverioca;
+	
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "bankaDuznika", cascade = CascadeType.ALL)
 	private List<StrukturaRtgsNaloga> strukturaDuznika;
 
@@ -90,7 +97,14 @@ public class Bank {
 	@JsonIgnore
 	@OneToMany(mappedBy = "bankaPoverioca", cascade = CascadeType.ALL)
 	List<Mt910> mt910;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "bankaDuznika", cascade = CascadeType.ALL)
+	List<Mt900Mt102> mt900Mt102;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "bankaPoverioca", cascade = CascadeType.ALL)
+	List<Mt910Mt102> mt910Mt102;	
 
 	public Long getId() {
 		return id;
@@ -228,6 +242,36 @@ public class Bank {
 		this.mt900 = mt900;
 	}
 
-	
+	public List<Mt910> getMt910() {
+		return mt910;
+	}
 
+	public void setMt910(List<Mt910> mt910) {
+		this.mt910 = mt910;
+	}
+
+	public List<Mt900Mt102> getMt900Mt102() {
+		return mt900Mt102;
+	}
+
+	public void setMt900Mt102(List<Mt900Mt102> mt900Mt102) {
+		this.mt900Mt102 = mt900Mt102;
+	}
+
+	public List<Mt910Mt102> getMt910Mt102() {
+		return mt910Mt102;
+	}
+
+	public void setMt910Mt102(List<Mt910Mt102> mt910Mt102) {
+		this.mt910Mt102 = mt910Mt102;
+	}
+
+	public List<Mt102> getMt102Poverioca() {
+		return mt102Poverioca;
+	}
+
+	public void setMt102Poverioca(List<Mt102> mt102Poverioca) {
+		this.mt102Poverioca = mt102Poverioca;
+	}
+	
 }

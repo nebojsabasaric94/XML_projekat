@@ -193,6 +193,7 @@ public class NationalBankEndpoint {
 			doc = decrypt(request);
 		Mt102 mt102 = getMt102FromXMLDoc(doc);
 		
+
 		
 		com.xml.mt102.ObjectFactory factory = new com.xml.mt102.ObjectFactory();
 		com.xml.mt102.Mt910Mt102 mt910 = factory.createMt910();
@@ -206,7 +207,6 @@ public class NationalBankEndpoint {
 		mt910.setObracunskiRacunBankePoverioca(mt102.getObracunskiRacunBankePoverioca());
 		mt910.setSifraValute(mt102.getSifraValute());
 		mt910.setSwiftKodBankePoverioca(mt102.getSWIFTKodBankePoverioca());
-		
 		mt910Request.setMt910(mt910);
 		mt910Request.setMt102(mt102);
 		com.xml.mt102.GetMt910Response mt910response = client.sendMt910mt102(mt910Request);

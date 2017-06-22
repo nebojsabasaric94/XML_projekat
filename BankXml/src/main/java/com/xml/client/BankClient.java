@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.xml.WSTemplate;
+import com.xml.bank.Bank;
+import com.xml.bank.BankService;
 import com.xml.firm.FirmService;
 import com.xml.firm.Firma;
 import com.xml.mt102.GetMt102Request;
@@ -20,6 +22,9 @@ public class BankClient {
 	@Autowired
 	private WSTemplate webServiceTemplate;
 
+	@Autowired
+	private BankService bankService;	
+	
 	@Autowired
 	private FirmService firmService;
 	
@@ -54,6 +59,8 @@ public class BankClient {
 				duznik.setStanjeRacuna(duznik.getStanjeRacuna()-mt102.getNalogZaMT102().get(i).getIznos().intValue());
 				firmService.save(duznik);
 			}
+			Bank bankaDuznika = bankService.findByObracunskiRacunBanke(response.getMt900().getObracunskiRacunBankeDuznika());
+			response.getMt900().setBankaDuznika(bankaDuznika);			
 			mt900Service.save(response.getMt900());
 			return response;
 		}

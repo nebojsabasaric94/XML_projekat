@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><getStrukturaRtgsNalogaResponse xmlns="http://strukturaRtgsNaloga.xml.com"><xenc:EncryptedData xmlns:xenc="http://www.w3.org/2001/04/xmlenc#" Type="http://www.w3.org/2001/04/xmlenc#Content"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
 <ds:KeyName>Sifrovan tajni kljuc</ds:KeyName>
-<xenc:EncryptedKey><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/><xenc:CipherData><xenc:CipherValue>UlM9vhv1+msuRw2uOb8FnWyFWWvVYU0tTXM1KaDPfWpwvomf88eNqYhKgaO/qAOCu0lROnQ+ippr&#13;
-DYL38wqpiRTgEtUvLhvbCvWfeCThn6J2ZpxBVxKAzKU/j+2BZGiup/uiRDb3D16+ojo1z5pMPaLM&#13;
-ajAJUo9VQv2ZxrZ3A7U=</xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>SIBzwoW/ebUvzFdnfgJGtvfVOQ1Iafptu7O1jtXR8CEAwADGCUM5ID6YtDL7bwVljsuwEU+9Kjqc&#13;
-hjs7kCRHeSyKDJBbfcDrl4h745y10LaK77ya4wk3tKaPP8OJOrZhdi2gus/pgHgTCdHw81k4P7NM&#13;
-4enCKMM2mbj6vS2s8637c6cY0ycIyVUO2RTRNPM7y3UUg0EuEjQJN8YEZuY+uAYt1JZSdmu7xSV8&#13;
-56REfSnpVSOORAeN/xkloq4tGNZMpgPUqLxXp2Rv2Rbh2E5klb8ZfC2RY5Nbx57+6aZi0Wza/Q2U&#13;
-pFAB6qj49DvL/PQfSsAB0vxlQajFeTAlOa6JcZ0YqR7DK26GPA6b2MazNe/yiFkZlooHgpQcKKJ0&#13;
-CRAXJo5MAkGI9/Q5y+F7+gRQEzSD39SLhw7xypj1xLQntlU+28hKOTxGKg==</xenc:CipherValue></xenc:CipherData></xenc:EncryptedData></getStrukturaRtgsNalogaResponse>
+<xenc:EncryptedKey><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/><xenc:CipherData><xenc:CipherValue>lwdo8c5fOvxxWuPZYj9kTu0VS281QA72E2fl0/gVSdTHQ7eSJ4qMjxGYxysZ98MNmoNajAv63bcE&#13;
+nLohA9EVaqmGHY6H1QCRibeaPq7fYJpi7qOeArA7AQcrnX2nFo986AGhuD1+Kzje5L56ITFSk/JI&#13;
+4Dc2O+VpmGUhThGmxd4=</xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>+cp+bVq0FJTbTLLOVHUHHOAxkrnrw3h0rl6bJbkglIrXA7jAOq2LfqGWXZfjT7/kTDxNSUP9iMNf&#13;
+eTkSbE7AyMRrJpYliV5TxbGs/TNnRajsdEtKE1+0bUugo5iiEvWudIGKoKv/zALnhIsd94vfijax&#13;
+XhoTKRtBc88h7yKM5sdJp82t9nrNRA49CfRwH69fJtgQFrSlqpjU29bH5U/na/HLNpYrFgGldSrJ&#13;
+ve8S392fRKmk+XMzJ6OBPMIHXg7OEDlOUfqMmSKcjKA0oYX52RjcvyhZ4vPRtN7NOjDqwbW9wv2C&#13;
+FjWF+5kY1sphc9gqveetLcUsk4peVxPF3OKoKHPmhnbkzP0C7g3xr1ltg7jpqtHkFQEunWwgTP3m&#13;
+nOXi/1wbEGPSNcZ9vM8Qs5EDZm58ZuvMLFjBzTYDxO4e3stpw+MWSL4Zww==</xenc:CipherValue></xenc:CipherData></xenc:EncryptedData></getStrukturaRtgsNalogaResponse>

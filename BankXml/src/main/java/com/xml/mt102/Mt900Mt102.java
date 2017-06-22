@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -25,6 +26,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.xml.AddaptDate;
+import com.xml.bank.Bank;
 
 
 /**
@@ -122,6 +124,10 @@ public class Mt900Mt102 {
     @XmlAttribute(name = "sifra_valute")
     protected String sifraValute;
 
+    
+    @ManyToOne
+    @XmlTransient
+    private Bank bankaDuznika;    
     /**
      * Gets the value of the idPoruke property.
      * 
@@ -296,6 +302,14 @@ public class Mt900Mt102 {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Bank getBankaDuznika() {
+		return bankaDuznika;
+	}
+
+	public void setBankaDuznika(Bank bankaDuznika) {
+		this.bankaDuznika = bankaDuznika;
 	}
 
 }
