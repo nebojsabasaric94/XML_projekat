@@ -16,7 +16,6 @@ public class NationalBankClient {
 	private WSTemplate webServiceTemplate;
 	
 	public GetMt910Response sendMt910(GetMt910Request request){
-		//webServiceTemplate.setDefaultUri("");
 		
 		GetMt910Response response  = (GetMt910Response) webServiceTemplate.marshalSendAndReceive(request);
 		return response;

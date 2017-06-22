@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -24,8 +26,10 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.xml.AddaptDate;
+import com.xml.bank.Bank;
 
 
 /**
@@ -188,464 +192,426 @@ public class StrukturaRtgsNaloga {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@XmlTransient
-	private Long id;
-	
-    @XmlElement(name = "id_poruke", required = true)
-    protected String idPoruke;
-    @XmlElement(name = "swift_kod_banke_duznika", required = true)
-    protected String swiftKodBankeDuznika;
-    @XmlElement(name = "obracunski_racun_banke_duznika", required = true)
-    protected String obracunskiRacunBankeDuznika;
-    @XmlElement(name = "swift_kod_banke_poverioca", required = true)
-    protected String swiftKodBankePoverioca;
-    @XmlElement(name = "obracunski_racun_banke_poverioca", required = true)
-    protected String obracunskiRacunBankePoverioca;
-    @XmlElement(name = "duznik_nalogodavac", required = true)
-    protected String duznikNalogodavac;
-    @XmlElement(name = "svrha_placanja", required = true)
-    protected String svrhaPlacanja;
-    @XmlElement(name = "primalac_poverilac", required = true)
-    protected String primalacPoverilac;
-    @XmlElement(name = "racun_duznika", required = true)
-    protected String racunDuznika;
-    @XmlElement(name = "model_zaduzenja")
-    protected int modelZaduzenja;
-    @XmlElement(name = "poziv_na_broj_zaduzenja", required = true)
-    protected String pozivNaBrojZaduzenja;
-    @XmlElement(name = "racun_poverioca", required = true)
-    protected String racunPoverioca;
-    @XmlElement(name = "model_odobrenja")
-    protected int modelOdobrenja;
-    @XmlElement(name = "poziv_na_broj_odobrenja", required = true)
-    protected String pozivNaBrojOdobrenja;
-    @XmlElement(required = true)
-    protected BigDecimal iznos;
-    @XmlAttribute(name = "datum_naloga")
-    @XmlSchemaType(name = "date")
-    @XmlJavaTypeAdapter(AddaptDate.class)
-    protected Date datumNaloga;
-    @XmlAttribute(name = "datum_valute")
-    @XmlSchemaType(name = "date")
-    @XmlJavaTypeAdapter(AddaptDate.class)
-    protected Date datumValute;
-    @XmlAttribute(name = "sifra_valute")
-    protected String sifraValute;
+	Long id;
 
-    /**
-     * Gets the value of the idPoruke property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getIdPoruke() {
-        return idPoruke;
-    }
+	@XmlElement(name = "id_poruke", required = true)
+	protected String idPoruke;
+	@XmlElement(name = "swift_kod_banke_duznika", required = true)
+	protected String swiftKodBankeDuznika;
+	@XmlElement(name = "obracunski_racun_banke_duznika", required = true)
+	protected String obracunskiRacunBankeDuznika;
+	@XmlElement(name = "swift_kod_banke_poverioca", required = true)
+	protected String swiftKodBankePoverioca;
+	@XmlElement(name = "obracunski_racun_banke_poverioca", required = true)
+	protected String obracunskiRacunBankePoverioca;
+	@XmlElement(name = "duznik_nalogodavac", required = true)
+	protected String duznikNalogodavac;
+	@XmlElement(name = "svrha_placanja", required = true)
+	protected String svrhaPlacanja;
+	@XmlElement(name = "primalac_poverilac", required = true)
+	protected String primalacPoverilac;
+	@XmlElement(name = "racun_duznika", required = true)
+	protected String racunDuznika;
+	@XmlElement(name = "model_zaduzenja")
+	protected int modelZaduzenja;
+	@XmlElement(name = "poziv_na_broj_zaduzenja", required = true)
+	protected String pozivNaBrojZaduzenja;
+	@XmlElement(name = "racun_poverioca", required = true)
+	protected String racunPoverioca;
+	@XmlElement(name = "model_odobrenja")
+	protected int modelOdobrenja;
+	@XmlElement(name = "poziv_na_broj_odobrenja", required = true)
+	protected String pozivNaBrojOdobrenja;
+	@XmlElement(required = true)
+	protected BigDecimal iznos;
+	@XmlAttribute(name = "datum_naloga")
+	@XmlSchemaType(name = "date")
+	@XmlJavaTypeAdapter(AddaptDate.class)
+	protected Date datumNaloga;
+	@XmlAttribute(name = "datum_valute")
+	@XmlSchemaType(name = "date")
+	@XmlJavaTypeAdapter(AddaptDate.class)
+	protected Date datumValute;
+	@XmlAttribute(name = "sifra_valute")
+	protected String sifraValute;
 
-    /**
-     * Sets the value of the idPoruke property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setIdPoruke(String value) {
-        this.idPoruke = value;
-    }
+	@ManyToOne
+	@JoinColumn(name = "bankaPoverioca")
+	@XmlTransient
+	private Bank bankaPoverioca;
 
-    /**
-     * Gets the value of the swiftKodBankeDuznika property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSwiftKodBankeDuznika() {
-        return swiftKodBankeDuznika;
-    }
+	@ManyToOne
+	@JoinColumn(name = "bankaDuznika")
+	@XmlTransient
+	private Bank bankaDuznika;
 
-    /**
-     * Sets the value of the swiftKodBankeDuznika property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSwiftKodBankeDuznika(String value) {
-        this.swiftKodBankeDuznika = value;
-    }
+	/**
+	 * Gets the value of the idPoruke property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getIdPoruke() {
+		return idPoruke;
+	}
 
-    /**
-     * Gets the value of the obracunskiRacunBankeDuznika property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getObracunskiRacunBankeDuznika() {
-        return obracunskiRacunBankeDuznika;
-    }
+	/**
+	 * Sets the value of the idPoruke property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setIdPoruke(String value) {
+		this.idPoruke = value;
+	}
 
-    /**
-     * Sets the value of the obracunskiRacunBankeDuznika property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setObracunskiRacunBankeDuznika(String value) {
-        this.obracunskiRacunBankeDuznika = value;
-    }
+	/**
+	 * Gets the value of the swiftKodBankeDuznika property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getSwiftKodBankeDuznika() {
+		return swiftKodBankeDuznika;
+	}
 
-    /**
-     * Gets the value of the swiftKodBankePoverioca property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSwiftKodBankePoverioca() {
-        return swiftKodBankePoverioca;
-    }
+	/**
+	 * Sets the value of the swiftKodBankeDuznika property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setSwiftKodBankeDuznika(String value) {
+		this.swiftKodBankeDuznika = value;
+	}
 
-    /**
-     * Sets the value of the swiftKodBankePoverioca property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSwiftKodBankePoverioca(String value) {
-        this.swiftKodBankePoverioca = value;
-    }
+	/**
+	 * Gets the value of the obracunskiRacunBankeDuznika property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getObracunskiRacunBankeDuznika() {
+		return obracunskiRacunBankeDuznika;
+	}
 
-    /**
-     * Gets the value of the obracunskiRacunBankePoverioca property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getObracunskiRacunBankePoverioca() {
-        return obracunskiRacunBankePoverioca;
-    }
+	/**
+	 * Sets the value of the obracunskiRacunBankeDuznika property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setObracunskiRacunBankeDuznika(String value) {
+		this.obracunskiRacunBankeDuznika = value;
+	}
 
-    /**
-     * Sets the value of the obracunskiRacunBankePoverioca property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setObracunskiRacunBankePoverioca(String value) {
-        this.obracunskiRacunBankePoverioca = value;
-    }
+	/**
+	 * Gets the value of the swiftKodBankePoverioca property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getSwiftKodBankePoverioca() {
+		return swiftKodBankePoverioca;
+	}
 
-    /**
-     * Gets the value of the duznikNalogodavac property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDuznikNalogodavac() {
-        return duznikNalogodavac;
-    }
+	/**
+	 * Sets the value of the swiftKodBankePoverioca property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setSwiftKodBankePoverioca(String value) {
+		this.swiftKodBankePoverioca = value;
+	}
 
-    /**
-     * Sets the value of the duznikNalogodavac property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDuznikNalogodavac(String value) {
-        this.duznikNalogodavac = value;
-    }
+	/**
+	 * Gets the value of the obracunskiRacunBankePoverioca property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getObracunskiRacunBankePoverioca() {
+		return obracunskiRacunBankePoverioca;
+	}
 
-    /**
-     * Gets the value of the svrhaPlacanja property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSvrhaPlacanja() {
-        return svrhaPlacanja;
-    }
+	/**
+	 * Sets the value of the obracunskiRacunBankePoverioca property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setObracunskiRacunBankePoverioca(String value) {
+		this.obracunskiRacunBankePoverioca = value;
+	}
 
-    /**
-     * Sets the value of the svrhaPlacanja property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSvrhaPlacanja(String value) {
-        this.svrhaPlacanja = value;
-    }
+	/**
+	 * Gets the value of the duznikNalogodavac property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getDuznikNalogodavac() {
+		return duznikNalogodavac;
+	}
 
-    /**
-     * Gets the value of the primalacPoverilac property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPrimalacPoverilac() {
-        return primalacPoverilac;
-    }
+	/**
+	 * Sets the value of the duznikNalogodavac property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setDuznikNalogodavac(String value) {
+		this.duznikNalogodavac = value;
+	}
 
-    /**
-     * Sets the value of the primalacPoverilac property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPrimalacPoverilac(String value) {
-        this.primalacPoverilac = value;
-    }
+	/**
+	 * Gets the value of the svrhaPlacanja property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getSvrhaPlacanja() {
+		return svrhaPlacanja;
+	}
 
-    /**
-     * Gets the value of the racunDuznika property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getRacunDuznika() {
-        return racunDuznika;
-    }
+	/**
+	 * Sets the value of the svrhaPlacanja property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setSvrhaPlacanja(String value) {
+		this.svrhaPlacanja = value;
+	}
 
-    /**
-     * Sets the value of the racunDuznika property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setRacunDuznika(String value) {
-        this.racunDuznika = value;
-    }
+	/**
+	 * Gets the value of the primalacPoverilac property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getPrimalacPoverilac() {
+		return primalacPoverilac;
+	}
 
-    /**
-     * Gets the value of the modelZaduzenja property.
-     * 
-     */
-    public int getModelZaduzenja() {
-        return modelZaduzenja;
-    }
+	/**
+	 * Sets the value of the primalacPoverilac property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setPrimalacPoverilac(String value) {
+		this.primalacPoverilac = value;
+	}
 
-    /**
-     * Sets the value of the modelZaduzenja property.
-     * 
-     */
-    public void setModelZaduzenja(int value) {
-        this.modelZaduzenja = value;
-    }
+	/**
+	 * Gets the value of the racunDuznika property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getRacunDuznika() {
+		return racunDuznika;
+	}
 
-    /**
-     * Gets the value of the pozivNaBrojZaduzenja property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPozivNaBrojZaduzenja() {
-        return pozivNaBrojZaduzenja;
-    }
+	/**
+	 * Sets the value of the racunDuznika property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setRacunDuznika(String value) {
+		this.racunDuznika = value;
+	}
 
-    /**
-     * Sets the value of the pozivNaBrojZaduzenja property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPozivNaBrojZaduzenja(String value) {
-        this.pozivNaBrojZaduzenja = value;
-    }
+	/**
+	 * Gets the value of the modelZaduzenja property.
+	 * 
+	 */
+	public int getModelZaduzenja() {
+		return modelZaduzenja;
+	}
 
-    /**
-     * Gets the value of the racunPoverioca property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getRacunPoverioca() {
-        return racunPoverioca;
-    }
+	/**
+	 * Sets the value of the modelZaduzenja property.
+	 * 
+	 */
+	public void setModelZaduzenja(int value) {
+		this.modelZaduzenja = value;
+	}
 
-    /**
-     * Sets the value of the racunPoverioca property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setRacunPoverioca(String value) {
-        this.racunPoverioca = value;
-    }
+	/**
+	 * Gets the value of the pozivNaBrojZaduzenja property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getPozivNaBrojZaduzenja() {
+		return pozivNaBrojZaduzenja;
+	}
 
-    /**
-     * Gets the value of the modelOdobrenja property.
-     * 
-     */
-    public int getModelOdobrenja() {
-        return modelOdobrenja;
-    }
+	/**
+	 * Sets the value of the pozivNaBrojZaduzenja property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setPozivNaBrojZaduzenja(String value) {
+		this.pozivNaBrojZaduzenja = value;
+	}
 
-    /**
-     * Sets the value of the modelOdobrenja property.
-     * 
-     */
-    public void setModelOdobrenja(int value) {
-        this.modelOdobrenja = value;
-    }
+	/**
+	 * Gets the value of the racunPoverioca property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getRacunPoverioca() {
+		return racunPoverioca;
+	}
 
-    /**
-     * Gets the value of the pozivNaBrojOdobrenja property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPozivNaBrojOdobrenja() {
-        return pozivNaBrojOdobrenja;
-    }
+	/**
+	 * Sets the value of the racunPoverioca property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setRacunPoverioca(String value) {
+		this.racunPoverioca = value;
+	}
 
-    /**
-     * Sets the value of the pozivNaBrojOdobrenja property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPozivNaBrojOdobrenja(String value) {
-        this.pozivNaBrojOdobrenja = value;
-    }
+	/**
+	 * Gets the value of the modelOdobrenja property.
+	 * 
+	 */
+	public int getModelOdobrenja() {
+		return modelOdobrenja;
+	}
 
-    /**
-     * Gets the value of the iznos property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
-     */
-    public BigDecimal getIznos() {
-        return iznos;
-    }
+	/**
+	 * Sets the value of the modelOdobrenja property.
+	 * 
+	 */
+	public void setModelOdobrenja(int value) {
+		this.modelOdobrenja = value;
+	}
 
-    /**
-     * Sets the value of the iznos property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
-     */
-    public void setIznos(BigDecimal value) {
-        this.iznos = value;
-    }
+	/**
+	 * Gets the value of the pozivNaBrojOdobrenja property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getPozivNaBrojOdobrenja() {
+		return pozivNaBrojOdobrenja;
+	}
 
-    /**
-     * Gets the value of the datumNaloga property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public Date getDatumNaloga() {
-        return datumNaloga;
-    }
+	/**
+	 * Sets the value of the pozivNaBrojOdobrenja property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setPozivNaBrojOdobrenja(String value) {
+		this.pozivNaBrojOdobrenja = value;
+	}
 
-    /**
-     * Sets the value of the datumNaloga property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setDatumNaloga(Date value) {
-        this.datumNaloga = value;
-    }
+	/**
+	 * Gets the value of the iznos property.
+	 * 
+	 * @return possible object is {@link BigDecimal }
+	 * 
+	 */
+	public BigDecimal getIznos() {
+		return iznos;
+	}
 
-    /**
-     * Gets the value of the datumValute property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public Date getDatumValute() {
-        return datumValute;
-    }
+	/**
+	 * Sets the value of the iznos property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link BigDecimal }
+	 * 
+	 */
+	public void setIznos(BigDecimal value) {
+		this.iznos = value;
+	}
 
-    /**
-     * Sets the value of the datumValute property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setDatumValute(Date value) {
-        this.datumValute = value;
-    }
+	/**
+	 * Gets the value of the datumNaloga property.
+	 * 
+	 * @return possible object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public Date getDatumNaloga() {
+		return datumNaloga;
+	}
 
-    /**
-     * Gets the value of the sifraValute property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSifraValute() {
-        return sifraValute;
-    }
+	/**
+	 * Sets the value of the datumNaloga property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public void setDatumNaloga(Date value) {
+		this.datumNaloga = value;
+	}
 
-    /**
-     * Sets the value of the sifraValute property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSifraValute(String value) {
-        this.sifraValute = value;
-    }
+	/**
+	 * Gets the value of the datumValute property.
+	 * 
+	 * @return possible object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public Date getDatumValute() {
+		return datumValute;
+	}
+
+	/**
+	 * Sets the value of the datumValute property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public void setDatumValute(Date value) {
+		this.datumValute = value;
+	}
+
+	/**
+	 * Gets the value of the sifraValute property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getSifraValute() {
+		return sifraValute;
+	}
+
+	/**
+	 * Sets the value of the sifraValute property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setSifraValute(String value) {
+		this.sifraValute = value;
+	}
 
 	public Long getId() {
 		return id;
@@ -653,6 +619,22 @@ public class StrukturaRtgsNaloga {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Bank getBankaPoverioca() {
+		return bankaPoverioca;
+	}
+
+	public void setBankaPoverioca(Bank bankaPoverioca) {
+		this.bankaPoverioca = bankaPoverioca;
+	}
+
+	public Bank getBankaDuznika() {
+		return bankaDuznika;
+	}
+
+	public void setBankaDuznika(Bank bankaDuznika) {
+		this.bankaDuznika = bankaDuznika;
 	}
 
 }

@@ -75,7 +75,6 @@ public class Faktura {
 	@Column
 	private boolean obradjena;
 	
-
 	@ManyToOne
 	private Firma firma;
 	

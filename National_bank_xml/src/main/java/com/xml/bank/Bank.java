@@ -16,6 +16,9 @@ import org.hibernate.validator.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xml.firm.Firma;
 import com.xml.mt102.Mt102;
+import com.xml.strukturartgsnaloga.Mt900;
+import com.xml.strukturartgsnaloga.Mt910;
+import com.xml.strukturartgsnaloga.StrukturaRtgsNaloga;
 
 @Entity
 public class Bank {
@@ -38,11 +41,11 @@ public class Bank {
 	private String obracunskiRacunBanke;
 
 	@Column(unique = true, columnDefinition = "CHAR(8)")
-	@NotBlank	
+	@NotBlank
 	private String swiftKodBanke;
-	
+
 	private Integer stanjeRacunaBanke;
-	
+
 	@Column(length = 120)
 	@NotBlank
 	private String name;
@@ -57,13 +60,13 @@ public class Bank {
 
 	@Column(length = 128)
 	private String web;
-	
+
 	@Column(length = 20)
 	private String phone;
-	
+
 	@Column(length = 20)
 	private String fax;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "bank", cascade = CascadeType.ALL)
 	private List<Firma> firms;
@@ -71,7 +74,24 @@ public class Bank {
 	@JsonIgnore
 	@OneToMany(mappedBy = "banka", cascade = CascadeType.ALL)
 	private List<Mt102> mt102;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "bankaDuznika", cascade = CascadeType.ALL)
+	private List<StrukturaRtgsNaloga> strukturaDuznika;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "bankaPoverioca", cascade = CascadeType.ALL)
+	private List<StrukturaRtgsNaloga> strukturaPoverioca;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "bankaDuznika", cascade = CascadeType.ALL)
+	List<Mt900> mt900;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "bankaPoverioca", cascade = CascadeType.ALL)
+	List<Mt910> mt910;
+	
+
 	public Long getId() {
 		return id;
 	}
@@ -144,7 +164,6 @@ public class Bank {
 		this.fax = fax;
 	}
 
-
 	public List<Firma> getFirms() {
 		return firms;
 	}
@@ -184,9 +203,31 @@ public class Bank {
 	public void setMt102(List<Mt102> mt102) {
 		this.mt102 = mt102;
 	}
-	
-	
-	
 
+	public List<StrukturaRtgsNaloga> getStrukturaDuznika() {
+		return strukturaDuznika;
+	}
+
+	public void setStrukturaDuznika(List<StrukturaRtgsNaloga> strukturaDuznika) {
+		this.strukturaDuznika = strukturaDuznika;
+	}
+
+	public List<StrukturaRtgsNaloga> getStrukturaPoverioca() {
+		return strukturaPoverioca;
+	}
+
+	public void setStrukturaPoverioca(List<StrukturaRtgsNaloga> strukturaPoverioca) {
+		this.strukturaPoverioca = strukturaPoverioca;
+	}
+
+	public List<Mt900> getMt900() {
+		return mt900;
+	}
+
+	public void setMt900(List<Mt900> mt900) {
+		this.mt900 = mt900;
+	}
+
+	
 
 }

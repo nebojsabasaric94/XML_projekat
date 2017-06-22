@@ -37,11 +37,11 @@ public class Bank {
 	private String obracunskiRacunBanke;
 
 	@Column(unique = true, columnDefinition = "CHAR(8)")
-	@NotBlank	
+	@NotBlank
 	private String swiftKodBanke;
-	
+
 	private Integer stanjeRacunaBanke;
-	
+
 	@Column(length = 120)
 	@NotBlank
 	private String name;
@@ -56,16 +56,28 @@ public class Bank {
 
 	@Column(length = 128)
 	private String web;
-	
+
 	@Column(length = 20)
 	private String phone;
-	
+
 	@Column(length = 20)
 	private String fax;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "bank", cascade = CascadeType.ALL)
 	private List<Firma> firms;
+
+	/*@JsonIgnore
+	@OneToMany(mappedBy = "banka", cascade = CascadeType.ALL)
+	private List<Mt102> mt102;*/
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "bankaDuznika", cascade = CascadeType.ALL)
+	private List<Bank> bankaDuznika;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "bankaPoverioca", cascade = CascadeType.ALL)
+	private List<Bank> bankaPoverioca;
 
 	public Long getId() {
 		return id;
@@ -139,7 +151,6 @@ public class Bank {
 		this.fax = fax;
 	}
 
-
 	public List<Firma> getFirms() {
 		return firms;
 	}
@@ -171,9 +182,29 @@ public class Bank {
 	public void setStanjeRacunaBanke(Integer stanjeRacunaBanke) {
 		this.stanjeRacunaBanke = stanjeRacunaBanke;
 	}
-	
-	
-	
 
+	/*public List<Mt102> getMt102() {
+		return mt102;
+	}
+
+	public void setMt102(List<Mt102> mt102) {
+		this.mt102 = mt102;
+	}
+*/
+	public List<Bank> getBankaDuznika() {
+		return bankaDuznika;
+	}
+
+	public void setBankaDuznika(List<Bank> bankaDuznika) {
+		this.bankaDuznika = bankaDuznika;
+	}
+
+	public List<Bank> getBankaPoverioca() {
+		return bankaPoverioca;
+	}
+
+	public void setBankaPoverioca(List<Bank> bankaPoverioca) {
+		this.bankaPoverioca = bankaPoverioca;
+	}
 
 }

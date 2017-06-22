@@ -94,10 +94,12 @@ public class NationalBankEndpoint {
 		//skidam novac sa racuna banki
 		Bank bankaDuznika = bankService.findBySwiftCode(rtgsNalog.getSwiftKodBankeDuznika());
 		Bank bankaPoverioca = bankService.findBySwiftCode(rtgsNalog.getSwiftKodBankePoverioca());
-		bankService.save(bankaPoverioca);
-		bankService.save(bankaDuznika);
+		//bankaDuznika = bankService.save(bankaPoverioca);
+		//bankaPoverioca = bankService.save(bankaDuznika);
 		bankaPoverioca.setStanjeRacunaBanke(bankaPoverioca.getStanjeRacunaBanke() + rtgsNalog.getIznos().intValue());
 		bankaDuznika.setStanjeRacunaBanke(bankaDuznika.getStanjeRacunaBanke()-rtgsNalog.getIznos().intValue());
+		bankaDuznika = bankService.save(bankaDuznika);
+		bankaPoverioca = bankService.save(bankaPoverioca);
 		System.out.println("Usao rtgs");
 		ObjectFactory factory = new ObjectFactory();
 		GetMt910Request mt910Request = factory.createGetMt910Request();
@@ -110,12 +112,15 @@ public class NationalBankEndpoint {
 		mt910.setObracunskiRacunBankePoverioca(rtgsNalog.getObracunskiRacunBankePoverioca());
 		mt910.setSifraValute(rtgsNalog.getSifraValute());
 		mt910.setSwiftKodBankePoverioca(rtgsNalog.getSwiftKodBankePoverioca());
-		
+		mt910.setBankaPoverioca(bankaPoverioca);
 		mt910Request.setMt910(mt910);
 		mt910Request.setRtgsNalog(rtgsNalog);
+		
 		GetMt910Response mt910Response = client.sendMt910(mt910Request);
 		if(mt910Response.getStatus().equals("success"))
 		{
+			rtgsNalog.setBankaPoverioca(bankaPoverioca);
+			rtgsNalog.setBankaDuznika(bankaDuznika);
 			Mt900 mt900 = new Mt900();
 			mt900.setDatumValute(null);
 			mt900.setIdPoruke("MT900");
@@ -124,7 +129,7 @@ public class NationalBankEndpoint {
 			mt900.setObracunskiRacunBankeDuznika(bankaDuznika.getObracunskiRacunBanke());
 			mt900.setSifraValute("RSD");
 			mt900.setSwiftBankeDuznika(bankaDuznika.getSwiftKodBanke());
-			
+			mt900.setBankaDuznika(bankaDuznika);
 			
 			
 			GetStrukturaRtgsNalogaResponse response = new GetStrukturaRtgsNalogaResponse();

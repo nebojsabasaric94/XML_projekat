@@ -9,5 +9,7 @@ public interface BankService {
 	public Bank findOne(Long id);
 	
 	public Bank save(Bank bank);
+	
+	public Bank findByObracunskiRacunBanke(String obracunskiRacunBanke);
 
 }

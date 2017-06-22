@@ -59,6 +59,9 @@ public class BankEndpoint {
 	
 	@Autowired
 	private Mt910Service mt910Service;
+	
+	@Autowired
+	private BankService bankService;
 		
 	@Autowired
 	private NalogZaMT102Service nalogZaMt102Service;
@@ -131,6 +134,8 @@ public class BankEndpoint {
 			if(response.getMt900().getIdPoruke().equals("MT900")){
 				duznik.setStanjeRacuna(duznik.getStanjeRacuna()-response.getMt900().getIznos().intValue());
 				firmService.save(duznik);
+				Bank bankaDuznika = bankService.findByObracunskiRacunBanke(response.getMt900().getObracunskiRacunBankeDuznika());
+				response.getMt900().setBankaDuznika(bankaDuznika);
 				mt900Service.save(response.getMt900());
 				GetNalogZaPlacanjeResponse responseNZP = new GetNalogZaPlacanjeResponse();
 				responseNZP.setNalogZaPlacanje(nalogZaPlacanje);
@@ -224,6 +229,7 @@ public class BankEndpoint {
 		poverilac.setStanjeRacuna(poverilac.getStanjeRacuna()+ getMt910Request.getRtgsNalog().getIznos().intValue());
 		firmService.save(poverilac);
 		GetMt910Response response = new GetMt910Response();
+		getMt910Request.getMt910().setBankaPoverioca(bankService.findByObracunskiRacunBanke(getMt910Request.getMt910().getObracunskiRacunBankePoverioca()));
 		mt910Service.save(getMt910Request.getMt910());
 		response.setStatus("success");
 		return response;

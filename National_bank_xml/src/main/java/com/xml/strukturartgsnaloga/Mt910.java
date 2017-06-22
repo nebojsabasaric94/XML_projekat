@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -23,8 +24,10 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.xml.AddaptDate;
+import com.xml.bank.Bank;
 
 
 /**
@@ -101,13 +104,12 @@ import com.xml.AddaptDate;
 @Entity
 public class Mt910 {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@XmlTransient
-	Long id;
+	private Long id;
 	
-	@XmlElement(name = "id_poruke", required = true)
+    @XmlElement(name = "id_poruke", required = true)
     protected String idPoruke;
     @XmlElement(name = "swift_kod_banke_poverioca", required = true)
     protected String swiftKodBankePoverioca;
@@ -119,11 +121,14 @@ public class Mt910 {
     protected BigDecimal iznos;
     @XmlAttribute(name = "datum_valute")
     @XmlSchemaType(name = "date")
-    @XmlJavaTypeAdapter(AddaptDate.class)
+    @XmlJavaTypeAdapter(AddaptDate.class) 
     protected Date datumValute;
     @XmlAttribute(name = "sifra_valute")
     protected String sifraValute;
 
+    @ManyToOne
+    @XmlTransient
+    private Bank bankaPoverioca;
     /**
      * Gets the value of the idPoruke property.
      * 
@@ -298,6 +303,14 @@ public class Mt910 {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Bank getBankaPoverioca() {
+		return bankaPoverioca;
+	}
+
+	public void setBankaPoverioca(Bank bankaPoverioca) {
+		this.bankaPoverioca = bankaPoverioca;
 	}
 
 }

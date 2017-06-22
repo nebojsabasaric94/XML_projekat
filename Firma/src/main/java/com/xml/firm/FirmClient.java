@@ -14,10 +14,6 @@ import com.xml.nalogzaplacanje.NalogZaPlacanjeService;
 import com.xml.nalogzaplacanje.ObjectFactory;
 import com.xml.ws.WSTemplate;
 
-
-
-
-
 @Component
 public class FirmClient {
 
@@ -26,11 +22,11 @@ public class FirmClient {
 
 	@Autowired
 	private NalogZaPlacanjeService nalogService;
-	
+
 	public void sendNalog(Faktura f, boolean hitno, Firma firmaPoverioca) {
 		ObjectFactory factory = new ObjectFactory();
 		GetNalogZaPlacanjeRequest nalogZaPlacanjeRequest = factory.createGetNalogZaPlacanjeRequest();
-		
+
 		NalogZaPlacanje nalogZaPlacanje = factory.createNalogZaPlacanje();
 		nalogZaPlacanje.setDatumNaloga(new Date());
 		nalogZaPlacanje.setDatumValute(f.getDatumValute());
@@ -45,19 +41,24 @@ public class FirmClient {
 		nalogZaPlacanje.setPozivNaBrojZaduzenja("41247412");
 		nalogZaPlacanje.setPrimalacPoverilac(f.getNazivDobavljaca());
 		nalogZaPlacanje.setRacunDuznika(f.getUplataNaRacun());
-		
+
 		nalogZaPlacanje.setRacunPoverioca(firmaPoverioca.getBrojRacuna());
 		nalogZaPlacanje.setSvrhaPlacanja("Svrha placanja");
-		
+		//nalogZaPlacanje.setFirmaNalogodavac(f.getFirma());
+		//nalogZaPlacanje.setFirmaPoverilac(firmaPoverioca);
+
 		nalogZaPlacanjeRequest.setNalogZaPlacanje(nalogZaPlacanje);
 
-		
-		GetNalogZaPlacanjeResponse getNalogZaPlacanjeResponse = (GetNalogZaPlacanjeResponse) webServiceTemplate.marshalSendAndReceive(nalogZaPlacanjeRequest);
-		if(getNalogZaPlacanjeResponse.getNalogZaPlacanje() != null){
+		GetNalogZaPlacanjeResponse getNalogZaPlacanjeResponse = (GetNalogZaPlacanjeResponse) webServiceTemplate
+				.marshalSendAndReceive(nalogZaPlacanjeRequest);
+		if (getNalogZaPlacanjeResponse.getNalogZaPlacanje() != null) {
 			System.out.println("proslo");
+			getNalogZaPlacanjeResponse.getNalogZaPlacanje().setFirmaNalogodavac(f.getFirma());
+			getNalogZaPlacanjeResponse.getNalogZaPlacanje().setFirmaPoverilac(firmaPoverioca);
+			
 			nalogService.save(getNalogZaPlacanjeResponse.getNalogZaPlacanje());
 		}
-	//	System.out.println(getNalogZaPlacanjeResponse.getNalogZaPlacanje().getDuznikNalogodavac());
-		}
+		// System.out.println(getNalogZaPlacanjeResponse.getNalogZaPlacanje().getDuznikNalogodavac());
+	}
 
 }

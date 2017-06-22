@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xml.bank.Bank;
 import com.xml.faktura.Faktura;
+import com.xml.nalogzaplacanje.NalogZaPlacanje;
 
 @Entity
 public class Firma {
@@ -60,15 +61,19 @@ public class Firma {
 	@ManyToOne
 	private Bank bank;
 	
-
-	
 	@JsonIgnore
 	@OneToMany(mappedBy = "firma", cascade = CascadeType.ALL)
 	private List<Faktura> fakture;
 
+	@JsonIgnore
+	@OneToMany(mappedBy = "firmaNalogodavac", cascade = CascadeType.ALL)
+	private List<NalogZaPlacanje> naloziZaPlacanjeNalogodavac;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "firmaPoverilac", cascade = CascadeType.ALL)
+	private List<NalogZaPlacanje> naloziZaPlacanjePoverilac;
 	
-	
+		
 	public Long getId() {
 		return id;
 	}
@@ -172,6 +177,22 @@ public class Firma {
 
 	public void setBrojRacuna(String brojRacuna) {
 		this.brojRacuna = brojRacuna;
+	}
+
+	public List<NalogZaPlacanje> getNaloziZaPlacanjeNalogodavac() {
+		return naloziZaPlacanjeNalogodavac;
+	}
+
+	public void setNaloziZaPlacanjeNalogodavac(List<NalogZaPlacanje> naloziZaPlacanjeNalogodavac) {
+		this.naloziZaPlacanjeNalogodavac = naloziZaPlacanjeNalogodavac;
+	}
+
+	public List<NalogZaPlacanje> getNaloziZaPlacanjePoverilac() {
+		return naloziZaPlacanjePoverilac;
+	}
+
+	public void setNaloziZaPlacanjePoverilac(List<NalogZaPlacanje> naloziZaPlacanjePoverilac) {
+		this.naloziZaPlacanjePoverilac = naloziZaPlacanjePoverilac;
 	}
 
 	
