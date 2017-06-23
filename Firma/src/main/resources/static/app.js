@@ -11,7 +11,8 @@ angular.module('routerApp', ['ui.router',
 	'csr.services','csr.controllers',
 	'user.services', 'user.controllers',
 	'login.services','login.controllers',
-	'faktura.services', 'faktura.controllers',]) 
+	'faktura.services', 'faktura.controllers',
+	'izvod.services', 'izvod.controllers']) 
 
 
 .config(function($stateProvider,$urlRouterProvider){
@@ -220,6 +221,11 @@ angular.module('routerApp', ['ui.router',
 				)
 			}
 		}
+	})
+	.state('home.zahtevZaDobijanjeIzvoda',{
+		url : '/slanjeZahteva',
+		templateUrl : 'izvod/slanjeZahteva.html',
+		controller : 'izvodController'
 	})
 
 	

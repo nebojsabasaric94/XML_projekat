@@ -1,0 +1,38 @@
+<div>
+		<form class="form-horizontal" name= "form">
+				<legend>Zahtev za dobijanje izvoda</legend>
+				
+				<div class = "form-group">
+					<label class = "col-md-4 control-label" for = "banka">Banka:</label>
+					<div class = "col-md-4">
+						<input disabled type = "text" class="form-control " required/>
+										
+					</div>
+				</div>
+				
+				<div class = "form-group" >
+					<label class = "col-md-4 control-label" for = "datum">Datum:</label>
+					<div class = "col-md-4">
+						<input type = "date" ng-model = "$parent.zahtev.datum"  class="form-control" required/>			
+					</div>
+				</div>
+				
+				<div class = "form-group">
+					<label class = "col-md-4 control-label" for = "brojRacuna">Broj Racuna:</label>
+					<div class = "col-md-4">
+						<input type = "text"  ng-model = "$parent.zahtev.brojRacuna" class="form-control" required/>
+					</div>
+				</div>
+				
+			</form>
+					
+
+				<div class = "form-group">
+					<label class = "col-md-4 control-label" form = "buttonSubmit"></label>
+					<div class = "col-md-4">
+						<button name = "buttonSubmit" class = "btn btn-primary" ng-click = posaljiZahtev()>Posalji zahtev</button>
+					</div>
+				</div>
+
+
+</div>
