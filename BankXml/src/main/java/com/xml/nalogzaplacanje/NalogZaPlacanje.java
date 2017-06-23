@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -28,6 +29,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.xml.AddaptDate;
+import com.xml.firm.Firma;
 
 
 /**
@@ -177,6 +179,14 @@ public class NalogZaPlacanje {
     protected Date datumValute;
     @XmlAttribute(name = "hitno")
     protected Boolean hitno;
+    
+    @ManyToOne
+    @XmlTransient
+    private Firma firmaNalogodavac;
+    
+    @ManyToOne
+    @XmlTransient
+    private Firma firmaPoverilac;
 
     /**
      * Gets the value of the idPoruke property.

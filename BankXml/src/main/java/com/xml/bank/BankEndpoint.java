@@ -31,6 +31,7 @@ import com.xml.mt102.NalogZaMT102;
 import com.xml.mt102.NalogZaMT102Service;
 import com.xml.nalogzaplacanje.GetNalogZaPlacanjeResponse;
 import com.xml.nalogzaplacanje.NalogZaPlacanje;
+import com.xml.nalogzaplacanje.NalogZaPlacanjeService;
 import com.xml.strukturartgsnaloga.GetMt910Request;
 import com.xml.strukturartgsnaloga.GetMt910Response;
 import com.xml.strukturartgsnaloga.GetStrukturaRtgsNalogaRequest;
@@ -64,6 +65,9 @@ public class BankEndpoint {
 	
 	@Autowired
 	private BankService bankService;
+	
+	@Autowired
+	private NalogZaPlacanjeService nalogZaPlacanjeService;
 		
 	@Autowired
 	private NalogZaMT102Service nalogZaMt102Service;
@@ -273,8 +277,15 @@ public class BankEndpoint {
 	@ResponsePayload
 	public GetZahtevResponse getZahtev(@RequestPayload GetZahtevRequest getZahtevRequest){
 		System.out.println("--------ZAHTEV PRIMLJEN----------");
+		System.out.println(		nalogZaPlacanjeService.findAll().size());
+		
 		return null;
 	}
+	
+	
+	
+	
+	
 	
 	
 	
