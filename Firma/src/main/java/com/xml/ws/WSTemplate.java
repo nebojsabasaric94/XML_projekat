@@ -1,5 +1,7 @@
 package com.xml.ws;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -30,6 +32,7 @@ import org.w3c.dom.Document;
 import com.xml.encryption.KeyStoreReader;
 import com.xml.encryption.XMLEncryptionUtility;
 import com.xml.encryption.XMLSigningUtility;
+import com.xml.nalogzaplacanje.GetNalogZaPlacanjeRequest;
 
 
 public class WSTemplate extends WebServiceTemplate {
@@ -56,32 +59,33 @@ public class WSTemplate extends WebServiceTemplate {
 					}
 				}
 				//////////////
-				DOMSource source = (DOMSource) request.getPayloadSource();
-				Document doc = source.getNode().getOwnerDocument();
-				
-				
-				//-----sve za print na izlaz----
-				StringWriter writer = new StringWriter();
-				StreamResult result = new StreamResult(writer);
-				TransformerFactory tf = TransformerFactory.newInstance();
-				Transformer transformer = tf.newTransformer();
-				transformer.transform(source, result);
-				System.out.println("XML IN String format is: \n" + writer.toString());
-				
-				
-				//---------sifrovanje---------------------
-				KeyStoreReader ksReader = new KeyStoreReader();
-				XMLEncryptionUtility encUtility = new XMLEncryptionUtility();
-				XMLSigningUtility sigUtility = new XMLSigningUtility();
-				SecretKey secretKey = encUtility.generateDataEncryptionKey();
-				Certificate cert = ksReader.readCertificate("ksBanks\\Banka A.jks", "123", "ba1");
-				doc = encUtility.encrypt(doc, secretKey, cert);
-				Certificate certFirm = ksReader.readCertificate("ksClients\\Firma A.jks", "FirmaA", "fa1");
-				PrivateKey privateKeyFirm = ksReader.readPrivateKey("ksClients\\Firma A.jks", "FirmaA", "fa1", "123");
-				doc = sigUtility.signDocument(doc, privateKeyFirm, certFirm);
-				saveDocument(doc,"nalog_encrypted_and_signed.xml");
-				/////////
+				if(requestPayload instanceof GetNalogZaPlacanjeRequest){
+					DOMSource source = (DOMSource) request.getPayloadSource();
+					Document doc = source.getNode().getOwnerDocument();
 					
+					
+					//-----sve za print na izlaz----
+					StringWriter writer = new StringWriter();
+					StreamResult result = new StreamResult(writer);
+					TransformerFactory tf = TransformerFactory.newInstance();
+					Transformer transformer = tf.newTransformer();
+					transformer.transform(source, result);
+					System.out.println("XML IN String format is: \n" + writer.toString());
+					
+					
+					//---------sifrovanje---------------------
+					KeyStoreReader ksReader = new KeyStoreReader();
+					XMLEncryptionUtility encUtility = new XMLEncryptionUtility();
+					XMLSigningUtility sigUtility = new XMLSigningUtility();
+					SecretKey secretKey = encUtility.generateDataEncryptionKey();
+					Certificate cert = ksReader.readCertificate("ksBanks\\Banka A.jks", "123", "ba1");
+					doc = encUtility.encrypt(doc, secretKey, cert);
+					Certificate certFirm = ksReader.readCertificate("ksClients\\Firma A.jks", "FirmaA", "fa1");
+					PrivateKey privateKeyFirm = ksReader.readPrivateKey("ksClients\\Firma A.jks", "FirmaA", "fa1", "123");
+					doc = sigUtility.signDocument(doc, privateKeyFirm, certFirm);
+					saveDocument(doc,"nalog_encrypted_and_signed.xml");
+					/////////
+				}	
 		}
 		}, new WebServiceMessageExtractor<Object>() {
 

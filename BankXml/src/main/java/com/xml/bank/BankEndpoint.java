@@ -39,6 +39,8 @@ import com.xml.strukturartgsnaloga.Mt900Service;
 import com.xml.strukturartgsnaloga.Mt910Service;
 import com.xml.strukturartgsnaloga.ObjectFactory;
 import com.xml.strukturartgsnaloga.StrukturaRtgsNaloga;
+import com.xml.zahtevzadobijanjeizvoda.GetZahtevRequest;
+import com.xml.zahtevzadobijanjeizvoda.GetZahtevResponse;
 
 
 
@@ -69,6 +71,8 @@ public class BankEndpoint {
 	@Autowired
 	private com.xml.mt102.Mt910Service mt910ServiceMt102;
 	
+	
+	
 	private static final String NAMESPACE_URI = "http://strukturaRtgsNaloga.xml.com";
 
 	private static final String NAMESPACE_URI1 = "http://nalogZaPlacanje.xml.com";
@@ -76,6 +80,8 @@ public class BankEndpoint {
 	
 	private static final String NAMESPACE_URI2 = "http://mt102.xml.com";
 	//private static final String NAMESPACE_URI3 = "http://zahtevzadobijanjeizvoda.xml.com";
+	
+	private static final String NAMESPACE_URI3 = "http://zahtevzadobijanjeizvoda.xml.com";
 
 	@PayloadRoot(namespace = NAMESPACE_URI1, localPart = "getNalogZaPlacanjeRequest")
 	@XmlAnyElement
@@ -236,6 +242,8 @@ public class BankEndpoint {
 		return response;
 	}
 	
+	
+	
 	@PayloadRoot(namespace = NAMESPACE_URI2, localPart = "getMt910RequestMt102")//za mt102
 	@ResponsePayload
 	public com.xml.mt102.GetMt910Response getMt910mt102(@RequestPayload Element request){
@@ -258,6 +266,14 @@ public class BankEndpoint {
 		mt910ServiceMt102.save(getMt910Request.getMt910());
 		response.setStatus("success");
 		return response;
+	}
+	
+	
+	@PayloadRoot(namespace = NAMESPACE_URI3, localPart = "getZahtevRequest")
+	@ResponsePayload
+	public GetZahtevResponse getZahtev(@RequestPayload GetZahtevRequest getZahtevRequest){
+		System.out.println("--------ZAHTEV PRIMLJEN----------");
+		return null;
 	}
 	
 	

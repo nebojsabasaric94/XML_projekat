@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.ws.client.core.WebServiceTemplate;
 
 import com.xml.faktura.Faktura;
 import com.xml.nalogzaplacanje.GetNalogZaPlacanjeRequest;
@@ -13,6 +14,8 @@ import com.xml.nalogzaplacanje.NalogZaPlacanje;
 import com.xml.nalogzaplacanje.NalogZaPlacanjeService;
 import com.xml.nalogzaplacanje.ObjectFactory;
 import com.xml.ws.WSTemplate;
+import com.xml.zahtevzadobijanjeizvoda.GetZahtevRequest;
+import com.xml.zahtevzadobijanjeizvoda.ZahtevZaDobijanjeIzvoda;
 
 @Component
 public class FirmClient {
@@ -22,6 +25,7 @@ public class FirmClient {
 
 	@Autowired
 	private NalogZaPlacanjeService nalogService;
+
 
 	public void sendNalog(Faktura f, boolean hitno, Firma firmaPoverioca) {
 		ObjectFactory factory = new ObjectFactory();
@@ -59,6 +63,15 @@ public class FirmClient {
 			nalogService.save(getNalogZaPlacanjeResponse.getNalogZaPlacanje());
 		}
 		// System.out.println(getNalogZaPlacanjeResponse.getNalogZaPlacanje().getDuznikNalogodavac());
+	}
+	
+	
+	public void sendZahtevZaDobijanjeIzvoda(ZahtevZaDobijanjeIzvoda zahtevZaDobijanjeIzvoda){
+		GetZahtevRequest getZahtevRequest = new GetZahtevRequest();
+		getZahtevRequest.setZahtevZaDobijanjeIzvoda(zahtevZaDobijanjeIzvoda);
+		GetNalogZaPlacanjeResponse response = (GetNalogZaPlacanjeResponse) webServiceTemplate
+				.marshalSendAndReceive(getZahtevRequest);
+		
 	}
 
 }
