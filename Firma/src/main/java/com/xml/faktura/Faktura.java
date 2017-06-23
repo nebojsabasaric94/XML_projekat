@@ -11,75 +11,106 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xml.AddaptDate;
 import com.xml.firm.Firma;
 
 @Entity
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Faktura")
 public class Faktura {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
+	@XmlTransient
 	private Long id;
 
+	@XmlElement(name = "Naziv_dobavljaca", required = true)
 	private String nazivDobavljaca;
 
+	@XmlElement(name = "Adresa_dobavljaca", required = true)
 	private String adresaDobavljaca;
 
+	@XmlElement(name = "PIB_dobavljaca", required = true)
 	@Column(columnDefinition = "char(11)")
 	private String pibDobavljaca;
 
+	@XmlElement(name = "Naziv_kupca", required = true)
 	@Column(length = 55)
 	private String nazivKupca;
 
+	@XmlElement(name = "Adresa_kupca", required = true)
 	@Column(length = 55)
 	private String adresaKupca;
 
+	@XmlElement(name = "PIB_kupca", required = true)
 	@Column(columnDefinition = "char(11)")
 	private String pibKupca;
 
+	@XmlElement(name = "Broj_racuna", required = true)
 	@Column(columnDefinition = "char(18)")
 	private String brojRacuna;
 
+	@XmlElement(name = "Datum_racuna", required = true)
+	@XmlJavaTypeAdapter(AddaptDate.class)
 	@Column
 	private Date datumRacuna;
 
+	@XmlElement(name = "Vrednost_robe", required = true)
 	@Column
 	private Integer vrednostRobe;
 
+	@XmlElement(name = "Vrednost_usluga", required = true)
 	@Column
 	private Integer vrednostUsluga;
 
+	@XmlElement(name = "Ukupno_roba_i_usluge", required = true)
 	@Column
 	private Integer ukupnoRobaIUsluge;
 
+	@XmlElement(name = "Ukupan_rabat", required = true)
 	@Column
 	private Integer ukupanRabat;
 
+	@XmlElement(name = "Ukupan_porez", required = true)
 	@Column
 	private Integer ukupanPorez;
 
+	@XmlElement(name = "Oznaka_valute", required = true)
 	@Column(columnDefinition = "CHAR(3)")
 	private String oznakaValute;
 
+	@XmlElement(name = "Iznos_za_uplatu", required = true)
 	@Column
 	private Integer iznosZaUplatu;
 
+	@XmlElement(name = "Uplata_na_racun", required = true)
 	@Column(columnDefinition = "CHAR(18)")
 	private String uplataNaRacun;
 
+	@XmlElement(name = "Datum_valute", required = true)
 	@Column
+	@XmlJavaTypeAdapter(AddaptDate.class)
 	private Date datumValute;
 
+	@XmlTransient
 	@Column
 	private boolean obradjena;
 	
+	@XmlTransient
 	@ManyToOne
 	private Firma firma;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "faktura", cascade = CascadeType.ALL) 
+	//@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL)
+	@XmlElement(name = "Stavka_fakture", required = true)
 	private List<StavkaFakture> stavkeFakture;
 	
 

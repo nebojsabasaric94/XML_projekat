@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Faktura xmlns="http://localhost:8080/faktura">
+    <Naziv_dobavljaca>levi</Naziv_dobavljaca>
+    <Adresa_dobavljaca>trifkovicev trg</Adresa_dobavljaca>
+    <PIB_dobavljaca>asdfggfdsaa</PIB_dobavljaca>
+    <Naziv_kupca>vega</Naziv_kupca>
+    <Adresa_kupca>trifkovicev trg</Adresa_kupca>
+    <PIB_kupca>asdfggfdsas</PIB_kupca>
+    <Broj_racuna>145236</Broj_racuna>
+    <Datum_racuna>2017-06-22</Datum_racuna>
+    <Vrednost_robe>3</Vrednost_robe>
+    <Vrednost_usluga>3</Vrednost_usluga>
+    <Ukupno_roba_i_usluge>3</Ukupno_roba_i_usluge>
+    <Ukupan_rabat>3</Ukupan_rabat>
+    <Ukupan_porez>3</Ukupan_porez>
+    <Oznaka_valute>333</Oznaka_valute>
+    <Iznos_za_uplatu>7704</Iznos_za_uplatu>
+    <Uplata_na_racun>200854578787874202</Uplata_na_racun>
+    <Datum_valute>2017-06-28</Datum_valute>
+    <Stavka_fakture>
+        <Redni_broj>321</Redni_broj>
+        <Naziv_robe_ili_usluge>321</Naziv_robe_ili_usluge>
+        <Kolicina>321</Kolicina>
+        <Jedinica_mere>3213</Jedinica_mere>
+        <Jedinicna_cena>21</Jedinicna_cena>
+        <Vrednost>6741</Vrednost>
+        <Procenat_rabata>321</Procenat_rabata>
+        <Iznos_rabata>321</Iznos_rabata>
+        <Umanjeno_za_rabat>31</Umanjeno_za_rabat>
+        <Ukupan_porez_stavka>321</Ukupan_porez_stavka>
+    </Stavka_fakture>
+    <Stavka_fakture>
+        <Redni_broj>231</Redni_broj>
+        <Naziv_robe_ili_usluge>321</Naziv_robe_ili_usluge>
+        <Kolicina>321</Kolicina>
+        <Jedinica_mere>33</Jedinica_mere>
+        <Jedinicna_cena>3</Jedinicna_cena>
+        <Vrednost>963</Vrednost>
+        <Procenat_rabata>321</Procenat_rabata>
+        <Iznos_rabata>321</Iznos_rabata>
+        <Umanjeno_za_rabat>321</Umanjeno_za_rabat>
+        <Ukupan_porez_stavka>321</Ukupan_porez_stavka>
+    </Stavka_fakture>
+</Faktura>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Faktura xmlns="http://localhost:8080/faktura"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://localhost:8080/faktura file:/C:/Users/Danilo/Desktop/XML/XML_projekat/Firma/faktura.xsd">
+    <ID_poruke>ID_poruke0</ID_poruke>
+    <Naziv_dobavljaca>Naziv_dobavljaca0</Naziv_dobavljaca>
+    <Adresa_dobavljaca>Adresa_dobavljaca0</Adresa_dobavljaca>
+    <PIB_dobavljaca>PIB_dobavlj</PIB_dobavljaca>
+    <Naziv_kupca>Naziv_kupca0</Naziv_kupca>
+    <Adresa_kupca>Adresa_kupca0</Adresa_kupca>
+    <PIB_kupca>PIB_kupca11</PIB_kupca>
+    <Broj_racuna>499950</Broj_racuna>
+    <Datum_racuna>2006-05-04</Datum_racuna>
+    <Vrednost_robe>0.00</Vrednost_robe>
+    <Vrednost_usluga>0.00</Vrednost_usluga>
+    <Ukupno_roba_i_usluge>0.00</Ukupno_roba_i_usluge>
+    <Ukupan_rabat>0.00</Ukupan_rabat>
+    <Ukupan_porez>0.00</Ukupan_porez>
+    <Oznaka_valute>Ozn</Oznaka_valute>
+    <Iznos_za_uplatu>0.00</Iznos_za_uplatu>
+    <Uplata_na_racun>Uplata_na_racun111</Uplata_na_racun>
+    <Datum_valute>2006-05-04</Datum_valute>
+    <Stavke_fakture>
+        <Redni_broj>450</Redni_broj>
+        <Naziv_robe_ili_usluge>Naziv_robe_ili_usluge0</Naziv_robe_ili_usluge>
+        <Kolicina>0.00</Kolicina>
+        <Jedinica_mere>Jedini</Jedinica_mere>
+        <Jedinicna_cena>0.00</Jedinicna_cena>
+        <Vrednost>0.00</Vrednost>
+        <Procenat_rabata>0.00</Procenat_rabata>
+        <Iznos_rabta>0.00</Iznos_rabta>
+        <Umanjeno_za_rabat>0.00</Umanjeno_za_rabat>
+        <Ukupan_porez>0.00</Ukupan_porez>
+    </Stavke_fakture>
+    <Stavke_fakture>
+        <Redni_broj>450</Redni_broj>
+        <Naziv_robe_ili_usluge>Naziv_robe_ili_usluge1</Naziv_robe_ili_usluge>
+        <Kolicina>0.00</Kolicina>
+        <Jedinica_mere>Jedini</Jedinica_mere>
+        <Jedinicna_cena>0.00</Jedinicna_cena>
+        <Vrednost>0.00</Vrednost>
+        <Procenat_rabata>0.00</Procenat_rabata>
+        <Iznos_rabta>0.00</Iznos_rabta>
+        <Umanjeno_za_rabat>0.00</Umanjeno_za_rabat>
+        <Ukupan_porez>0.00</Ukupan_porez>
+    </Stavke_fakture>
+</Faktura>

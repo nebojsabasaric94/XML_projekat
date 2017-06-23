@@ -55,7 +55,13 @@ app.controller('fakturaController',['$scope','fakturaService','$location',
 	$scope.sendFaktura = function(){
 		fakturaService.send($scope.faktura).then(
 			function(response){
-				alert("uspesno dodata faktura");
+				if(response.data == "true"){
+					alert("uspesno dodata faktura");
+					$location.path("/home");
+				} else {
+					alert("greska pri dodavanju fakture, faktura nije validna");
+				}
+				
 			}, function(response){
 				alert("greska");
 			}
