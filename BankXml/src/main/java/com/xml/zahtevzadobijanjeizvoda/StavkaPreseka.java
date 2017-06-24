@@ -9,13 +9,18 @@
 package com.xml.zahtevzadobijanjeizvoda;
 
 import java.math.BigDecimal;
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
+
+import com.xml.AddaptDate;
 
 
 /**
@@ -138,10 +143,12 @@ public class StavkaPreseka {
     protected String smer;
     @XmlAttribute(name = "datumNaloga")
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar datumNaloga;
+    @XmlJavaTypeAdapter(AddaptDate.class)
+    protected Date datumNaloga;
     @XmlAttribute(name = "datumValute")
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar datumValute;
+    @XmlJavaTypeAdapter(AddaptDate.class)
+    protected Date datumValute;
 
     /**
      * Gets the value of the duznikNalogodavac property.
@@ -399,7 +406,7 @@ public class StavkaPreseka {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getDatumNaloga() {
+   Date getDatumNaloga() {
         return datumNaloga;
     }
 
@@ -411,7 +418,7 @@ public class StavkaPreseka {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setDatumNaloga(XMLGregorianCalendar value) {
+    public void setDatumNaloga(Date value) {
         this.datumNaloga = value;
     }
 
@@ -423,7 +430,7 @@ public class StavkaPreseka {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getDatumValute() {
+   Date getDatumValute() {
         return datumValute;
     }
 
@@ -435,7 +442,7 @@ public class StavkaPreseka {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setDatumValute(XMLGregorianCalendar value) {
+    public void setDatumValute(Date value) {
         this.datumValute = value;
     }
 

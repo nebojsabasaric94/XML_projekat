@@ -32,7 +32,123 @@
 					<div class = "col-md-4">
 						<button name = "buttonSubmit" class = "btn btn-primary" ng-click = posaljiZahtev()>Posalji zahtev</button>
 					</div>
-				</div>
+				</div><br/>
+				
+				
+				
+				
+				
+	
+	<br/><hr/><br/>
+	<div id="zaglavlje">
+		<table class ="table ">
+		
+		
+		<tr>
+		<td><label class="control-label">Broj Racuna</label></td><td>{{presek.zaglavlje.brojRacuna}}</td>
+		<tr>
+		
+		<tr>
+		<td><label class="control-label">Datum naloga</label></td><td>{{presek.zaglavlje.datumNaloga}}</td>
+		<tr>
+		
+		<tr>
+		<td><label class="control-label">Broj preseka</label></td><td>{{presek.zaglavlje.brojPreseka}}</td>
+		<tr>
+		
+		<tr>
+		<td><label class="control-label">Prethodno Stanje</label></td><td>{{presek.zaglavlje.prethodnoStanje}}</td>
+		<tr>
+		
+		<tr>
+		<td><label class="control-label">Broj promena u korist</label></td><td>{{presek.zaglavlje.brojPromenaUKorist}}</td>
+		<tr>
+		
+		<tr>
+		<td><label class="control-label">Ukupno u korist</label></td><td>{{presek.zaglavlje.ukupnoUKorist}}</td>
+		<tr>
+		
+		<tr>
+		<td><label class="control-label">Broj promena na teret</label></td><td>{{presek.zaglavlje.brojPromenaNaTeret}}</td>
+		<tr>
+		
+		<tr>
+		<td><label class="control-label">Ukupno na teret</label></td><td>{{presek.zaglavlje.ukupnoNaTeret}}</td>
+		<tr>
+		
+		<tr>
+		<td><label class="control-label">Novo Stanje</label></td><td>{{presek.zaglavlje.novoStanje}}</td>
+		<tr>
+		</table>
+	</div>		
+	<hr/>
+	
+	<div id = "stavke">
+		<table class ="table">
+		<thead>
+			<tr>
+			<th>Duznik</th>
+			<th>Svrha placanje</th>
+			<th>Primalac</th>
+			<th>Datum naloga</th>
+			<th>Datum valute</th>
+			<th>Racun duznika</th>
+			<th>Model zaduzenja</th>
+			<th>Poziv na broj Zaduzenja</th>
+			<th>Racun poverioca</th>
+			<th>Model odobrenja</th>
+			<th>Poziv na broj odobrenja</th>
+			<th>Iznos</th>
+			<th>Smer</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr	ng-repeat = "stavka in presek.stavka">
+				<td>
+					{{stavka.duznikNalogodavac}}
+				</td>
+				<td>
+					{{stavka.svrhaPlacanja}}
+				</td>
+				<td>
+					{{stavka.primalacPoverilac}}
+				</td>
+				<td>
+					{{stavka.datumNaloga}}
+				</td>
+				<td>
+					{{stavka.datumValute}}
+				</td>
+				<td>
+					{{stavka.racunDuznika}}
+				</td>
+				<td>
+					{{stavka.modelZaduzenja}}
+				</td>
+				<td>
+					{{stavka.pozivNaBrojZaduzenja}}
+				</td>
+				<td>
+					{{stavka.racunPoverioca}}
+				</td>
+				<td>
+					{{stavka.modelOdobrenja}}
+				</td>
+				<td>
+					{{stavka.pozivNaBrojOdobrenja}}
+				</td>
+				<td>
+					{{stavka.iznos}}
+				</td>
+				<td>
+					{{stavka.smer}}
+				</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+	
+	
 
 
 </div>

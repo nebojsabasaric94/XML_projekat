@@ -1,11 +1,14 @@
 package com.xml.bank;
 
+import java.math.BigDecimal;
 import java.security.PrivateKey;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -42,6 +45,11 @@ import com.xml.strukturartgsnaloga.ObjectFactory;
 import com.xml.strukturartgsnaloga.StrukturaRtgsNaloga;
 import com.xml.zahtevzadobijanjeizvoda.GetZahtevRequest;
 import com.xml.zahtevzadobijanjeizvoda.GetZahtevResponse;
+import com.xml.zahtevzadobijanjeizvoda.Presek;
+import com.xml.zahtevzadobijanjeizvoda.PresekAlati;
+import com.xml.zahtevzadobijanjeizvoda.StavkaPreseka;
+import com.xml.zahtevzadobijanjeizvoda.ZaglavljePreseka;
+import com.xml.zahtevzadobijanjeizvoda.ZahtevZaDobijanjeIzvoda;
 
 
 
@@ -75,7 +83,7 @@ public class BankEndpoint {
 	@Autowired
 	private com.xml.mt102.Mt910Service mt910ServiceMt102;
 	
-	
+	private static final int BR_STAVKI_PO_PRESEKU = 3;
 	
 	private static final String NAMESPACE_URI = "http://strukturaRtgsNaloga.xml.com";
 
@@ -276,12 +284,55 @@ public class BankEndpoint {
 	@PayloadRoot(namespace = NAMESPACE_URI3, localPart = "getZahtevRequest")
 	@ResponsePayload
 	public GetZahtevResponse getZahtev(@RequestPayload GetZahtevRequest getZahtevRequest){
-		System.out.println("--------ZAHTEV PRIMLJEN----------");
-		System.out.println(		nalogZaPlacanjeService.findAll().size());
 		
-		return null;
+		Presek presek = new Presek();
+		
+		System.out.println("--------ZAHTEV PRIMLJEN----------");
+		String brojRacuna = getZahtevRequest.getZahtevZaDobijanjeIzvoda().getBrojRacuna();
+		List<NalogZaPlacanje> nalozi = nalogZaPlacanjeService.findForIzvod(
+				getZahtevRequest.getZahtevZaDobijanjeIzvoda().getDatum(),
+				brojRacuna,
+				BR_STAVKI_PO_PRESEKU, 
+				getZahtevRequest.getZahtevZaDobijanjeIzvoda().getRedniBrojPreseka().intValue()
+				);
+		ZaglavljePreseka zaglavljePreseka = new ZaglavljePreseka();
+		zaglavljePreseka.setBrojRacuna(brojRacuna);
+		zaglavljePreseka.setDatumNaloga(getZahtevRequest.getZahtevZaDobijanjeIzvoda().getDatum());
+		zaglavljePreseka.setBrojPreseka(getZahtevRequest.getZahtevZaDobijanjeIzvoda().getRedniBrojPreseka().intValue());
+		zaglavljePreseka.setPrethodnoStanje(new BigDecimal(100));	//TODO
+		zaglavljePreseka.setBrojPromenaUKorist(PresekAlati.IzracunajBrojPromenaUKorist(nalozi, brojRacuna));
+		zaglavljePreseka.setUkupnoUKorist(PresekAlati.IzracunajUkupnoUKorist(nalozi, brojRacuna));
+		zaglavljePreseka.setBrojPromenaNaTeret(PresekAlati.IzracunajBrojPromenaNaTeret(nalozi, brojRacuna));
+		zaglavljePreseka.setUkupnoNaTeret(PresekAlati.IzracunajUkupnoNaTeret(nalozi, brojRacuna));
+		zaglavljePreseka.setNovoStanje(new BigDecimal(100));//TODO
+		
+		presek.setZaglavlje(zaglavljePreseka);
+		
+		
+		for (NalogZaPlacanje n : nalozi) {
+			StavkaPreseka stavkaPreseka = new StavkaPreseka();
+			stavkaPreseka.setDuznikNalogodavac(n.getDuznikNalogodavac());
+			stavkaPreseka.setSvrhaPlacanja(n.getSvrhaPlacanja());
+			stavkaPreseka.setPrimalacPoverilac(n.getPrimalacPoverilac());
+			stavkaPreseka.setDatumNaloga(n.getDatumNaloga());
+			stavkaPreseka.setDatumValute(n.getDatumValute());
+			stavkaPreseka.setRacunDuznika(n.getRacunDuznika());
+			stavkaPreseka.setModelZaduzenja(n.getModelZaduzenja());
+			stavkaPreseka.setPozivNaBrojZaduzenja(n.getPozivNaBrojZaduzenja());
+			stavkaPreseka.setRacunPoverioca(n.getRacunPoverioca());
+			stavkaPreseka.setModelOdobrenja(n.getModelOdobrenja());
+			stavkaPreseka.setPozivNaBrojOdobrenja(n.getPozivNaBrojOdobrenja());
+			stavkaPreseka.setIznos(n.getIznos());
+			stavkaPreseka.setSmer(PresekAlati.izracunajSmer(n, brojRacuna));
+			presek.getStavka().add(stavkaPreseka);
+		}
+		
+		GetZahtevResponse getZahtevResponse = new GetZahtevResponse();
+		
+		getZahtevResponse.setPresek(presek);
+		
+		return getZahtevResponse;
 	}
-	
 	
 	
 	

@@ -15,6 +15,7 @@ import com.xml.nalogzaplacanje.NalogZaPlacanjeService;
 import com.xml.nalogzaplacanje.ObjectFactory;
 import com.xml.ws.WSTemplate;
 import com.xml.zahtevzadobijanjeizvoda.GetZahtevRequest;
+import com.xml.zahtevzadobijanjeizvoda.GetZahtevResponse;
 import com.xml.zahtevzadobijanjeizvoda.ZahtevZaDobijanjeIzvoda;
 
 @Component
@@ -66,11 +67,12 @@ public class FirmClient {
 	}
 	
 	
-	public void sendZahtevZaDobijanjeIzvoda(ZahtevZaDobijanjeIzvoda zahtevZaDobijanjeIzvoda){
+	public GetZahtevResponse sendZahtevZaDobijanjeIzvoda(ZahtevZaDobijanjeIzvoda zahtevZaDobijanjeIzvoda){
 		GetZahtevRequest getZahtevRequest = new GetZahtevRequest();
 		getZahtevRequest.setZahtevZaDobijanjeIzvoda(zahtevZaDobijanjeIzvoda);
-		GetNalogZaPlacanjeResponse response = (GetNalogZaPlacanjeResponse) webServiceTemplate
+		GetZahtevResponse response = (GetZahtevResponse) webServiceTemplate
 				.marshalSendAndReceive(getZahtevRequest);
+		return response;
 		
 	}
 

@@ -11,7 +11,10 @@ app.controller('izvodController',['$scope','izvodService','$location',
 		
 		izvodService.posaljiZahtev(zahtev).then(
 			function(response){
-				alert("Zahtev poslat");
+				izvodService.primiPresek().then(
+					function(response2){
+						$scope.presek = response2.data.presek;
+					})
 			}
 		)
 	}

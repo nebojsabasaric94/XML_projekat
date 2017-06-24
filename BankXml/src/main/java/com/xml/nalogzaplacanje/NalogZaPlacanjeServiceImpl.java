@@ -2,6 +2,8 @@ package com.xml.nalogzaplacanje;
 
 import java.util.List;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +24,14 @@ public class NalogZaPlacanjeServiceImpl implements NalogZaPlacanjeService{
 	@Override
 	public List<NalogZaPlacanje> findAll() {
 		return (List<NalogZaPlacanje>) nalogZaPlacanjeRepo.findAll();
+	}
+
+
+	@Override
+	public List<NalogZaPlacanje> findForIzvod(XMLGregorianCalendar datum, String brojRacuna, int brStavkiPoPreseku,
+			int redniBrojPreseka) {
+		return (List<NalogZaPlacanje>) nalogZaPlacanjeRepo.findAll();
+
 	}
 	
 	
