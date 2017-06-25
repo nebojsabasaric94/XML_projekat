@@ -4,6 +4,9 @@ services.service('fakturaService',['$http',function($http){
 	this.findAll = function(){
 		return $http.get("/faktura");
 	}
+	this.findObradjene = function(){
+		return $http.get("/faktura/obr");
+	}
 	
 	this.send = function(faktura){
 		return $http.post("/faktura", faktura);
@@ -19,6 +22,10 @@ services.service('fakturaService',['$http',function($http){
 	
 	this.obradi = function(faktura, hitno){
 		return $http.post('/faktura/obrada/' + hitno , faktura);
+	}
+	
+	this.prikaziHtml = function(faktura){
+		return $http.post("/faktura/transformHTML", faktura);
 	}
 	
 }])

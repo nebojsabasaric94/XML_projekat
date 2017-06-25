@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header/><SOAP-ENV:Body><ns2:getNalogZaPlacanjeRequest xmlns:ns2="http://nalogZaPlacanje.xml.com" xmlns:ns3="http://zahtevzadobijanjeizvoda.xml.com"><xenc:EncryptedData xmlns:xenc="http://www.w3.org/2001/04/xmlenc#" Type="http://www.w3.org/2001/04/xmlenc#Content"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<?xml version="1.0" encoding="UTF-8"?><SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header/><SOAP-ENV:Body><ns2:getNalogZaPlacanjeRequest xmlns:ns2="http://nalogZaPlacanje.xml.com" xmlns:ns3="http://zahtevzadobijanjeizvoda.xml.com"><xenc:EncryptedData xmlns:xenc="http://www.w3.org/2001/04/xmlenc#" Type="http://www.w3.org/2001/04/xmlenc#Content"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
 <ds:KeyName>Sifrovan tajni kljuc</ds:KeyName>
-<xenc:EncryptedKey><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/><xenc:CipherData><xenc:CipherValue>PWP319/j8I/p3Hq5bCIbESUXodk+suvwQpcvK01NNw2Zs+16PT8c8D/IYIc5w8+TH1EnVFmg1Ohd&#13;
-qFaqWKHwSjL2oSLdXtMUI52wST8CFw7Sd5HVr/mlEREoWV/MOYnD1PTM65m2Vxt2QTu0GfzMN0QK&#13;
-EjOjnT6zlUg1+BPlxXf/HjgMwZ10lIOH8um52PCPudH6nN1GH+Fj0zMsgSIC9fZSBYWlMLL5ln/j&#13;
-onoKN33FzhrKs7hrHwN/GJg4xp0f9RLgnLZzNjbraOJXIJAB73HljCZSf5x9DXZek/KmlIKOKc6J&#13;
-X5LoIuKUZbWaZDTwzjcqHMkOqvVrMnibwMMzHg==</xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>aYy1+yizTR48pJubf4fqKQZu+HvVwU+1aZrUCPh+HYGF5MglRjTH/2F91QXg/oc5Xw8J69jsFoJU&#13;
-Te/U3FVzJMb8dDu6s9KGMewRXJiL4Qk80jwS3lsrXRY+HSpJP8jFP4PB36tdSNr5JhCkeJs0iK3b&#13;
-rMVzUnW59SgFlC2rGuyaWvVggsZh8FG+4Kc9kBIsdpvjEuAIh08Qq6pVtGDvFXVj7K7lUicGvC8Z&#13;
-ZCyKBjUZEA5IuBhLI8CaXaGbMP6OyX/bOsHQb+oxEb0dxR4lEUoko+I3IdTpAgB2wpGdN3Vp4uHh&#13;
-tXPvRxxSuN0+oanlsadELOH9gs8cCA11qgNydhMyHfEm2f5nZCwkt11UGXXRvb36/8l49/8sBzUT&#13;
-2L1qgEj3BuhYnNoRVV9QHwa5nwImf44IyCayJoYl5z99a4ZJT1LTwJkWYGHoRMIElnEIOMs6IJ4t&#13;
-Z+BIH4ye/zKHXeD8oIO/4glZYGDV+NCAKve+Pte8zs+iUb9+FrshdImak7DwlKC9mo7XHviH/kvu&#13;
-u5Ir5JfkDnQSJQQ2V7ya27w6292b+Nu7P69RU0WRJ8zjhbPWAvfxeYGVOOEej1CMuLUkWVAzYwdQ&#13;
-AiPwoxKvtZwnHHY25Ru1zUSwPisdzC4+spucxeDvd9SUpm1CiYY3Xt2i3ke7BKg3bjtSAno4pFtt&#13;
-7NwVrJh4jKxgNUG/wikG+1FgNRVIYtIcAEHBhIskrvcO8lOZdPR9tTDhHPgH9FIibZh2Mjk9yC+E&#13;
-Lfd6p/tjs4f6V8LIwEOohId8pDuqWu2IJtPYHgfWCrqdSq2n3riEMG6PSvN+uYWv21KbD86aLBcL&#13;
-tlIGYZCEDX8zzyGY2nKpP8gZfFyVvxRbN7LtPl2+eDTBfs/F+R/g8v3sRFhJHipcjABCvuq11Vk1&#13;
-D9Vu1qS502afiq6h/HiAP9q/8azZuc/vhAxDPs/aMWklaK3s</xenc:CipherValue></xenc:CipherData></xenc:EncryptedData></ns2:getNalogZaPlacanjeRequest></SOAP-ENV:Body><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<xenc:EncryptedKey xmlns:xenc="http://www.w3.org/2001/04/xmlenc#"><xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/><xenc:CipherData><xenc:CipherValue>Qcj4i4gzASs8mIQD/AosOlzujWOT4ZAOj+CDNNQrxEInKZ+ReTf7Uyw96emUWbZvT6qWfiAugNIJ&#13;
+nDhCeGLHgvr1RlDXf7tp4Ggkc/dRMCK9ndx7XAy2UAJlQMD1KikWj+mJ04AaH/gdGpLKoFNUaNMH&#13;
+tp+SoylZ1Nc3ARD2hwroigTIOXRzZv4Xugxbq5JrrNxRde01BMKOe1XQ5QvCKLgPoOTb2owteaCH&#13;
+OnC2D8yQ4bVNGYjPMvZ3QWiXqwsDwgEFkuiYKONYu/fTr6AgItLTYoHcGbIVp50QYDlK/mfZFSNr&#13;
+uOiSET9dljtJeqIOgcp4L6pEx+90/tLuuIxSeA==</xenc:CipherValue></xenc:CipherData></xenc:EncryptedKey></ds:KeyInfo><xenc:CipherData><xenc:CipherValue>mu/SaIo9r7nyr25X725LQVvLUVVYqHpXWtobtUug69eFDQULZQI1TDzpARplkvfGwCTZnujfWVfC&#13;
+2vQ7MjPJi+4OuLJIxGM3XVX18C1sj9JiMoDHk51NZeZl8ol6kfo/TH+rCkwW1Z9d5yXagi+nAeIq&#13;
+EZs6xa0rAl2iho7Sf0I2ur6qj1CIm9ksTeNw1caBrd4N8F0b7U/lweqfSm0mjFb1YvoCT7fjnaXu&#13;
+Gre2qK3/1BktOGSaT0mgmvstacdbcKzy91K1wZTyjJVP99Q2MjBOCXfZ0exDFThULW9FmE56IJVL&#13;
+QSnnaDhljVZo6kQ6qKZO/XzUTfBB2Kt5e8Quy1uLoxMoB4Pa6/nAZQeKOe3qUDKOTght37p/Syd0&#13;
+YQ7HgY3lH94SBO6nhRKmVnkOOY0+RkUKIq+cD7KnDSru/wCELtTjRL1RXZf+LhS8HeFXtZ79EQgD&#13;
+7UDDJQ/BMDXgedUnKf4C3NWioUbcrzmT7mprw1OtXUz8j87KcGw/WS0OyTpfTAyM83NzfDEra6qt&#13;
+h/SZGQ7mTgAFj+djBflc/Bxjqw0JlQBVh4qrsSEj+q9NwQ7tKrQNniycVCxCNfbgx5pMNnGH6t4i&#13;
+UOa0rnZS3V6ZA9/hN658Pfht6A80iBfJhd0OZ2qNC5RoXQLZXzHKsHvcaT6NbXyk7uYu47nZrjJK&#13;
+5vl0sfWe3xRdkO/Vyfm/KPgtWYAt5/lcVexf+YWNxgs2yEAka0xcwPjgyWClFcN959b2ry1J2mXh&#13;
+u2ZccGYGVQB5vz/+7IIf5esaBFRrmFh88pKIYTLtSdBp2t3dBmhC3xwTQjPdjo6GFyTfe1iCY/m+&#13;
+mCqqNSVZYEP6s5CMU0JVVuEzw5tErwcqUMYha4t4buSQhcMYMdJXzwFvNKNCMaw7Vn8rxWzoqkp2&#13;
+U05zXc7tqlElc7udLaKeW3nhZC6CGRq3AVQOnBtkbzdRcD4d</xenc:CipherValue></xenc:CipherData></xenc:EncryptedData></ns2:getNalogZaPlacanjeRequest></SOAP-ENV:Body><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
 <ds:SignedInfo>
 <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
 <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
@@ -26,17 +26,17 @@ D9Vu1qS502afiq6h/HiAP9q/8azZuc/vhAxDPs/aMWklaK3s</xenc:CipherValue></xenc:Cipher
 <ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-<ds:DigestValue>JNMvbg2vmPJgsIdN9M/forq3Uoo=</ds:DigestValue>
+<ds:DigestValue>2AvjP/qqYBx/5TEf+4VFzVgTWNM=</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
 <ds:SignatureValue>
-AhP6abV6f9Tg5BSlp7InbHA7eYapJiflerijv2cr7gDhReqFocsbDjHZdFdrs7jBMklGXZ6PBjj5&#13;
-AcJP/gSFY86hnkKrN9kt/D5Ke3avuggGqLFchvhUnd/p4c1zMPK7MUuS361lFlquMJhwq/3+i5v+&#13;
-cQzbZoDnsyl1ju86CuoBc9/bP5+Jeu8o7/MF13iZp2KPofbN17YbXXqQ6yOkoLERdV/wqaLApkJs&#13;
-i5dVzuU1WPEDzbBXetoAE5XQirYKIL6uXBWtYniMhHKCXUKN6+ocjzizH8jMgICZ2rt1JlFqTW2j&#13;
-J5HW+e3r9qtbLQME8R67i5ECv869mjo1ND0PqQ==
+YSxQwZDwFh81z7pYHuZTWCjfTCnk9FIE1p/TanU8nNHrjrc3V/C46qf54gN7tIIzeHwXiDeTqqRv&#13;
+s1Nva8+F5Yk5zz2Hrx1S0EZjJ2NNovn3OZ8wjN+5/WKIT3yVV7SOJewL4DV3U6AmYkOEhFxXmacx&#13;
+DbdxME+ZTb158lsgnoG0paqWfnPVVIVnspj4e2CN8czT1mCm+Wn2Uj0FCD185dg6zrEwCEhY6mJ3&#13;
+ateOGjXuinaqGXvp79F5elpK8pUrgII5ihPt5o2kZKz3zWq+KnA1UouAEhiW21rTs6/JlUqKuDG9&#13;
+7c71UU5OaAlgWrMWE7H4TS8kPlMCt1hIPyI6UA==
 </ds:SignatureValue>
-<ds:KeyInfo>
+<ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
 <ds:KeyValue>
 <ds:RSAKeyValue>
 <ds:Modulus>

@@ -1,8 +1,8 @@
 var app = angular.module('faktura.controllers',[]);
 
 
-app.controller('fakturaController',['$scope','fakturaService','$location',
-	function($scope, fakturaService, $location) {
+app.controller('fakturaController',['$scope','fakturaService','$location','$window',
+	function($scope, fakturaService, $location, $window) {
 
 	$scope.faktura = new Object();
 	$scope.faktura.stavkeFakture = [];
@@ -52,6 +52,18 @@ app.controller('fakturaController',['$scope','fakturaService','$location',
 		
 	}
 	
+	$scope.findObradjene = function(){
+		fakturaService.findObradjene().then(
+				function(response){
+					$scope.faktureObradjene = response.data;
+				}, function(response){
+					alert("greska");
+				}
+			)
+		
+		
+	}
+	
 	$scope.sendFaktura = function(){
 		fakturaService.send($scope.faktura).then(
 			function(response){
@@ -65,6 +77,19 @@ app.controller('fakturaController',['$scope','fakturaService','$location',
 			}, function(response){
 				alert("greska");
 			}
+		)
+	}
+	
+	
+	$scope.prikaziHtml = function(faktura){
+		fakturaService.prikaziHtml(faktura).then(
+			function(response){
+				/*$scope.findObradjene();
+				*/
+				window.location.href = response.data;
+				
+			}
+				
 		)
 	}
 	
@@ -102,6 +127,8 @@ app.controller('fakturaController',['$scope','fakturaService','$location',
 		$scope.selectedFirm = firm;
 		
 	}
+	
+	
 	
 	$scope.obradi = function(faktura, hitno){
 		if(hitno == undefined)

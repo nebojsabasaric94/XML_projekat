@@ -1,6 +1,10 @@
 package com.xml.faktura;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +14,9 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -28,8 +35,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import com.itextpdf.text.DocumentException;
 import com.xml.firm.FirmClient;
 import com.xml.firm.FirmService;
 import com.xml.firm.Firma;
@@ -65,6 +74,18 @@ public class FakturaController {
 		}
 		return fakture;
 	}
+	@GetMapping("/obr")
+	public List<Faktura> getFaktureObr() {
+		User user = getUserDetails();
+		Firma firm = user.getFirma();
+		List<Faktura> fakture = new ArrayList<Faktura>();
+		for (int i = 0; i < firm.getFakture().size(); i++) {
+			if (firm.getFakture().get(i).isObradjena()) {
+				fakture.add(firm.getFakture().get(i));
+			}
+		}
+		return fakture;
+	}
 
 	@GetMapping("/findFirm")
 	public Firma findFirm() {
@@ -89,6 +110,53 @@ public class FakturaController {
 		return false;
 		
 
+	}
+	
+	@PostMapping("/transformHTML")
+	public File transformAndGenerate(@RequestBody Faktura faktura) throws IOException, DocumentException {
+		File file = new File("fakturaForTransform.xml");
+		JAXBContext jaxbContext;
+		try {
+			jaxbContext = JAXBContext.newInstance(Faktura.class);
+			//Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			//jaxbMarshaller.setProperty(Marshaller.JAXB_NO_NAMESPACE_SCHEMA_LOCATION, "faktura.xsd");
+			        
+			jaxbMarshaller.marshal(faktura, file);
+			
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			String line;
+			StringBuilder sb = new StringBuilder();
+
+			while((line=br.readLine())!= null){
+			    sb.append(line.trim());
+			}
+			String testni=sb.toString();
+			String testniKo;
+			testniKo=testni.replaceAll("<Faktura xmlns=\"http://localhost:8080/faktura\">", "<?xml-stylesheet type=\"text/xsl\" href=\"faktReslt/xsltFaktura.xsl\"?> <Faktura>");
+			
+			System.out.println(testniKo);
+			File filer = new File("transformnaFakt.xml");
+			try {
+			    BufferedWriter out = new BufferedWriter(new FileWriter(filer));
+			    out.write(testniKo);  
+			    out.close();
+			}
+			catch (IOException e)
+			{
+			    System.out.println("Exception ");
+
+			}
+
+			
+			Transformation.ExecuteOrder();
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new File(Transformation.HTML_FILE);
+		
 	}
 	
 	private boolean validateFakturaXml(Faktura faktura){

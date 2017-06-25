@@ -227,6 +227,11 @@ angular.module('routerApp', ['ui.router',
 		templateUrl : 'izvod/slanjeZahteva.html',
 		controller : 'izvodController'
 	})
+	.state('home.obradjeneFakture',{
+		url : '/obradjeneFakture',
+		templateUrl : 'faktura/obradjeneFakture.html',
+		controller : 'fakturaController'
+	})
 
 	
 	

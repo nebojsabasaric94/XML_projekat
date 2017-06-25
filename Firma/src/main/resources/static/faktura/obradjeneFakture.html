@@ -1,0 +1,25 @@
+
+<div class = "col-sm-6">
+	<table ng-init = "findObradjene()" class="table">
+		<tr>
+			<th>Naziv dobavljaca</th>
+			<th>Adresa dobavljaca</th>
+			<th>Ukupno roba i usluge</th>
+			
+			
+			<th></th>
+			
+		</tr>
+		<tr	ng-repeat = "faktura in faktureObradjene">
+			<td>{{faktura.nazivDobavljaca}}</td>
+			<td>{{faktura.adresaDobavljaca}}</td>
+			<td>{{faktura.ukupnoRobaIUsluge}}</td>
+			<td>
+			<button class = "btn" ng-click = "prikaziHtml(faktura)">Prikazi HTML</button>
+			</td>
+			<td>
+			<button class = "btn" ng-click = "prikaziPdf(faktura)">Prikazi PDF</button>
+			</td>
+		</tr>
+	</table>
+</div>

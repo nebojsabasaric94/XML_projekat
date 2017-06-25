@@ -30,15 +30,15 @@ public class Transformation {
 	
 	private static TransformerFactory transFactory;
 	
-	public static final String INPUT_FILE = "faktura.xml";
+	public static final String INPUT_FILE = "transformnaFakt.xml";
 	
 	
 	/// dodati fajl xsl
-	public static final String XSL_FILE = "faktura/xsltFaktura.xsl";
+	public static final String XSL_FILE = "faktReslt/xsltFaktura.xsl";
 	
-	public static final String HTML_FILE = "faktura/hmtlFaktura.html";
+	public static final String HTML_FILE = "faktReslt/hmtlFaktura.html";
 	
-	public static final String OUTPUT_FILE = "faktura/pdfFaktura.pdf";
+	public static final String OUTPUT_FILE = "faktReslt/pdfFaktura.pdf";
 
 
 	static {
@@ -116,7 +116,7 @@ public class Transformation {
     
     }
 	//konacna za odradjivanje
-	public static void Execute() throws IOException, DocumentException {
+	public static void ExecuteOrder() throws IOException, DocumentException {
 
     	System.out.println("[INFO] " + Transformation.class.getSimpleName());
     	
