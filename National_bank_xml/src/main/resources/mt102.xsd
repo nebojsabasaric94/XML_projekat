@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://mt102.xml.com"
-    xmlns:mt102="http://mt102.xml.com">
+    targetNamespace="http://mt102.xml.com" xmlns:mt102="http://mt102.xml.com">
 
     <xs:element name="getMt102Request">
         <xs:complexType>
@@ -135,7 +134,7 @@
             <xs:element name="obracunski_racun_banke_poverioca">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:length value="18"/>
+                        <xs:pattern value="\d{3}-\d{13}-\d{2}"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>

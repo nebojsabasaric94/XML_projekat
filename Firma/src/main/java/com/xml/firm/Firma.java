@@ -55,7 +55,7 @@ public class Firma {
 
 	private Integer stanjeRacuna;
 	
-	@Column(columnDefinition = "CHAR(18)",unique = true)	
+	@Column(columnDefinition = "CHAR(20)",unique = true)	
 	private String brojRacuna;
 
 	@ManyToOne

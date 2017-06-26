@@ -1,13 +1,13 @@
 insert into national_bank (common_name, country, email, organization, organization_unit) values ('NBS','Srbija','nbs@nbs','org','orgU');
 
-insert into bank(bank_code,pib,name,address,email,web,phone,fax,obracunski_racun_banke,swift_kod_banke,stanje_racuna_banke) values ('BAC','asdfggfdsa','uni credit','glavna','uni@gmail.com','web','4892810','fax','200123456123141124','BACXRSBG',0);
-insert into bank(bank_code,pib,name,address,email,web,phone,fax,obracunski_racun_banke,swift_kod_banke,stanje_racuna_banke) values ('GIB','pooppooppo','erste','bulevar','erste@gmail.com','web','4892810','fax','300124510974841158','GIBARS22',0);
-insert into bank(bank_code,pib,name,address,email,web,phone,fax,obracunski_racun_banke,swift_kod_banke,stanje_racuna_banke) values ('DBD','intesansns','intesa','glavna','intesa@gmail.com','web','4892810','fax','400123456321454147','DBDBRSBG',0);
+insert into bank(bank_code,pib,name,address,email,web,phone,fax,obracunski_racun_banke,swift_kod_banke,stanje_racuna_banke) values ('BAC','asdfggfdsa','uni credit','glavna','uni@gmail.com','web','4892810','fax','200-1234561231411-24','BACXRSBG',0);
+insert into bank(bank_code,pib,name,address,email,web,phone,fax,obracunski_racun_banke,swift_kod_banke,stanje_racuna_banke) values ('GIB','pooppooppo','erste','bulevar','erste@gmail.com','web','4892810','fax','300-1245109748411-58','GIBARS22',0);
+insert into bank(bank_code,pib,name,address,email,web,phone,fax,obracunski_racun_banke,swift_kod_banke,stanje_racuna_banke) values ('DBD','intesansns','intesa','glavna','intesa@gmail.com','web','4892810','fax','400-1234563214541-47','DBDBRSBG',0);
 
-insert into firma(name,address,city,country,email,phone,web,bank_id,pib_firm,stanje_racuna,broj_racuna) values ('levi','trifkovicev trg','Novi Sad','Srbija','levi@levi.com','012656','web',1,'asdfggfdsaa',0,'200636547896321456');
-insert into firma(name,address,city,country,email,phone,web,bank_id,pib_firm,stanje_racuna,broj_racuna) values ('vega','trifkovicev trg','Novi Sad','Srbija','vega@vega.com','012656','web',1,'asdfggfdsas',0,'200854578787874202');
-insert into firma(name,address,city,country,email,phone,web,bank_id,pib_firm,stanje_racuna,broj_racuna) values ('dms','trifkovicev trg','Novi Sad','Srbija','dms@dms.com','012656','web',2,'asdfggfdsrr',0,'300874521693695451');
-insert into firma(name,address,city,country,email,phone,web,bank_id,pib_firm,stanje_racuna,broj_racuna) values ('ftn','bulevar','Novi Sad','Srbija','ftn@uns.com','012656','web',3,'asdfggfdsea',0,'400254547845612156');
+insert into firma(name,address,city,country,email,phone,web,bank_id,pib_firm,stanje_racuna,broj_racuna) values ('levi','trifkovicev trg','Novi Sad','Srbija','levi@levi.com','012656','web',1,'asdfggfdsaa',0,'200-6365478963214-56');
+insert into firma(name,address,city,country,email,phone,web,bank_id,pib_firm,stanje_racuna,broj_racuna) values ('vega','trifkovicev trg','Novi Sad','Srbija','vega@vega.com','012656','web',1,'asdfggfdsas',0,'200-8545787878742-02');
+insert into firma(name,address,city,country,email,phone,web,bank_id,pib_firm,stanje_racuna,broj_racuna) values ('dms','trifkovicev trg','Novi Sad','Srbija','dms@dms.com','012656','web',2,'asdfggfdsrr',0,'300-8745216936954-51');
+insert into firma(name,address,city,country,email,phone,web,bank_id,pib_firm,stanje_racuna,broj_racuna) values ('ftn','bulevar','Novi Sad','Srbija','ftn@uns.com','012656','web',3,'asdfggfdsea',0,'400-2545478456121-56');
 
 
 insert into user (username, password, email) values ('dachakg','$2a$10$bdLAFEAmvgWUApO.uKWqvOjVDlN7riKyB/d0/4w.9e.aeTF1Z3KQ.','a@s.com');
@@ -61,11 +61,11 @@ insert into roles_privileges (role_id, privilege_id) values (1,8);
 
 
 
-insert into faktura(adresa_dobavljaca, adresa_kupca, broj_racuna, datum_racuna, datum_valute, iznos_za_uplatu, naziv_dobavljaca, naziv_kupca, obradjena, oznaka_valute, pib_dobavljaca, pib_kupca, ukupan_porez, ukupan_rabat, ukupno_robaiusluge, uplata_na_racun, vrednost_robe, vrednost_usluga, firma_id) values ('bulevar', 'trifkovicev trg', '200636547896321456', '2017-06-12 02:00:00', '2017-06-12 02:00:00', '7', 'ftn', 'levi', false, '7', 'asdfggfdsea', 'asdfggfdsaa', '7', '7', '77', '300874521693695451', '312312', '3212', '1')
+insert into faktura(adresa_dobavljaca, adresa_kupca, broj_racuna, datum_racuna, datum_valute, iznos_za_uplatu, naziv_dobavljaca, naziv_kupca, obradjena, oznaka_valute, pib_dobavljaca, pib_kupca, ukupan_porez, ukupan_rabat, ukupno_robaiusluge, uplata_na_racun, vrednost_robe, vrednost_usluga, firma_id) values ('bulevar', 'trifkovicev trg', '145632', '2017-06-12 02:00:00', '2017-06-12 02:00:00', '7', 'ftn', 'levi', false, 'rsd', 'asdfggfdsea', 'asdfggfdsaa', '7', '7', '77', '300-8745216936954-51', '312312', '3212', '1')
 
 insert into stavka_fakture(iznos_rabata, jedinica_mere, jedinicna_cena, kolicina, naziv_robe_ili_usluge, procena_rabata, redni_broj, ukupan_porez_stavka, umanjeno_za_rabat, vrednost, faktura_id) values ('5', '5', '5', '6', '5', '5', '141', '7', '5', '5', 1);
 
-insert into faktura(adresa_dobavljaca, adresa_kupca, broj_racuna, datum_racuna, datum_valute, iznos_za_uplatu, naziv_dobavljaca, naziv_kupca, obradjena, oznaka_valute, pib_dobavljaca, pib_kupca, ukupan_porez, ukupan_rabat, ukupno_robaiusluge, uplata_na_racun, vrednost_robe, vrednost_usluga, firma_id) values ('bulevar', 'trifkovicev trg', '200636547896321456', '2017-06-12 02:00:00', '2017-06-12 02:00:00', '700000', 'ftn', 'levi', false, '7', 'asdfggfdsea', 'asdfggfdsaa', '7', '7', '77', '300874521693695451', '312312', '3212', '1')
+insert into faktura(adresa_dobavljaca, adresa_kupca, broj_racuna, datum_racuna, datum_valute, iznos_za_uplatu, naziv_dobavljaca, naziv_kupca, obradjena, oznaka_valute, pib_dobavljaca, pib_kupca, ukupan_porez, ukupan_rabat, ukupno_robaiusluge, uplata_na_racun, vrednost_robe, vrednost_usluga, firma_id) values ('bulevar', 'trifkovicev trg', '147852', '2017-06-12 02:00:00', '2017-06-12 02:00:00', '700000', 'ftn', 'levi', false, 'eur', 'asdfggfdsea', 'asdfggfdsaa', '7', '7', '77', '300-8745216936954-51', '312312', '3212', '1')
 
 insert into stavka_fakture(iznos_rabata, jedinica_mere, jedinicna_cena, kolicina, naziv_robe_ili_usluge, procena_rabata, redni_broj, ukupan_porez_stavka, umanjeno_za_rabat, vrednost, faktura_id) values ('5', '5', '5', '6', '5', '5', '141', '700000', '5', '5', 2);
 

@@ -135,7 +135,10 @@ app.controller('fakturaController',['$scope','fakturaService','$location','$wind
 			hitno = false;
 		fakturaService.obradi(faktura, hitno)
 		.then(function(response){
-			$scope.findAll();
+			if(response.data == "true")
+				$scope.findAll();
+			else
+				alert("greska pri slanju naloga");
 		},
 		function(response){
 			

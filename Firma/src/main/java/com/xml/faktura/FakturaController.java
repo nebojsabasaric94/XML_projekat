@@ -14,9 +14,6 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -35,7 +32,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import com.itextpdf.text.DocumentException;
@@ -118,10 +114,8 @@ public class FakturaController {
 		JAXBContext jaxbContext;
 		try {
 			jaxbContext = JAXBContext.newInstance(Faktura.class);
-			//Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			//jaxbMarshaller.setProperty(Marshaller.JAXB_NO_NAMESPACE_SCHEMA_LOCATION, "faktura.xsd");
 			        
 			jaxbMarshaller.marshal(faktura, file);
 			
@@ -174,7 +168,6 @@ public class FakturaController {
 			Schema schema;
 			try {
 				schema = factory.newSchema(new StreamSource("faktura.xsd"));
-				//Faktura fakturaXml = (Faktura) jaxbUnmarshaller.unmarshal(file);
 				Validator validator = schema.newValidator();
 				try {
 					validator.validate(new StreamSource("faktura.xml"));
@@ -218,13 +211,17 @@ public class FakturaController {
 
 	@PreAuthorize("hasAuthority('sendInvoice')")
 	@PostMapping("/obrada/{hitno}")
-	public void obradi(@RequestBody Faktura faktura, @PathVariable boolean hitno) {
+	public boolean obradi(@RequestBody Faktura faktura, @PathVariable boolean hitno) {
 		Faktura f = fakturaService.findOne(faktura.getId());
 		Firma firmaPoverioca = firmService.findByName(f.getNazivDobavljaca());
-		firmClient.sendNalog(f, hitno, firmaPoverioca);
-		faktura.setObradjena(true);
-		fakturaService.save(faktura);
-		logger.info("User " + getUserDetails() + " processing invoice.");
+		boolean poslatNalog = firmClient.sendNalog(f, hitno, firmaPoverioca);
+		if(poslatNalog){
+			faktura.setObradjena(true);
+			fakturaService.save(faktura);
+			logger.info("User " + getUserDetails() + " processing invoice.");
+			return true;
+		}
+		return false;
 	}
 
 	private User getUserDetails() {

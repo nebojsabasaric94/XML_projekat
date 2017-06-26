@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<getStrukturaRtgsNalogaRequest xmlns="http://strukturaRtgsNaloga.xml.com"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://strukturaRtgsNaloga.xml.com file:/C:/Users/Danilo/Desktop/XML/XML_projekat/BankXml/src/main/resources/strukturaRtgsNaloga.xsd">
+    <strukturaRtgsNaloga>
+        <id_poruke>id_poruke0</id_poruke>
+        <swift_kod_banke_duznika>swift_ko</swift_kod_banke_duznika>
+        <obracunski_racun_banke_duznika>000-0000000000000-00</obracunski_racun_banke_duznika>
+        <swift_kod_banke_poverioca>swift_ko</swift_kod_banke_poverioca>
+        <obracunski_racun_banke_poverioca>000-0000000000000-00</obracunski_racun_banke_poverioca>
+        <duznik_nalogodavac>duznik_nalogodavac0</duznik_nalogodavac>
+        <svrha_placanja>svrha_placanja0</svrha_placanja>
+        <primalac_poverilac>primalac_poverilac0</primalac_poverilac>
+        <racun_duznika>000-0000000000000-00</racun_duznika>
+        <model_zaduzenja>54</model_zaduzenja>
+        <poziv_na_broj_zaduzenja>poziv_na_broj_zaduze</poziv_na_broj_zaduzenja>
+        <racun_poverioca>000-0000000000000-00</racun_poverioca>
+        <model_odobrenja>54</model_odobrenja>
+        <poziv_na_broj_odobrenja>poziv_na_broj_odobre</poziv_na_broj_odobrenja>
+        <iznos>0.00</iznos>
+    </strukturaRtgsNaloga>
+</getStrukturaRtgsNalogaRequest>

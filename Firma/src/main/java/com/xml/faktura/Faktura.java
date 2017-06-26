@@ -55,7 +55,7 @@ public class Faktura {
 	private String pibKupca;
 
 	@XmlElement(name = "Broj_racuna", required = true)
-	@Column(columnDefinition = "char(18)")
+	@Column(columnDefinition = "char(6)")
 	private String brojRacuna;
 
 	@XmlElement(name = "Datum_racuna", required = true)
@@ -92,7 +92,7 @@ public class Faktura {
 	private Integer iznosZaUplatu;
 
 	@XmlElement(name = "Uplata_na_racun", required = true)
-	@Column(columnDefinition = "CHAR(18)")
+	@Column(columnDefinition = "CHAR(20)")
 	private String uplataNaRacun;
 
 	@XmlElement(name = "Datum_valute", required = true)

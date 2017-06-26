@@ -38,7 +38,7 @@ public class Bank {
 	@NotBlank
 	private String PIB;
 
-	@Column(unique = true, columnDefinition = "CHAR(18)")
+	@Column(unique = true, columnDefinition = "CHAR(20)")
 	@NotBlank
 	private String obracunskiRacunBanke;
 

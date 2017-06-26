@@ -1,16 +1,24 @@
 package com.xml.bank;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.security.PrivateKey;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -20,6 +28,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import com.xml.client.BankClient;
 import com.xml.encryption.KeyStoreReader;
@@ -49,7 +58,6 @@ import com.xml.zahtevzadobijanjeizvoda.Presek;
 import com.xml.zahtevzadobijanjeizvoda.PresekAlati;
 import com.xml.zahtevzadobijanjeizvoda.StavkaPreseka;
 import com.xml.zahtevzadobijanjeizvoda.ZaglavljePreseka;
-import com.xml.zahtevzadobijanjeizvoda.ZahtevZaDobijanjeIzvoda;
 
 
 
@@ -147,17 +155,19 @@ public class BankEndpoint {
 			strukturaRtgsNaloga.setIdPoruke("MT103");
 			
 			rtgs.setStrukturaRtgsNaloga(strukturaRtgsNaloga);
-			
-			GetStrukturaRtgsNalogaResponse response = bankClient.sendMt103ToNationalBank(rtgs);
-			if(response.getMt900().getIdPoruke().equals("MT900")){
-				duznik.setStanjeRacuna(duznik.getStanjeRacuna()-response.getMt900().getIznos().intValue());
-				firmService.save(duznik);
-				Bank bankaDuznika = bankService.findByObracunskiRacunBanke(response.getMt900().getObracunskiRacunBankeDuznika());
-				response.getMt900().setBankaDuznika(bankaDuznika);
-				mt900Service.save(response.getMt900());
-				GetNalogZaPlacanjeResponse responseNZP = new GetNalogZaPlacanjeResponse();
-				responseNZP.setNalogZaPlacanje(nalogZaPlacanje);
-				return responseNZP;
+			boolean validate = validateGetStrukturaRtgsNalogaRequest(rtgs);
+			if(validate){
+				GetStrukturaRtgsNalogaResponse response = bankClient.sendMt103ToNationalBank(rtgs);
+				if(response.getMt900().getIdPoruke().equals("MT900")){
+					duznik.setStanjeRacuna(duznik.getStanjeRacuna()-response.getMt900().getIznos().intValue());
+					firmService.save(duznik);
+					Bank bankaDuznika = bankService.findByObracunskiRacunBanke(response.getMt900().getObracunskiRacunBankeDuznika());
+					response.getMt900().setBankaDuznika(bankaDuznika);
+					mt900Service.save(response.getMt900());
+					GetNalogZaPlacanjeResponse responseNZP = new GetNalogZaPlacanjeResponse();
+					responseNZP.setNalogZaPlacanje(nalogZaPlacanje);
+					return responseNZP;
+				}
 			}
 		}
 		else{
@@ -232,7 +242,6 @@ public class BankEndpoint {
 	}
 	
 	
-	
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getMt910Request")//za rtgs tj mt103
 	@ResponsePayload
 	public GetMt910Response getMt910(@RequestPayload Element request){
@@ -243,19 +252,24 @@ public class BankEndpoint {
 		//----------------------------------gotov deo za desifrovanje-------------
 		GetMt910Request getMt910Request = getMt910FromXMLDoc(doc);
 		
-		
-		Firma poverilac = firmService.findByAccount(getMt910Request.getRtgsNalog().getRacunPoverioca());
-		poverilac.setStanjeRacuna(poverilac.getStanjeRacuna()+ getMt910Request.getRtgsNalog().getIznos().intValue());
-		firmService.save(poverilac);
-		GetMt910Response response = new GetMt910Response();
-		getMt910Request.getMt910().setBankaPoverioca(bankService.findByObracunskiRacunBanke(getMt910Request.getMt910().getObracunskiRacunBankePoverioca()));
-		mt910Service.save(getMt910Request.getMt910());
-		response.setStatus("success");
-		return response;
+		boolean validateGetMt910Request = validateGetMt910Request(getMt910Request);
+		if(validateGetMt910Request){
+			Firma poverilac = firmService.findByAccount(getMt910Request.getRtgsNalog().getRacunPoverioca());
+			poverilac.setStanjeRacuna(poverilac.getStanjeRacuna()+ getMt910Request.getRtgsNalog().getIznos().intValue());
+			firmService.save(poverilac);
+			GetMt910Response response = new GetMt910Response();
+			getMt910Request.getMt910().setBankaPoverioca(bankService.findByObracunskiRacunBanke(getMt910Request.getMt910().getObracunskiRacunBankePoverioca()));
+			mt910Service.save(getMt910Request.getMt910());
+			response.setStatus("success");
+			return response;
+		}
+		return null;
 	}
 	
 	
-	
+
+
+
 	@PayloadRoot(namespace = NAMESPACE_URI2, localPart = "getMt910RequestMt102")//za mt102
 	@ResponsePayload
 	public com.xml.mt102.GetMt910Response getMt910mt102(@RequestPayload Element request){
@@ -265,22 +279,28 @@ public class BankEndpoint {
 			doc = decrypt(request);
 		//----------------------------------gotov deo za desifrovanje-------------
 		GetMt910RequestMt102 getMt910Request = getMt910RequestMt102FromXMLDoc(doc);
-		
-		String racunPoverioca = null;
-		for(int i =0; i < getMt910Request.getMt102().getNalogZaMT102().size();i++){
-			racunPoverioca = getMt910Request.getMt102().getNalogZaMT102().get(i).getRacunPoverioca();
-			Firma poverilac = firmService.findByAccount(racunPoverioca);
-			poverilac.setStanjeRacuna(poverilac.getStanjeRacuna()+ getMt910Request.getMt102().getNalogZaMT102().get(i).getIznos().intValue());
-			firmService.save(poverilac);
+		boolean validateGetMt910RequestMt102 = validateGetMt910RequestMt102(getMt910Request);
+		if(validateGetMt910RequestMt102){
+			String racunPoverioca = null;
+			for(int i =0; i < getMt910Request.getMt102().getNalogZaMT102().size();i++){
+				racunPoverioca = getMt910Request.getMt102().getNalogZaMT102().get(i).getRacunPoverioca();
+				Firma poverilac = firmService.findByAccount(racunPoverioca);
+				poverilac.setStanjeRacuna(poverilac.getStanjeRacuna()+ getMt910Request.getMt102().getNalogZaMT102().get(i).getIznos().intValue());
+				firmService.save(poverilac);
+			}
+			com.xml.mt102.GetMt910Response response = new com.xml.mt102.GetMt910Response();
+			getMt910Request.getMt910().setBankaPoverioca(bankService.findByObracunskiRacunBanke(getMt910Request.getMt910().getObracunskiRacunBankePoverioca()));
+			mt910ServiceMt102.save(getMt910Request.getMt910());
+			response.setStatus("success");
+			return response;
 		}
-		com.xml.mt102.GetMt910Response response = new com.xml.mt102.GetMt910Response();
-		getMt910Request.getMt910().setBankaPoverioca(bankService.findByObracunskiRacunBanke(getMt910Request.getMt910().getObracunskiRacunBankePoverioca()));
-		mt910ServiceMt102.save(getMt910Request.getMt910());
-		response.setStatus("success");
-		return response;
+		return null;
 	}
 	
 	
+
+
+
 	@PayloadRoot(namespace = NAMESPACE_URI3, localPart = "getZahtevRequest")
 	@ResponsePayload
 	public GetZahtevResponse getZahtev(@RequestPayload GetZahtevRequest getZahtevRequest){
@@ -429,6 +449,136 @@ public class BankEndpoint {
 				return null;
 			}
 	}
+	
+	private boolean validateGetStrukturaRtgsNalogaRequest(GetStrukturaRtgsNalogaRequest rtgs) {
+
+		File file = new File("getStrukturaRtgsNalogaRequest.xml");
+		JAXBContext jaxbContext;
+		try {
+			jaxbContext = JAXBContext.newInstance(GetStrukturaRtgsNalogaRequest.class);
+			//Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			jaxbMarshaller.marshal(rtgs, file);
+			
+			SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			
+			Schema schema;
+			try {
+				schema = factory.newSchema(new StreamSource("classpath:strukturaRtgsNaloga.xsd"));
+				Validator validator = schema.newValidator();
+				try {
+					validator.validate(new StreamSource("getStrukturaRtgsNalogaRequest.xml"));
+					return true;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return false;
+				}
+				
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+			
+					
+			
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+	
+	
+	private boolean validateGetMt910Request(GetMt910Request getMt910Request) {
+
+		File file = new File("getMt910Request.xml");
+		JAXBContext jaxbContext;
+		try {
+			jaxbContext = JAXBContext.newInstance(GetMt910Request.class);
+			//Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			jaxbMarshaller.marshal(getMt910Request, file);
+			
+			SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			
+			Schema schema;
+			try {
+				schema = factory.newSchema(new StreamSource("classpath:strukturaRtgsNaloga.xsd"));
+				Validator validator = schema.newValidator();
+				try {
+					validator.validate(new StreamSource("getMt910Request.xml"));
+					return true;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return false;
+				}
+				
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+			
+					
+			
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+	
+	private boolean validateGetMt910RequestMt102(GetMt910RequestMt102 getMt910Request) {
+
+
+		File file = new File("getMt910RequestMt102.xml");
+		JAXBContext jaxbContext;
+		try {
+			jaxbContext = JAXBContext.newInstance(GetMt910RequestMt102.class);
+			//Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			jaxbMarshaller.marshal(getMt910Request, file);
+			
+			SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			
+			Schema schema;
+			try {
+				schema = factory.newSchema(new StreamSource("classpath:mt102.xsd"));
+				Validator validator = schema.newValidator();
+				try {
+					validator.validate(new StreamSource("getMt910RequestMt102.xml"));
+					return true;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return false;
+				}
+				
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+			
+					
+			
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+
+	
+	}
+
 	
 	
 	

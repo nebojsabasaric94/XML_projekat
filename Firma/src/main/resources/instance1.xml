@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<getNalogZaPlacanjeRequest xmlns="http://nalogZaPlacanje.xml.com"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://nalogZaPlacanje.xml.com file:/C:/Users/Danilo/Desktop/XML/XML_projekat/Firma/src/main/resources/nalogZaPlacanje.xsd">
+    <nalogZaPlacanje>
+        <idPoruke>idPoruke0</idPoruke>
+        <duznik-nalogodavac>duznik-nalogodavac0</duznik-nalogodavac>
+        <svrhaPlacanja>svrhaPlacanja0</svrhaPlacanja>
+        <primalac-poverilac>primalac-poverilac0</primalac-poverilac>
+        <racunDuznika>racunDuznika111111</racunDuznika>
+        <modelZaduzenja>54</modelZaduzenja>
+        <pozivNaBrojZaduzenja>pozivNaBrojZaduzenja</pozivNaBrojZaduzenja>
+        <racunPoverioca>racunPoverioca1111</racunPoverioca>
+        <modelOdobrenja>54</modelOdobrenja>
+        <pozivNaBrojOdobrenja>pozivNaBrojOdobrenja</pozivNaBrojOdobrenja>
+        <iznos>0.00</iznos>
+        <oznakaValute>ozn</oznakaValute>
+    </nalogZaPlacanje>
+</getNalogZaPlacanjeRequest>
