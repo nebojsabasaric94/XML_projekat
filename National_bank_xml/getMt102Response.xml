@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<getMt102Response xmlns="http://mt102.xml.com">
+    <mt900 sifra_valute="RSD">
+        <id_poruke>MT900</id_poruke>
+        <swift_banke_duznika>GIBARS22</swift_banke_duznika>
+        <obracunski_racun_banke_duznika>300-1245109748411-58</obracunski_racun_banke_duznika>
+        <id_poruke_naloga>MT102</id_poruke_naloga>
+        <iznos>7.00</iznos>
+    </mt900>
+</getMt102Response>

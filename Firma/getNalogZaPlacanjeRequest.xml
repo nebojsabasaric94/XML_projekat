@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <getNalogZaPlacanjeRequest xmlns="http://nalogZaPlacanje.xml.com">
-    <nalogZaPlacanje datumNaloga="2017-06-27+02:00" datumValute="2017-06-12+02:00" hitno="false">
+    <nalogZaPlacanje datumNaloga="2017-06-28+02:00" datumValute="2017-06-12+02:00" hitno="false">
         <idPoruke>Nalog za prenos</idPoruke>
         <duznik-nalogodavac>levi</duznik-nalogodavac>
         <svrhaPlacanja>Svrha placanja</svrhaPlacanja>

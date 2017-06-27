@@ -7,6 +7,7 @@ import java.security.PrivateKey;
 import java.security.cert.Certificate;
 
 import javax.crypto.SecretKey;
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -20,6 +21,10 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 
 import org.apache.xml.security.encryption.EncryptedData;
 import org.apache.xml.security.encryption.EncryptedKey;
@@ -212,22 +217,26 @@ public class NationalBankEndpoint {
 				mt900.setSwiftBankeDuznika(mt102.getSwiftKodBankeDuznika());
 				GetMt102Response response = new GetMt102Response();
 				response.setMt900(mt900);
-
-				Bank bankaDuznika = bankService.findBySwiftCode(mt102.getSwiftKodBankeDuznika());
-				Bank bankaPoverioca = bankService.findBySwiftCode(mt102.getSWIFTKodBankePoverioca());
-				// bankaDuznika = bankService.save(bankaPoverioca);
-				// bankaPoverioca = bankService.save(bankaDuznika);
-				bankaPoverioca.setStanjeRacunaBanke(bankaPoverioca.getStanjeRacunaBanke() + mt102.getUkupanIznos().intValue());
-				bankaDuznika.setStanjeRacunaBanke(bankaDuznika.getStanjeRacunaBanke() - mt102.getUkupanIznos().intValue());
-				bankaDuznika = bankService.save(bankaDuznika);
-				bankaPoverioca = bankService.save(bankaPoverioca);
-				// mt102Service.save(mt102);
-				return response;
+				boolean validateGetMt102Response = validateGetMt102Response(response);
+				if(validateGetMt102Response){
+					Bank bankaDuznika = bankService.findBySwiftCode(mt102.getSwiftKodBankeDuznika());
+					Bank bankaPoverioca = bankService.findBySwiftCode(mt102.getSWIFTKodBankePoverioca());
+					// bankaDuznika = bankService.save(bankaPoverioca);
+					// bankaPoverioca = bankService.save(bankaDuznika);
+					bankaPoverioca.setStanjeRacunaBanke(bankaPoverioca.getStanjeRacunaBanke() + mt102.getUkupanIznos().intValue());
+					bankaDuznika.setStanjeRacunaBanke(bankaDuznika.getStanjeRacunaBanke() - mt102.getUkupanIznos().intValue());
+					bankaDuznika = bankService.save(bankaDuznika);
+					bankaPoverioca = bankService.save(bankaPoverioca);
+					// mt102Service.save(mt102);
+					return response;
+				}
 			}
 		}
 
 		return null;
 	}
+
+
 
 	public boolean checkSignature(Element request) {
 		Document doc = request.getOwnerDocument();
@@ -363,6 +372,50 @@ public class NationalBankEndpoint {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	private boolean validateGetMt102Response(GetMt102Response response) {
+
+
+		File file = new File("getMt102Response.xml");
+		JAXBContext jaxbContext;
+		try {
+			jaxbContext = JAXBContext.newInstance(GetMt102Response.class);
+			//Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			jaxbMarshaller.marshal(response, file);
+			
+			SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			
+			Schema schema;
+			try {
+				schema = factory.newSchema(new StreamSource("classpath:mt102.xsd"));
+				Validator validator = schema.newValidator();
+				try {
+					validator.validate(new StreamSource("getMt102Response.xml"));
+					return true;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return false;
+				}
+				
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+			
+					
+			
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+
+	
 	}
 
 	private Document loadDocument(String file) {
