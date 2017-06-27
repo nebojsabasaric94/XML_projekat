@@ -5,13 +5,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
-import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
-import org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection;
+import org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition;
 
 @EnableWs
 @Configuration
@@ -25,8 +23,11 @@ public class WebServiceConfig {
 
 		return new ServletRegistrationBean(servlet, "/ws/*");
 	}
-
-	@Bean(name = "nationalBank")
+	@Bean
+	public SimpleWsdl11Definition nationalBank() {
+		return new SimpleWsdl11Definition(new ClassPathResource("nationalBank.wsdl"));
+	}
+/*	@Bean(name = "nationalBank")
 	public DefaultWsdl11Definition defaultWsdl11Definition(CommonsXsdSchemaCollection schemaCollection)
 			throws Exception {
 		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
@@ -47,7 +48,7 @@ public class WebServiceConfig {
 
 		collection.setInline(true);
 		return collection;
-	}
+	}*/
 	
 	@Bean
 	Jaxb2Marshaller jaxb2Marshaller() {

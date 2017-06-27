@@ -1,0 +1,321 @@
+<wsdl:definitions xmlns:sch0="http://nalogZaPlacanje.xml.com" xmlns:sch1="http://zahtevzadobijanjeizvoda.xml.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://firm_xml.com/ws/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://firm_xml.com/ws/">
+<wsdl:types>
+<xs:schema xmlns:tns="http://nalogZaPlacanje.xml.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://nalogZaPlacanje.xml.com">
+<xs:element name="getNalogZaPlacanjeRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="nalogZaPlacanje" type="tns:nalogZaPlacanje"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="getNalogZaPlacanjeResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="nalogZaPlacanje" type="tns:nalogZaPlacanje"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:complexType name="nalogZaPlacanje">
+<xs:sequence>
+<xs:element name="idPoruke">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:maxLength value="50"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="duznik-nalogodavac" type="xs:string"/>
+<xs:element name="svrhaPlacanja" type="xs:string"/>
+<xs:element name="primalac-poverilac" type="xs:string"/>
+<xs:element name="racunDuznika">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:pattern value="\d{3}-\d{13}-\d{2}"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="modelZaduzenja">
+<xs:simpleType>
+<xs:restriction base="xs:int">
+<xs:maxInclusive value="99"/>
+<xs:minInclusive value="10"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="pozivNaBrojZaduzenja">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:length value="20"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="racunPoverioca">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:pattern value="\d{3}-\d{13}-\d{2}"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="modelOdobrenja">
+<xs:simpleType>
+<xs:restriction base="xs:int">
+<xs:minInclusive value="10"/>
+<xs:maxInclusive value="99"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="pozivNaBrojOdobrenja">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:length value="20"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="iznos">
+<xs:simpleType>
+<xs:restriction base="xs:decimal">
+<xs:totalDigits value="15"/>
+<xs:fractionDigits value="2"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="oznakaValute">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:length value="3"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+</xs:sequence>
+<xs:attribute name="datumNaloga" type="xs:date"/>
+<xs:attribute name="datumValute" type="xs:date"/>
+<xs:attribute name="hitno" type="xs:boolean"/>
+</xs:complexType>
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:zi="http://zahtevzadobijanjeizvoda.xml.com" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://zahtevzadobijanjeizvoda.xml.com">
+<xs:complexType name="ZahtevZaDobijanjeIzvoda">
+<xs:sequence>
+<xs:element name="Broj_racuna">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:length value="18"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element minOccurs="0" name="Datum" type="xs:date"/>
+<xs:element name="Redni_broj_preseka">
+<xs:simpleType>
+<xs:restriction base="xs:integer">
+<xs:maxInclusive value="99"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getZahtevRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="zahtevZaDobijanjeIzvoda" type="zi:ZahtevZaDobijanjeIzvoda"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="getZahtevResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="presek" type="zi:Presek"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:complexType name="zaglavljePreseka">
+<xs:sequence>
+<xs:element name="brojRacuna">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:length value="18"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="brojPreseka">
+<xs:simpleType>
+<xs:restriction base="xs:int">
+<xs:minInclusive value="10"/>
+<xs:maxInclusive value="99"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="prethodnoStanje">
+<xs:simpleType>
+<xs:restriction base="xs:decimal">
+<xs:totalDigits value="15"/>
+<xs:fractionDigits value="2"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="brojPromenaUKorist">
+<xs:simpleType>
+<xs:restriction base="xs:int">
+<xs:minInclusive value="0"/>
+<xs:maxInclusive value="999999"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="ukupnoUKorist">
+<xs:simpleType>
+<xs:restriction base="xs:decimal">
+<xs:totalDigits value="15"/>
+<xs:fractionDigits value="2"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="brojPromenaNaTeret">
+<xs:simpleType>
+<xs:restriction base="xs:int">
+<xs:minInclusive value="0"/>
+<xs:maxInclusive value="999999"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="ukupnoNaTeret">
+<xs:simpleType>
+<xs:restriction base="xs:decimal">
+<xs:totalDigits value="15"/>
+<xs:fractionDigits value="2"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="novoStanje">
+<xs:simpleType>
+<xs:restriction base="xs:decimal">
+<xs:totalDigits value="15"/>
+<xs:fractionDigits value="2"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+</xs:sequence>
+<xs:attribute name="datumNaloga" type="xs:date"/>
+</xs:complexType>
+<xs:complexType name="stavkaPreseka">
+<xs:sequence>
+<xs:element name="duznik-nalogodavac" type="xs:string"/>
+<xs:element name="svrhaPlacanja" type="xs:string"/>
+<xs:element name="primalac-poverilac" type="xs:string"/>
+<xs:element name="racunDuznika">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:length value="18"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="modelZaduzenja">
+<xs:simpleType>
+<xs:restriction base="xs:int">
+<xs:minInclusive value="10"/>
+<xs:maxInclusive value="99"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="pozivNaBrojZaduzenja">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:length value="20"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="racunPoverioca">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:length value="18"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="modelOdobrenja">
+<xs:simpleType>
+<xs:restriction base="xs:int">
+<xs:minInclusive value="10"/>
+<xs:maxInclusive value="99"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="pozivNaBrojOdobrenja">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:length value="20"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="Iznos">
+<xs:simpleType>
+<xs:restriction base="xs:decimal">
+<xs:totalDigits value="15"/>
+<xs:fractionDigits value="2"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="Smer">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:length value="1"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+</xs:sequence>
+<xs:attribute name="datumNaloga" type="xs:date"/>
+<xs:attribute name="datumValute" type="xs:date"/>
+</xs:complexType>
+<xs:complexType name="Presek">
+<xs:sequence>
+<xs:element name="zaglavlje" type="zi:zaglavljePreseka"/>
+<xs:element form="qualified" maxOccurs="unbounded" name="stavka" type="zi:stavkaPreseka"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="getNalogZaPlacanjeRequest">
+<wsdl:part element="sch0:getNalogZaPlacanjeRequest" name="getNalogZaPlacanjeRequest"/>
+</wsdl:message>
+<wsdl:message name="getZahtevRequest">
+<wsdl:part element="sch1:getZahtevRequest" name="getZahtevRequest"/>
+</wsdl:message>
+<wsdl:message name="getNalogZaPlacanjeResponse">
+<wsdl:part element="sch0:getNalogZaPlacanjeResponse" name="getNalogZaPlacanjeResponse"/>
+</wsdl:message>
+<wsdl:message name="getZahtevResponse">
+<wsdl:part element="sch1:getZahtevResponse" name="getZahtevResponse"/>
+</wsdl:message>
+<wsdl:portType name="FirmPort">
+<wsdl:operation name="getNalogZaPlacanje">
+<wsdl:input message="tns:getNalogZaPlacanjeRequest" name="getNalogZaPlacanjeRequest"/>
+<wsdl:output message="tns:getNalogZaPlacanjeResponse" name="getNalogZaPlacanjeResponse"/>
+</wsdl:operation>
+<wsdl:operation name="getZahtev">
+<wsdl:input message="tns:getZahtevRequest" name="getZahtevRequest"/>
+<wsdl:output message="tns:getZahtevResponse" name="getZahtevResponse"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="FirmPortSoap11" type="tns:FirmPort">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="getNalogZaPlacanje">
+<soap:operation soapAction=""/>
+<wsdl:input name="getNalogZaPlacanjeRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getNalogZaPlacanjeResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getZahtev">
+<soap:operation soapAction=""/>
+<wsdl:input name="getZahtevRequest">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getZahtevResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="FirmPortService">
+<wsdl:port binding="tns:FirmPortSoap11" name="FirmPortSoap11">
+<soap:address location="https://localhost:8085/ws"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

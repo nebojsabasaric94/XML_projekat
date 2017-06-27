@@ -5,14 +5,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
-import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
-import org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection;
+import org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition;
 
 @EnableWs
 @Configuration
@@ -26,8 +24,11 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 
 		return new ServletRegistrationBean(servlet, "/ws/*");
 	}
-
-	@Bean(name = "banka")
+	@Bean
+	public SimpleWsdl11Definition banka() {
+		return new SimpleWsdl11Definition(new ClassPathResource("banka.wsdl"));
+	}
+/*	@Bean(name = "banka")
 	public DefaultWsdl11Definition defaultWsdl11Definition(CommonsXsdSchemaCollection schemaCollection)
 			throws Exception {
 		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
@@ -44,11 +45,11 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	@Bean
 	public CommonsXsdSchemaCollection schemeCollection() {
 		CommonsXsdSchemaCollection collection = new CommonsXsdSchemaCollection(
-				new Resource[] { new ClassPathResource("/nalogZaPlacanje.xsd"),new ClassPathResource("/strukturaRtgsNaloga.xsd"), new ClassPathResource("/mt102.xsd") });
+				new Resource[] { new ClassPathResource("/nalogZaPlacanje.xsd"),new ClassPathResource("/strukturaRtgsNaloga.xsd"), new ClassPathResource("/mt102.xsd"),new ClassPathResource("/ZahtevZaDobijanjeIzvoda.xsd") });
 
 		collection.setInline(true);
 		return collection;
-	}
+	}*/
 
 	@Bean
 	Jaxb2Marshaller jaxb2Marshaller() {
