@@ -3,11 +3,12 @@ var app = angular.module('izvod.controllers',[]);
 
 app.controller('izvodController',['$scope','izvodService','$location',
 	function($scope, izvodService, $location) {
+	
+	$scope.show = false;
 
 	$scope.posaljiZahtev = function(){
 		var zahtev = $scope.zahtev;
 		zahtev.redniBrojPreseka = 1;
-		
 		
 		izvodService.posaljiZahtev(zahtev).then(
 			function(response){
@@ -17,6 +18,7 @@ app.controller('izvodController',['$scope','izvodService','$location',
 					})
 			}
 		)
+		$scope.show = true;
 	}
 	
 }]);

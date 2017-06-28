@@ -11,7 +11,7 @@
         <racunPoverioca>400-2545478456121-56</racunPoverioca>
         <modelOdobrenja>97</modelOdobrenja>
         <pozivNaBrojOdobrenja>pozivNaBrojZaduzenja</pozivNaBrojOdobrenja>
-        <iznos>7</iznos>
-        <oznakaValute>rsd</oznakaValute>
+        <iznos>700000</iznos>
+        <oznakaValute>eur</oznakaValute>
     </nalogZaPlacanje>
 </getNalogZaPlacanjeRequest>
