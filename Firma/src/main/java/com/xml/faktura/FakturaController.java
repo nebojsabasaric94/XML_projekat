@@ -109,7 +109,7 @@ public class FakturaController {
 	}
 	
 	@PostMapping("/transformHTML")
-	public File transformAndGenerate(@RequestBody Faktura faktura) throws IOException, DocumentException {
+	public void transformAndGenerate(@RequestBody Faktura faktura) throws IOException, DocumentException {
 		File file = new File("fakturaForTransform.xml");
 		JAXBContext jaxbContext;
 		try {
@@ -149,7 +149,7 @@ public class FakturaController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new File(Transformation.HTML_FILE);
+		
 		
 	}
 	

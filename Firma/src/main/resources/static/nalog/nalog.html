@@ -1,0 +1,20 @@
+<div class = "col-sm-6">
+	<table ng-init = "findAll()" class="table">
+		<tr>
+			<th>Duznik-nalogodavac</th>
+			<th>Primalac-poverilac</th>
+			
+			<th></th>
+			
+		</tr>
+		<tr	ng-repeat = "nalog in nalozi">
+			<td>{{nalog.duznikNalogodavac}}</td>
+			<td>{{nalog.primalacPoverilac}}</td>
+			
+			<td>
+			<button class = "btn" ng-click = "izgenerisiPrikaz(nalog)">Prikazi</button>
+			</td>
+			
+		</tr>
+	</table>
+</div>

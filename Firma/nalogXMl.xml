@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<NalogZaPlacanje xmlns="http://nalogZaPlacanje.xml.com" datumNaloga="2017-06-28+02:00" datumValute="2017-06-12+02:00" hitno="false">
+    <idPoruke>Nalog za prenos</idPoruke>
+    <duznik-nalogodavac>levi</duznik-nalogodavac>
+    <svrhaPlacanja>Svrha placanja</svrhaPlacanja>
+    <primalac-poverilac>ftn</primalac-poverilac>
+    <racunDuznika>300-8745216936954-51</racunDuznika>
+    <modelZaduzenja>92</modelZaduzenja>
+    <pozivNaBrojZaduzenja>pozivNaBrojZaduzenja</pozivNaBrojZaduzenja>
+    <racunPoverioca>400-2545478456121-56</racunPoverioca>
+    <modelOdobrenja>97</modelOdobrenja>
+    <pozivNaBrojOdobrenja>pozivNaBrojZaduzenja</pozivNaBrojOdobrenja>
+    <iznos>7</iznos>
+    <oznakaValute>rsd</oznakaValute>
+</NalogZaPlacanje>

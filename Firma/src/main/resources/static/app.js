@@ -12,6 +12,7 @@ angular.module('routerApp', ['ui.router',
 	'user.services', 'user.controllers',
 	'login.services','login.controllers',
 	'faktura.services', 'faktura.controllers',
+	'nalog.services' , 'nalog.controllers',
 	'izvod.services', 'izvod.controllers']) 
 
 
@@ -97,6 +98,11 @@ angular.module('routerApp', ['ui.router',
 		url : '/getExistingCertificate',
 		templateUrl : 'findExistingCertificate/findCertificate.html',
 		controller : 'findCertificateController'
+	})
+	.state('home.nalog',{
+		url : '/nalog',
+		templateUrl : 'nalog/nalog.html',
+		controller : 'nalogController'
 	})
 	.state('home.revokeCertificate',{
 		url : '/revokeCertificate',
