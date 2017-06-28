@@ -23,8 +23,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.xml.AddaptDate;
 import com.xml.firm.Firma;
 
 
@@ -165,9 +167,11 @@ public class NalogZaPlacanje {
     protected String oznakaValute;
     @XmlAttribute(name = "datumNaloga")
     @XmlSchemaType(name = "date")
+    @XmlJavaTypeAdapter(AddaptDate.class)
     protected Date datumNaloga;
     @XmlAttribute(name = "datumValute")
     @XmlSchemaType(name = "date")
+    @XmlJavaTypeAdapter(AddaptDate.class)
     protected Date datumValute;
     @XmlAttribute(name = "hitno")
     protected Boolean hitno;

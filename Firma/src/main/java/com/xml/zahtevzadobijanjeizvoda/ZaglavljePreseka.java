@@ -9,13 +9,18 @@
 package com.xml.zahtevzadobijanjeizvoda;
 
 import java.math.BigDecimal;
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
+
+import com.xml.AddaptDate;
 
 
 /**
@@ -128,7 +133,8 @@ public class ZaglavljePreseka {
     protected BigDecimal novoStanje;
     @XmlAttribute(name = "datumNaloga")
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar datumNaloga;
+    @XmlJavaTypeAdapter(AddaptDate.class)
+    protected Date datumNaloga;
 
     /**
      * Gets the value of the brojRacuna property.
@@ -306,7 +312,7 @@ public class ZaglavljePreseka {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getDatumNaloga() {
+    public Date getDatumNaloga() {
         return datumNaloga;
     }
 
@@ -318,7 +324,7 @@ public class ZaglavljePreseka {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setDatumNaloga(XMLGregorianCalendar value) {
+    public void setDatumNaloga(Date value) {
         this.datumNaloga = value;
     }
 

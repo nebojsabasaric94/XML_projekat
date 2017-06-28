@@ -9,12 +9,17 @@
 package com.xml.zahtevzadobijanjeizvoda;
 
 import java.math.BigInteger;
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
+
+import com.xml.AddaptDate;
 
 
 /**
@@ -62,7 +67,8 @@ public class ZahtevZaDobijanjeIzvoda {
     protected String brojRacuna;
     @XmlElement(name = "Datum")
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar datum;
+    @XmlJavaTypeAdapter(AddaptDate.class)
+    protected Date datum;
     @XmlElement(name = "Redni_broj_preseka", required = true)
     protected BigInteger redniBrojPreseka;
 
@@ -98,7 +104,7 @@ public class ZahtevZaDobijanjeIzvoda {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getDatum() {
+    public Date getDatum() {
         return datum;
     }
 
@@ -110,7 +116,7 @@ public class ZahtevZaDobijanjeIzvoda {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setDatum(XMLGregorianCalendar value) {
+    public void setDatum(Date value) {
         this.datum = value;
     }
 

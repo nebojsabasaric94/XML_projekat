@@ -1,5 +1,6 @@
 var app = angular.module('izvod.controllers',[]);
 
+var redniBrojPreseka = 1;
 
 app.controller('izvodController',['$scope','izvodService','$location',
 	function($scope, izvodService, $location) {
@@ -8,7 +9,7 @@ app.controller('izvodController',['$scope','izvodService','$location',
 
 	$scope.posaljiZahtev = function(){
 		var zahtev = $scope.zahtev;
-		zahtev.redniBrojPreseka = 1;
+		zahtev.redniBrojPreseka = redniBrojPreseka;
 		
 		izvodService.posaljiZahtev(zahtev).then(
 			function(response){
@@ -19,6 +20,39 @@ app.controller('izvodController',['$scope','izvodService','$location',
 			}
 		)
 		$scope.show = true;
+	}
+	
+	$scope.sledeciPresek = function(){
+		redniBrojPreseka++;
+		var zahtev = $scope.zahtev;
+		zahtev.redniBrojPreseka = redniBrojPreseka;
+		
+		izvodService.posaljiZahtev(zahtev).then(
+			function(response){
+				izvodService.primiPresek().then(
+					function(response2){
+						$scope.presek = response2.data.presek;
+					})
+			}
+		)
+		$scope.show = true;
+	}
+	
+	$scope.prethodniPresek = function(){
+		redniBrojPreseka--;
+		var zahtev = $scope.zahtev;
+		zahtev.redniBrojPreseka = redniBrojPreseka;
+		
+		izvodService.posaljiZahtev(zahtev).then(
+			function(response){
+				izvodService.primiPresek().then(
+					function(response2){
+						$scope.presek = response2.data.presek;
+					})
+			}
+		)
+		$scope.show = true;
+		
 	}
 	
 }]);
