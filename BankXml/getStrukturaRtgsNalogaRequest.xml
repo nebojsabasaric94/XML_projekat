@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <getStrukturaRtgsNalogaRequest xmlns="http://strukturaRtgsNaloga.xml.com">
-    <strukturaRtgsNaloga datum_naloga="2017-06-26" datum_valute="2017-06-12" sifra_valute="rsd">
+    <strukturaRtgsNaloga datum_naloga="2017-06-28" datum_valute="2017-06-12" sifra_valute="eur">
         <id_poruke>MT103</id_poruke>
         <swift_kod_banke_duznika>GIBARS22</swift_kod_banke_duznika>
-        <obracunski_racun_banke_duznika>300-1245109748411-58</obracunski_racun_banke_duznika>
+        <obracunski_racun_banke_duznika>300124510974841158</obracunski_racun_banke_duznika>
         <swift_kod_banke_poverioca>DBDBRSBG</swift_kod_banke_poverioca>
-        <obracunski_racun_banke_poverioca>400-1234563214541-47</obracunski_racun_banke_poverioca>
+        <obracunski_racun_banke_poverioca>400123456321454147</obracunski_racun_banke_poverioca>
         <duznik_nalogodavac>levi</duznik_nalogodavac>
         <svrha_placanja>Svrha placanja</svrha_placanja>
         <primalac_poverilac>ftn</primalac_poverilac>
@@ -15,6 +15,6 @@
         <racun_poverioca>400-2545478456121-56</racun_poverioca>
         <model_odobrenja>97</model_odobrenja>
         <poziv_na_broj_odobrenja>pozivNaBrojZaduzenja</poziv_na_broj_odobrenja>
-        <iznos>7</iznos>
+        <iznos>700000</iznos>
     </strukturaRtgsNaloga>
 </getStrukturaRtgsNalogaRequest>

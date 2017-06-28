@@ -2,25 +2,18 @@
 		<form class="form-horizontal" name= "form">
 				<legend>Zahtev za dobijanje izvoda</legend>
 				
-				<div class = "form-group">
-					<label class = "col-md-4 control-label" for = "banka">Banka:</label>
-					<div class = "col-md-4">
-						<input disabled type = "text" class="form-control " required/>
-										
-					</div>
-				</div>
 				
 				<div class = "form-group" >
 					<label class = "col-md-4 control-label" for = "datum">Datum:</label>
 					<div class = "col-md-4">
-						<input type = "date" ng-model = "$parent.zahtev.datum"  class="form-control" required/>			
+						<input type = "date" ng-model = "$parent.zahtev.datum"  class="form-control" ng-init="$parent.zahtev.datum ='2017-06-29'" required/>			
 					</div>
 				</div>
 				
 				<div class = "form-group">
 					<label class = "col-md-4 control-label" for = "brojRacuna">Broj Racuna:</label>
 					<div class = "col-md-4">
-						<input type = "text"  ng-model = "$parent.zahtev.brojRacuna" class="form-control" required/>
+						<input type = "text"  ng-model = "$parent.zahtev.brojRacuna" class="form-control" ng-init="$parent.zahtev.brojRacuna ='300-8745216936954-51'"required/>
 					</div>
 				</div>
 				
@@ -37,10 +30,12 @@
 				
 				
 				
-				
+<div id = "prikazPreseka" ng-show="show">
 	
 	<br/><hr/><br/>
 	<div id="zaglavlje">
+		
+	
 		<table class ="table ">
 		
 		
@@ -80,6 +75,10 @@
 		<td><label class="control-label">Novo Stanje</label></td><td>{{presek.zaglavlje.novoStanje}}</td>
 		<tr>
 		</table>
+		<center>
+		<button class = "btn glyphicon glyphicon-arrow-left"></button>
+		<button class = "btn glyphicon glyphicon-arrow-right"></button>
+		</center>
 	</div>		
 	<hr/>
 	
@@ -148,7 +147,7 @@
 		</table>
 	</div>
 	
-	
+	</div>
 
 
 </div>
