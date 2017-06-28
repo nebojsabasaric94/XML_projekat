@@ -23,36 +23,39 @@ app.controller('izvodController',['$scope','izvodService','$location',
 	}
 	
 	$scope.sledeciPresek = function(){
-		redniBrojPreseka++;
-		var zahtev = $scope.zahtev;
-		zahtev.redniBrojPreseka = redniBrojPreseka;
-		
-		izvodService.posaljiZahtev(zahtev).then(
-			function(response){
-				izvodService.primiPresek().then(
-					function(response2){
-						$scope.presek = response2.data.presek;
-					})
-			}
-		)
-		$scope.show = true;
+		if($scope.presek.stavka.length > 1 ){
+			redniBrojPreseka++;
+			var zahtev = $scope.zahtev;
+			zahtev.redniBrojPreseka = redniBrojPreseka;
+			
+			izvodService.posaljiZahtev(zahtev).then(
+				function(response){
+					izvodService.primiPresek().then(
+						function(response2){
+							$scope.presek = response2.data.presek;
+						})
+				}
+			)
+			$scope.show = true;
+		}
 	}
 	
 	$scope.prethodniPresek = function(){
-		redniBrojPreseka--;
-		var zahtev = $scope.zahtev;
-		zahtev.redniBrojPreseka = redniBrojPreseka;
-		
-		izvodService.posaljiZahtev(zahtev).then(
-			function(response){
-				izvodService.primiPresek().then(
-					function(response2){
-						$scope.presek = response2.data.presek;
-					})
-			}
-		)
-		$scope.show = true;
-		
+		if(redniBrojPreseka > 1){
+			redniBrojPreseka--;
+			var zahtev = $scope.zahtev;
+			zahtev.redniBrojPreseka = redniBrojPreseka;
+			
+			izvodService.posaljiZahtev(zahtev).then(
+				function(response){
+					izvodService.primiPresek().then(
+						function(response2){
+							$scope.presek = response2.data.presek;
+						})
+				}
+			)
+			$scope.show = true;
+		}
 	}
 	
 }]);

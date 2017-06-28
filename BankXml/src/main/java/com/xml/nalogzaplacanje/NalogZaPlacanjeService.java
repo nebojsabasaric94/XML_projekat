@@ -13,4 +13,6 @@ public interface NalogZaPlacanjeService {
 	
 	public List<NalogZaPlacanje> findForIzvod(Date datum,
 			String brojRacuna, int brStavkiPoPreseku, int redniBrojPreseka);
+	
+	public double izracunajPredhodnoStanje(Date doDatuma, long doNaloga, String brRacuna);
 }

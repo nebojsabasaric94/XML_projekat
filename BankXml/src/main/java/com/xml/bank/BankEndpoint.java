@@ -306,6 +306,8 @@ public class BankEndpoint {
 	public GetZahtevResponse getZahtev(@RequestPayload GetZahtevRequest getZahtevRequest){
 		
 		Presek presek = new Presek();
+		long doNaloga = 0;
+		
 		
 		System.out.println("--------ZAHTEV PRIMLJEN----------");
 		String brojRacuna = getZahtevRequest.getZahtevZaDobijanjeIzvoda().getBrojRacuna();
@@ -315,16 +317,27 @@ public class BankEndpoint {
 				BR_STAVKI_PO_PRESEKU, 
 				getZahtevRequest.getZahtevZaDobijanjeIzvoda().getRedniBrojPreseka().intValue()
 				);
+		try{
+			doNaloga = nalozi.get(0).getId();
+		}
+		catch(Exception g)
+		{
+			doNaloga = 0;
+		}
+		
 		ZaglavljePreseka zaglavljePreseka = new ZaglavljePreseka();
 		zaglavljePreseka.setBrojRacuna(brojRacuna);
 		zaglavljePreseka.setDatumNaloga(getZahtevRequest.getZahtevZaDobijanjeIzvoda().getDatum());
 		zaglavljePreseka.setBrojPreseka(getZahtevRequest.getZahtevZaDobijanjeIzvoda().getRedniBrojPreseka().intValue());
-		zaglavljePreseka.setPrethodnoStanje(new BigDecimal(100));	//TODO
+		zaglavljePreseka.setPrethodnoStanje(new BigDecimal( nalogZaPlacanjeService.izracunajPredhodnoStanje(
+				getZahtevRequest.getZahtevZaDobijanjeIzvoda().getDatum(), doNaloga, brojRacuna) ));
+		
 		zaglavljePreseka.setBrojPromenaUKorist(PresekAlati.IzracunajBrojPromenaUKorist(nalozi, brojRacuna));
 		zaglavljePreseka.setUkupnoUKorist(PresekAlati.IzracunajUkupnoUKorist(nalozi, brojRacuna));
 		zaglavljePreseka.setBrojPromenaNaTeret(PresekAlati.IzracunajBrojPromenaNaTeret(nalozi, brojRacuna));
 		zaglavljePreseka.setUkupnoNaTeret(PresekAlati.IzracunajUkupnoNaTeret(nalozi, brojRacuna));
-		zaglavljePreseka.setNovoStanje(new BigDecimal(100));//TODO
+		zaglavljePreseka.setNovoStanje((new BigDecimal( nalogZaPlacanjeService.izracunajPredhodnoStanje(
+				getZahtevRequest.getZahtevZaDobijanjeIzvoda().getDatum(),doNaloga, brojRacuna)).add(zaglavljePreseka.getUkupnoUKorist())).subtract(zaglavljePreseka.getUkupnoNaTeret()));//TODO
 		
 		presek.setZaglavlje(zaglavljePreseka);
 		

@@ -58,7 +58,21 @@ public class NalogZaPlacanjeServiceImpl implements NalogZaPlacanjeService{
 		
 		return outList;
 	}
-	
+
+	@Override
+	public double izracunajPredhodnoStanje(Date doDatuma, long doNaloga, String brRacuna) {
+		double res = 0;
+		List<NalogZaPlacanje> nalozi = (List<NalogZaPlacanje>) nalogZaPlacanjeRepo.findAll();
+		for(int i=0; i<nalozi.size(); i++){
+			if(nalozi.get(i).getId() >= doNaloga)
+				break;
+				if(nalozi.get(i).getRacunDuznika().equals(brRacuna))
+					res -= nalozi.get(i).iznos.doubleValue();
+				if(nalozi.get(i).getRacunPoverioca().equals(brRacuna))
+					res += nalozi.get(i).iznos.doubleValue();
+		}
+		return res;
+	}
 	
 	
 }
